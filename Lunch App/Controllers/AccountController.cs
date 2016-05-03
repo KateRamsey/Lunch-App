@@ -368,7 +368,7 @@ namespace Lunch_App.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new LunchUser { UserName = model.Email, Email = model.Email };
+                var user = new LunchUser { UserName = model.Email, Email = model.Email, Handle = model.Handle};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
