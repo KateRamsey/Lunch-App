@@ -10,9 +10,13 @@ namespace Lunch_App.Controllers
     {
         public ActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View();
         }
-
 
     }
 }
