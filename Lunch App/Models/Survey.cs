@@ -12,8 +12,8 @@ namespace Lunch_App.Models
         public int MinutesAvailiable { get; set; }
         public int ZipCode { get; set; }
         public int ZipCodeRadius { get; set; }
-        //CusineType wanted
-        //CusineType not wanted
+        public Cuisine CuisineWanted { get; set; }
+        public Cuisine CuisineNotWanted { get; set; }
         public Resturant SuggestedResturant { get; set; }
         public int DiataryIssues { get; set; }
     }

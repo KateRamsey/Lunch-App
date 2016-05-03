@@ -18,7 +18,7 @@ namespace Lunch_App.Models
     {
         public int Id { get; set; }
         public Lunch Lunch { get; set; }
-        public Resturant Option { get; set; }
+        public Resturant Resturant { get; set; }
         public int Rank { get; set; }
     }
 

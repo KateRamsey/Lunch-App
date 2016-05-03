@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Lunch_App.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class LunchUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<LunchUser> manager)
@@ -19,7 +18,8 @@ namespace Lunch_App.Models
         }
 
         public string Handle { get; set; }
-        public virtual List<LunchUser> Buddies { get; set; }
+        public virtual List<LunchUser> MyBuddies { get; set; }
+        public virtual List<LunchUser> BuddiesWithMe { get; set; }
         public virtual List<Resturant> FavoriteResturants { get; set; }
         public virtual List<LunchMembers> Lunches { get; set; }
 
@@ -35,6 +35,26 @@ namespace Lunch_App.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<LunchUser>().ToTable("Users").HasMany(x => x.MyBuddies).WithMany(x => x.BuddiesWithMe)
+               .Map(x =>
+            {
+                x.ToTable("LunchBuddies");
+                x.MapLeftKey("LunchUserId");
+                x.MapRightKey("BuddyId");
+            });
+            modelBuilder.Entity<Resturant>().HasMany(x => x.Fans).WithMany(y => y.FavoriteResturants)
+                .Map(z => z.ToTable("ResturantFans"));
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
     }
 }
