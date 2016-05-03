@@ -44,15 +44,7 @@ namespace Lunch_App
             var transportWeb = new Web(credentials);
 
             // Send the email.
-            if (transportWeb != null)
-            {
-                await transportWeb.DeliverAsync(myMessage);
-            }
-            else
-            {
-                Trace.TraceError("Failed to create Web transport.");
-                await Task.FromResult(0);
-            }
+            await transportWeb.DeliverAsync(myMessage);
         }
 
     }

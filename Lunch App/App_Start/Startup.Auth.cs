@@ -55,11 +55,11 @@ namespace Lunch_App
                appId: "1626461107679315",
                appSecret: "620621debce2c9339e254d50bc26e960");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "79297487876-7am87k6o164v54lcnb05brc5haetavjo.apps.googleusercontent.com",
-            //    ClientSecret = "6YmfFEfXPh_-bnFlgO3uqKQD"
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "79297487876-7am87k6o164v54lcnb05brc5haetavjo.apps.googleusercontent.com",
+                ClientSecret = "6YmfFEfXPh_-bnFlgO3uqKQD"
+            });
         }
     }
 }

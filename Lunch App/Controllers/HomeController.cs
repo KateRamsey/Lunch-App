@@ -12,7 +12,7 @@ namespace Lunch_App.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account", new {returnUrl = "/home/index"});
             }
 
             return View();
