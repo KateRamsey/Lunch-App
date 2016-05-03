@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Lunch_App.Models.Survey>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFinished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinutesAvailiable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCodeRadius)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuisineWanted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuisineNotWanted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiataryIssues)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFinished)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinutesAvailiable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCodeRadius)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuisineWanted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuisineNotWanted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiataryIssues)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

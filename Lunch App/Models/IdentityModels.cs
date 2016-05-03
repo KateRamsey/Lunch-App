@@ -18,10 +18,11 @@ namespace Lunch_App.Models
         }
 
         public string Handle { get; set; }
-        public virtual List<LunchUser> MyBuddies { get; set; }
-        public virtual List<LunchUser> BuddiesWithMe { get; set; }
-        public virtual List<Resturant> FavoriteResturants { get; set; }
-        public virtual List<LunchMembers> Lunches { get; set; }
+        public virtual List<LunchUser> MyBuddies { get; set; } = new List<LunchUser>();
+        public virtual List<LunchUser> BuddiesWithMe { get; set; } = new List<LunchUser>();
+        public virtual List<Resturant> FavoriteResturants { get; set; } = new List<Resturant>();
+        public virtual List<LunchMembers> Lunches { get; set; } = new List<LunchMembers>();
+        public virtual List<Survey> Surveys { get; set; }
 
     }
 
@@ -56,5 +57,7 @@ namespace Lunch_App.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
+
+        public System.Data.Entity.DbSet<Lunch_App.Models.Survey> Surveys { get; set; }
     }
 }
