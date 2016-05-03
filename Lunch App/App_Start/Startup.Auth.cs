@@ -45,14 +45,11 @@ namespace Lunch_App
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+
 
             //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            //   consumerKey: "BX3KOfSZv2D291dPg3TfnEtoy",
+            //   consumerSecret: "3uhw4cPb9XgZNKakqxDOYn0tzENEKiBSJX6oG87HXgAgAVu7sP");
 
             app.UseFacebookAuthentication(
                appId: "1626461107679315",
@@ -60,8 +57,8 @@ namespace Lunch_App
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientId = "79297487876-7am87k6o164v54lcnb05brc5haetavjo.apps.googleusercontent.com",
+            //    ClientSecret = "6YmfFEfXPh_-bnFlgO3uqKQD"
             //});
         }
     }
