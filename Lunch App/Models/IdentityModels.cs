@@ -22,7 +22,7 @@ namespace Lunch_App.Models
         public virtual List<LunchUser> BuddiesWithMe { get; set; } = new List<LunchUser>();
         public virtual List<Resturant> FavoriteResturants { get; set; } = new List<Resturant>();
         public virtual List<LunchMembers> Lunches { get; set; } = new List<LunchMembers>();
-        public virtual List<Survey> Surveys { get; set; }
+        public virtual List<Survey> Surveys { get; set; } = new List<Survey>();
 
     }
 

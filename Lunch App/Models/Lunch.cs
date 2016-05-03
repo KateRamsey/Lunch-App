@@ -11,7 +11,7 @@ namespace Lunch_App.Models
         public DateTime MeetingDateTime { get; set; }
         public LunchUser Creator { get; set; }
         public virtual Resturant Resturant { get; set; }
-        public virtual List<ResturantOptions> Options { get; set; }
+        public virtual List<ResturantOptions> Options { get; set; } = new List<ResturantOptions>();
     }
 
     public class ResturantOptions

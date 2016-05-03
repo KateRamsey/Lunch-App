@@ -14,8 +14,8 @@ namespace Lunch_App.Models
         public Cuisine CuisineType { get; set; }
         public int DietaryOptions { get; set; }
 
-        public virtual List<LunchUser> Fans { get; set; }
-        public virtual List<Lunch> Lunches { get; set; }
+        public virtual List<LunchUser> Fans { get; set; } = new List<LunchUser>();
+        public virtual List<Lunch> Lunches { get; set; } = new List<Lunch>();
     }
 
 }
