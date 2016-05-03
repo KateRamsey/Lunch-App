@@ -65,6 +65,10 @@ namespace Lunch_App.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Handle")]
+        public string Handle { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
