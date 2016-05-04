@@ -16,11 +16,14 @@ namespace Lunch_App.Logic
             var results = new List<int>();
             var surveyTotal = CombineSurveys(surveys);
 
+            //TODO: Check DiataryIssues before zips to limit API calls!!
+
             foreach (var r in resturants)
             {
                 if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
                     && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
-                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime))
+                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+                    && surveyTotal.ZipCodes.Contains(r.LocationZip))
                 {
                     results.Add(r.Id);
                 }
