@@ -63,7 +63,10 @@ namespace Lunch_App.Tests
         public void TestZipMethod()
         {
            var result = FilterLogic.FindZipCodes("72023", 2);
-           Assert.AreEqual(72023, result);
+           var expect = new List<string>() {"72023"};
+
+           //Assert.AreEqual(expect, result);
+           Assert.AreSame(expect, result);
         }
     }
 }
