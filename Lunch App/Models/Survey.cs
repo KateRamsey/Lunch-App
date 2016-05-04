@@ -10,7 +10,7 @@ namespace Lunch_App.Models
         public bool IsFinished { get; set; }
         public DateTime TimeAvailable { get; set; }
         public int MinutesAvailiable { get; set; }
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
         public int ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
@@ -34,7 +34,7 @@ namespace Lunch_App.Models
 
        public DateTime TimeAvailable { get; set; }
        // public int MinutesAvailiable { get; set; }
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
         public int ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }

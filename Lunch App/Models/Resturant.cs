@@ -8,7 +8,7 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-        public int LocationZip { get; set; }
+        public string LocationZip { get; set; }
         public string HoursOfOperation { get; set; }
         public int PriceRange { get; set; }
         public string Website { get; set; }
@@ -33,7 +33,7 @@ namespace Lunch_App.Models
         }
 
         public int Id { get; set; }
-        public int LocationZip { get; set; }
+        public string LocationZip { get; set; }
         public string HoursOfOperation { get; set; }
         public int PriceRange { get; set; }
         public Cuisine CuisineType { get; set; }

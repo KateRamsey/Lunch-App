@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Lunch_App.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace Lunch_App.Logic
@@ -77,10 +79,8 @@ namespace Lunch_App.Logic
             return result;
         }
 
-        public static IEnumerable<int> FindZipCodes(int zipCode, int zipCodeRadius)
+        public static IEnumerable<string> FindZipCodes(string zipCode, int zipCodeRadius)
         {
-            var zipList = new List<int>() {zipCode};
-
 
             var client = new RestClient("http://www.zipcodeapi.com/rest/ye29DnmW3cFSb9nmn3EEm7qiaj1E2M6A18KEw7AzjgsupPQNTvsfCSyNbzsemzPn");
 
@@ -89,19 +89,17 @@ namespace Lunch_App.Logic
 
             var response = client.Execute(request);
 
-            var content = response.Content;
+            var content = (JObject)JsonConvert.DeserializeObject(response.Content);
 
-            List<ZipsFromAPI> myDeserializedObjList =
-                (List<ZipsFromAPI>) Newtonsoft.Json.JsonConvert.DeserializeObject(content);
 
-            zipList.AddRange(myDeserializedObjList.Select(z => z.zip_code));
+            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x=>x.zip_code);
 
-            return zipList;
+            return zips;
         }
 
         public class ZipsFromAPI
         {
-            public int zip_code { get; set; }
+            public string zip_code { get; set; }
         }
     }
 
