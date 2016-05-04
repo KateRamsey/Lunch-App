@@ -42,4 +42,16 @@ namespace Lunch_App.Models
         public int DiataryIssues { get; set; }
     }
 
+    public enum DiataryIssues
+    {
+        Vegan = 1,
+        Vegetarian = 2,
+        GlutenFree = 4,
+        NutAllergy = 8,
+        ShellFishAllergy = 16,
+        Kosher = 32,
+        Halaal = 64,
+        LactoseIntolerant = 128
+    }
+
 }
