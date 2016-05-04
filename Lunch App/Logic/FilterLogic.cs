@@ -38,8 +38,15 @@ namespace Lunch_App.Logic
         private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
         {
             //TODO: helper function to break string into DateTime Ranges
+            var dateRanges = BreakHoursToRanges(hoursOfOperation);
             //TODO: check ranges against lunchTime
             return true;
+        }
+
+        private static object BreakHoursToRanges(string hoursOfOperation)
+        {
+            //TODO: parse string to ranges
+            throw new NotImplementedException();
         }
 
 
