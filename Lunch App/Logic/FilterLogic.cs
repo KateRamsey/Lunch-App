@@ -11,7 +11,35 @@ namespace Lunch_App.Logic
         public static List<int> Filter(List<ResturantFilterModel> resturants, List<SurveyFilterModel> surveys)
         {
             var results = new List<int>();
+            var surveyTotal = CombineSurveys(surveys);
+
+            foreach (var r in resturants)
+            {
+                //HoursOfOperation Check
+                if (ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime))
+                {
+                    results.Add(r.Id);
+                }
+
+                //TODO: DiataryIssue check to cut resturants
+               
+            }
+
+  
+            //TODO: Cuisine Checks
+
+
+            //TODO: sort on suggested resturants
+
+
             return results;
+        }
+
+        private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
+        {
+            //TODO: helper function to break string into DateTime Ranges
+            //TODO: check ranges against lunchTime
+            return true;
         }
 
 
