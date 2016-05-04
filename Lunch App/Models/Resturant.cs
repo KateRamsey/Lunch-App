@@ -46,5 +46,21 @@ public enum Cuisine
 {
     Mexican,
     Sushi,
-    Pizza
+    Pizza,
+    Cajun,
+    American,
+    Chinese,
+    Italian,
+    Sandwitch,
+    Japanese,
+    Seafood,
+    Thai,
+    BBQ,
+    Steak,
+    Buffet,
+    Cuban,
+    Southern,
+    MiddleEastern,
+    Mediterranean
+
 }
