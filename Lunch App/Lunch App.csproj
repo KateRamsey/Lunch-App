@@ -187,6 +187,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Temp_LunchesController.cs" />
+    <Compile Include="Controllers\Temp_ResturantsController.cs" />
     <Compile Include="Controllers\Temp_SurveysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -263,6 +265,16 @@
     <Content Include="Views\Temp_Surveys\Details.cshtml" />
     <Content Include="Views\Temp_Surveys\Edit.cshtml" />
     <Content Include="Views\Temp_Surveys\Index.cshtml" />
+    <Content Include="Views\Temp_Lunches\Create.cshtml" />
+    <Content Include="Views\Temp_Lunches\Delete.cshtml" />
+    <Content Include="Views\Temp_Lunches\Details.cshtml" />
+    <Content Include="Views\Temp_Lunches\Edit.cshtml" />
+    <Content Include="Views\Temp_Lunches\Index.cshtml" />
+    <Content Include="Views\Temp_Resturants\Create.cshtml" />
+    <Content Include="Views\Temp_Resturants\Delete.cshtml" />
+    <Content Include="Views\Temp_Resturants\Details.cshtml" />
+    <Content Include="Views\Temp_Resturants\Edit.cshtml" />
+    <Content Include="Views\Temp_Resturants\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

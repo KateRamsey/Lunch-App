@@ -59,5 +59,9 @@ namespace Lunch_App.Models
         }
 
         public System.Data.Entity.DbSet<Lunch_App.Models.Survey> Surveys { get; set; }
+
+        public System.Data.Entity.DbSet<Lunch_App.Models.Lunch> Lunches { get; set; }
+
+        public System.Data.Entity.DbSet<Lunch_App.Models.Resturant> Resturants { get; set; }
     }
 }
