@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Lunch_App.Models;
+using RestSharp;
 
 namespace Lunch_App.Logic
 {
@@ -15,14 +16,12 @@ namespace Lunch_App.Logic
 
             foreach (var r in resturants)
             {
-                //HoursOfOperation Check
-                if (ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime))
+                if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
+                    && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
+                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime))
                 {
                     results.Add(r.Id);
                 }
-
-                //TODO: DiataryIssue check to cut resturants
-               
             }
 
   
@@ -37,7 +36,6 @@ namespace Lunch_App.Logic
 
         private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
         {
-            //TODO: helper function to break string into DateTime Ranges
             var dateRanges = BreakHoursToRanges(hoursOfOperation);
             //TODO: check ranges against lunchTime
             return true;
@@ -52,20 +50,19 @@ namespace Lunch_App.Logic
 
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
         {
-            var result = new SurveyTotal();
-
+            var result = new SurveyTotal {DiataryIssues = 0};
             foreach (var s in surveys)
             {
                 result.ZipCodes.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
                 result.NotWantedCuisines.Add(s.CuisineNotWanted);
                 result.WantedCuisines.Add(s.CuisineWanted);
                 result.SuggestedResturantIds.Add(s.SuggestedResturantId);
+                result.DiataryIssues = result.DiataryIssues | s.DiataryIssues;
             }
 
-            //TODO: result.LunchTime
+            //TODO: result.LunchTime complicated logic
 
-            //TODO: result.DiataryIssues
-
+            result.LunchTime = surveys.First().TimeAvailable;
 
 
             return result;
@@ -75,10 +72,27 @@ namespace Lunch_App.Logic
         {
             var zipList = new List<int>() {zipCode};
 
-            //TODO: use api to find list of zipcodes in range
+
+            var client = new RestClient("http://www.zipcodeapi.com/rest/ye29DnmW3cFSb9nmn3EEm7qiaj1E2M6A18KEw7AzjgsupPQNTvsfCSyNbzsemzPn");
+
+            var request = new RestRequest(
+                $"/radius.json/{zipCode}/{zipCodeRadius}/mile", Method.GET);
+
+            //var response = client.Execute<ZipsFromAPI>(request);
+            //var Data = response.Data;
+            //foreach (var d in Data)
+            //{
+                
+            //}
+
 
             return zipList;
         }
+
+        //private class ZipsFromAPI
+        //{
+        //    private int zip_code { get; set; }
+        //}
     }
 
 }
