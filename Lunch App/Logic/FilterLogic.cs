@@ -77,7 +77,7 @@ namespace Lunch_App.Logic
             return result;
         }
 
-        private static IEnumerable<int> FindZipCodes(int zipCode, int zipCodeRadius)
+        public static IEnumerable<int> FindZipCodes(int zipCode, int zipCodeRadius)
         {
             var zipList = new List<int>() {zipCode};
 
