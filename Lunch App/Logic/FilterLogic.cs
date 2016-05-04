@@ -24,15 +24,24 @@ namespace Lunch_App.Logic
                 }
             }
 
-  
-            //TODO: Cuisine Checks
+            
 
+            //TODO: Call Rank()
 
-            //TODO: sort on suggested resturants
 
 
             return results;
         }
+
+        private static List<int> Rank(List<ResturantFilterModel> resturants, SurveyTotal surveyTotal)
+        {
+
+            //TODO: sort on suggested resturants and cuisine types wanted
+            var result = new List<int>();
+
+
+            return result;
+        } 
 
         private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
         {
@@ -78,21 +87,22 @@ namespace Lunch_App.Logic
             var request = new RestRequest(
                 $"/radius.json/{zipCode}/{zipCodeRadius}/mile", Method.GET);
 
-            //var response = client.Execute<ZipsFromAPI>(request);
-            //var Data = response.Data;
-            //foreach (var d in Data)
-            //{
-                
-            //}
+            var response = client.Execute(request);
 
+            var content = response.Content;
+
+            List<ZipsFromAPI> myDeserializedObjList =
+                (List<ZipsFromAPI>) Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+
+            zipList.AddRange(myDeserializedObjList.Select(z => z.zip_code));
 
             return zipList;
         }
 
-        //private class ZipsFromAPI
-        //{
-        //    private int zip_code { get; set; }
-        //}
+        public class ZipsFromAPI
+        {
+            public int zip_code { get; set; }
+        }
     }
 
 }
