@@ -8,6 +8,7 @@ namespace Lunch_App.Models
         public virtual LunchUser User { get; set; }
         public virtual Lunch Lunch { get; set; }
         public bool IsFinished { get; set; } = false;
+        public bool IsComing { get; set; }
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
         public string ZipCode { get; set; } = "72120";
