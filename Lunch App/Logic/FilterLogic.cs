@@ -60,7 +60,9 @@ namespace Lunch_App.Logic
 
             var parsed = hoursOfOperation.Split(',');
 
-            foreach (var s in parsed)
+            var splitOn = new char[] {' ','-'};
+
+    foreach (var s in parsed)
             {
                 if (s.StartsWith("M-F"))
                 {
@@ -73,12 +75,37 @@ namespace Lunch_App.Logic
                 else if (s.StartsWith("Su"))
                 {
                     //set Sun start and end date
+                    var sunSplit = s.Split(splitOn);
+                    var sunOpen = sunSplit[1];
+                    var sunClose = sunSplit[2];
+                    var nextSunday = DateTime.Now;
+
+                    while(nextSunday.DayOfWeek != DayOfWeek.Sunday)
+                    {
+                        nextSunday = nextSunday.AddDays(1);
+                    }
+                    hours.SunOpen = TimeToDateTime(sunOpen, nextSunday);
+                    hours.SunClose = TimeToDateTime(sunClose, nextSunday);
                 }
             }
 
 
 
             return hours;
+        }
+
+        private static DateTime TimeToDateTime(string time, DateTime date)
+        {
+            var hour = int.Parse(time.Substring(0, time.Length - 1));
+            var aOrP = time.Substring(time.Length - 1);
+
+            if (aOrP == "p" || aOrP == "P")
+            {
+                hour += 12;
+            }
+
+            return date.AddHours(hour);
+
         }
 
 
