@@ -38,6 +38,7 @@ namespace Lunch_App.Models
         public int PriceRange { get; set; }
         public Cuisine CuisineType { get; set; }
         public int DietaryOptions { get; set; }
+        public int Score { get; set; }
     }
 }
 

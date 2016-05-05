@@ -13,6 +13,6 @@ namespace Lunch_App.Logic
         public int DietaryIssues { get; set; }
 
         public List<string> PossibleZips { get; set; } = new List<string>();
-
+        public List<string> BaseZips { get; set; } = new List<string>();
     }
 }

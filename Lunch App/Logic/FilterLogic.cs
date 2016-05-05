@@ -41,15 +41,23 @@ namespace Lunch_App.Logic
 
         private static List<int> Rank(List<ResturantFilterModel> resturants, SurveyTotal surveyTotal)
         {
-
-            //TODO: sort on suggested resturants and cuisine types wanted
-
-
-            var result = new List<int>();
             foreach (var r in resturants)
             {
-                result.Add(r.Id);
+                if (surveyTotal.SuggestedResturantIds.Contains(r.Id))
+                {
+                    r.Score += surveyTotal.SuggestedResturantIds.GroupBy(x=>x, v => v).Count(p => p.Key == r.Id) * 50;
+                }
+                if (surveyTotal.WantedCuisines.Contains(r.CuisineType))
+                {
+                    r.Score += surveyTotal.WantedCuisines.GroupBy(x => x, v => v).Count(p=>p.Key == r.CuisineType) * 25;
+                }
+                if (surveyTotal.BaseZips.Contains(r.LocationZip))
+                {
+                    r.Score += surveyTotal.BaseZips.GroupBy(x => x, v => v).Count(p=>p.Key == r.LocationZip) * 15;
+                }
             }
+
+            var result = resturants.OrderByDescending(x => x.Score).Select(v=>v.Id).ToList();
 
             return result;
         }
@@ -81,6 +89,7 @@ namespace Lunch_App.Logic
                 result.WantedCuisines.Add(s.CuisineWanted);
                 result.SuggestedResturantIds.Add(s.SuggestedResturantId);
                 result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
+                result.BaseZips.Add(s.ZipCode);
             }
 
             result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
