@@ -16,7 +16,7 @@ namespace Lunch_App.Tests
         public Logic_Tests()
         {
             //
-            // TODO: Add constructor logic here
+            // 
             //
         }
 

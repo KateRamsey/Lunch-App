@@ -33,7 +33,6 @@ namespace Lunch_App.Logic
                 DayOfWeek enddow;
                 Enum.TryParse(dowrange[1], out enddow);
 
-                //TODO: Fix Doesn't work on Saturday-Sunday because Enum starts on Sunday
                 for (DayOfWeek i = startdow; i <= enddow; i++)
                 {
                     results.Add(new HoursOfOperations() { Close = end, Open = begin, DayOfWeek = i });
