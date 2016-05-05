@@ -65,6 +65,7 @@ namespace Lunch_App.Logic
 
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
         {
+            surveys.RemoveAll(x => x.IsComing == false);
             var result = new SurveyTotal { DiataryIssues = 0 };
             foreach (var s in surveys)
             {

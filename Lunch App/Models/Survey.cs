@@ -32,8 +32,10 @@ namespace Lunch_App.Models
             CuisineNotWanted = s.CuisineNotWanted;
             SuggestedResturantId = s.SuggestedResturant.Id;
             DiataryIssues = s.DiataryIssues;
+            IsComing = s.IsComing;
         }
 
+        public bool IsComing { get; set; }
         public DateTime TimeAvailable { get; set; }
         public int MinutesAvailiable { get; set; }
         public string ZipCode { get; set; }
