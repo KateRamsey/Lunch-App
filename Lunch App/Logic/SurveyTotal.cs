@@ -11,5 +11,8 @@ namespace Lunch_App.Logic
         public List<Cuisine> NotWantedCuisines { get; set; } = new List<Cuisine>();
         public List<int> SuggestedResturantIds { get; set; } = new List<int>();
         public int DiataryIssues { get; set; }
+
+        public List<string> PossibleZips { get; set; } = new List<string>();
+
     }
 }

@@ -16,7 +16,6 @@ namespace Lunch_App.Logic
             var results = new List<int>();
             var surveyTotal = CombineSurveys(surveys);
 
-            //TODO: Check DiataryIssues before zips to limit API calls!!
 
             foreach (var r in resturants)
             {
@@ -67,13 +66,19 @@ namespace Lunch_App.Logic
             var result = new SurveyTotal {DiataryIssues = 0};
             foreach (var s in surveys)
             {
-                result.ZipCodes.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
+                result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
                 result.NotWantedCuisines.Add(s.CuisineNotWanted);
                 result.WantedCuisines.Add(s.CuisineWanted);
                 result.SuggestedResturantIds.Add(s.SuggestedResturantId);
                 result.DiataryIssues = result.DiataryIssues | s.DiataryIssues;
             }
 
+            result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
+                .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
+
+           
+            
+            
             //TODO: result.LunchTime complicated logic
 
             result.LunchTime = surveys.First().TimeAvailable;
