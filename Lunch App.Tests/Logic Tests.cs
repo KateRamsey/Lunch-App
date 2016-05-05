@@ -59,14 +59,26 @@ namespace Lunch_App.Tests
         //
         #endregion
 
-        [TestMethod]
-        public void TestZipMethod()
-        {
-           var result = FilterLogic.FindZipCodes("72023", 2);
-           var expect = new List<string>() {"72023"};
+        //[TestMethod]
+        //public void TestZipMethod()
+        //{
+        //   var result = FilterLogic.FindZipCodes("72023", 2);
+        //   var expect = new List<string>() {"72023"};
 
-           //Assert.AreEqual(expect, result);
-           Assert.AreSame(expect, result);
+        //   //Assert.AreEqual(expect, result);
+        //   Assert.AreSame(expect, result);
+        //}
+
+        [TestMethod]
+        public void SunStringParce()
+        {
+            var result = FilterLogic.BreakHoursToRanges("Sun 8a-9p");
+            var expect = new HoursOfOperations
+            { SunOpen = new DateTime(2016, 5, 8, 8, 0, 0), SunClose = new DateTime(2016, 5, 8, 21, 0, 0)};
+
+
+            Assert.AreEqual(expect.SunOpen, result.SunOpen);
+            Assert.AreEqual(expect.SunClose, result.SunClose);
         }
     }
 }

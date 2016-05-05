@@ -19,7 +19,7 @@ namespace Lunch_App.Logic
 
             foreach (var r in resturants)
             {
-                if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
+                if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues)
                     && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
                     //&& ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
                     && surveyTotal.ZipCodes.Contains(r.LocationZip))
@@ -28,7 +28,7 @@ namespace Lunch_App.Logic
                 }
             }
 
-            
+
 
             //TODO: Call Rank()
 
@@ -45,7 +45,7 @@ namespace Lunch_App.Logic
 
 
             return result;
-        } 
+        }
 
         private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
         {
@@ -54,15 +54,15 @@ namespace Lunch_App.Logic
             return true;
         }
 
-        private static HoursOfOperations BreakHoursToRanges(string hoursOfOperation)
+        public static HoursOfOperations BreakHoursToRanges(string hoursOfOperation)
         {
             var hours = new HoursOfOperations();
 
             var parsed = hoursOfOperation.Split(',');
 
-            var splitOn = new char[] {' ','-'};
+            var splitOn = new char[] { ' ', '-' };
 
-    foreach (var s in parsed)
+            foreach (var s in parsed)
             {
                 if (s.StartsWith("M-F"))
                 {
@@ -74,13 +74,13 @@ namespace Lunch_App.Logic
                 }
                 else if (s.StartsWith("Su"))
                 {
-                    //set Sun start and end date
+                    //set Sun open and close
                     var sunSplit = s.Split(splitOn);
                     var sunOpen = sunSplit[1];
                     var sunClose = sunSplit[2];
                     var nextSunday = DateTime.Now;
 
-                    while(nextSunday.DayOfWeek != DayOfWeek.Sunday)
+                    while (nextSunday.DayOfWeek != DayOfWeek.Sunday)
                     {
                         nextSunday = nextSunday.AddDays(1);
                     }
@@ -88,8 +88,6 @@ namespace Lunch_App.Logic
                     hours.SunClose = TimeToDateTime(sunClose, nextSunday);
                 }
             }
-
-
 
             return hours;
         }
@@ -104,14 +102,14 @@ namespace Lunch_App.Logic
                 hour += 12;
             }
 
-            return date.AddHours(hour);
-
+            var returnDate = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);
+            return returnDate;
         }
 
 
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
         {
-            var result = new SurveyTotal {DiataryIssues = 0};
+            var result = new SurveyTotal { DiataryIssues = 0 };
             foreach (var s in surveys)
             {
                 result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
@@ -124,9 +122,9 @@ namespace Lunch_App.Logic
             result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
                 .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
 
-           
-            
-            
+
+
+
             //TODO: result.LunchTime complicated logic
 
             result.LunchTime = surveys.First().TimeAvailable;
@@ -148,7 +146,7 @@ namespace Lunch_App.Logic
             var content = (JObject)JsonConvert.DeserializeObject(response.Content);
 
 
-            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x=>x.zip_code);
+            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x => x.zip_code);
 
             return zips;
         }
