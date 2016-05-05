@@ -15,4 +15,22 @@ namespace Lunch_App.Logic
         public List<string> PossibleZips { get; set; } = new List<string>();
 
     }
+
+    public class HoursOfOperations
+    {
+        public DateTime MonOpen { get; set; }
+        public DateTime MonClose { get; set; }
+        public DateTime TueOpen { get; set; }
+        public DateTime TueClose { get; set; }
+        public DateTime WedOpen { get; set; }
+        public DateTime WedClose { get; set; }
+        public DateTime ThurOpen { get; set; }
+        public DateTime ThurClose { get; set; }
+        public DateTime FriOpen { get; set; }
+        public DateTime FriClose { get; set; }
+        public DateTime SatOpen { get; set; }
+        public DateTime SatClose { get; set; }
+        public DateTime SunOpen { get; set; }
+        public DateTime SunClose { get; set; }
+    }
 }

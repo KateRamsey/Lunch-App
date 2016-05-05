@@ -7,15 +7,15 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public virtual LunchUser User { get; set; }
         public virtual Lunch Lunch { get; set; }
-        public bool IsFinished { get; set; }
-        public DateTime TimeAvailable { get; set; }
-        public int MinutesAvailiable { get; set; }
-        public string ZipCode { get; set; }
-        public int ZipCodeRadius { get; set; }
+        public bool IsFinished { get; set; } = false;
+        public DateTime TimeAvailable { get; set; } = DateTime.Now;
+        public int MinutesAvailiable { get; set; } = 10000;
+        public string ZipCode { get; set; } = "72120";
+        public int ZipCodeRadius { get; set; } = 100;
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public Resturant SuggestedResturant { get; set; }
-        public int DiataryIssues { get; set; }
+        public int DiataryIssues { get; set; } = 0;
     }
 
     public class SurveyFilterModel

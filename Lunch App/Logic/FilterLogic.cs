@@ -21,7 +21,7 @@ namespace Lunch_App.Logic
             {
                 if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
                     && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
-                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+                    //&& ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
                     && surveyTotal.ZipCodes.Contains(r.LocationZip))
                 {
                     results.Add(r.Id);
@@ -54,10 +54,31 @@ namespace Lunch_App.Logic
             return true;
         }
 
-        private static object BreakHoursToRanges(string hoursOfOperation)
+        private static HoursOfOperations BreakHoursToRanges(string hoursOfOperation)
         {
-            //TODO: parse string to ranges
-            throw new NotImplementedException();
+            var hours = new HoursOfOperations();
+
+            var parsed = hoursOfOperation.Split(',');
+
+            foreach (var s in parsed)
+            {
+                if (s.StartsWith("M-F"))
+                {
+                    //set Mon-Fri start and end date
+                }
+                else if (s.StartsWith("Sa"))
+                {
+                    //set Sat start and end date
+                }
+                else if (s.StartsWith("Su"))
+                {
+                    //set Sun start and end date
+                }
+            }
+
+
+
+            return hours;
         }
 
 
