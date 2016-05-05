@@ -51,7 +51,8 @@ namespace Lunch_App.Logic
         {
             var dateRanges = BreakHoursToRanges(hoursOfOperation);
 
-            return dateRanges.Where(dr => lunchTime.DayOfWeek == dr.DayOfWeek).Any(dr => lunchTime.Hour >= dr.Open.Hour && lunchTime.AddHours(1).Hour <= dr.Close.Hour);
+            return dateRanges.Where(dr => lunchTime.DayOfWeek == dr.DayOfWeek)
+                .Any(dr => lunchTime.Hour >= dr.Open.Hour && lunchTime.AddHours(1).Hour <= dr.Close.Hour);
         }
 
         public static IEnumerable<HoursOfOperations> BreakHoursToRanges(string hoursOfOperation)
