@@ -13,6 +13,7 @@ namespace Lunch_App.Logic
             //Examples 
             //Monday 8am-2pm
             //Tuesday-Saturday 10pm-11pm
+            //Friday-Saturday 11am-3pm, Sunday 11am-3pm
             var split = s.Split(' ');
 
             var times = split[1].Split('-');

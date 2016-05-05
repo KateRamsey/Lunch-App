@@ -113,16 +113,16 @@ namespace Lunch_App.Tests
         [TestMethod]
         public void MultiDayMultiStringParce()
         {
-            var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm, Saturday-Sunday 11am-10pm").ToList();
+            var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm, Friday-Saturday 11am-10pm").ToList();
 
             Assert.AreEqual(3, result.Count());
             Assert.AreEqual(DayOfWeek.Thursday, result[0].DayOfWeek);
             Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[0].Open);
             Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[0].Close);
-            Assert.AreEqual(DayOfWeek.Saturday, result[1].DayOfWeek);
+            Assert.AreEqual(DayOfWeek.Friday, result[1].DayOfWeek);
             Assert.AreEqual(new DateTime(1, 1, 1, 11, 0, 0), result[1].Open);
             Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[1].Close);
-            Assert.AreEqual(DayOfWeek.Sunday, result[2].DayOfWeek);
+            Assert.AreEqual(DayOfWeek.Saturday, result[2].DayOfWeek);
             Assert.AreEqual(new DateTime(1, 1, 1, 11, 0, 0), result[2].Open);
             Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[2].Close);
         }
