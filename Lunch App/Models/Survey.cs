@@ -24,6 +24,7 @@ namespace Lunch_App.Models
         public SurveyFilterModel(Survey s)
         {
             TimeAvailable = s.TimeAvailable;
+            MinutesAvailiable = s.MinutesAvailiable;
             ZipCode = s.ZipCode;
             ZipCodeRadius = s.ZipCodeRadius;
             CuisineWanted = s.CuisineWanted;
@@ -32,8 +33,8 @@ namespace Lunch_App.Models
             DiataryIssues = s.DiataryIssues;
         }
 
-       public DateTime TimeAvailable { get; set; }
-       // public int MinutesAvailiable { get; set; }
+        public DateTime TimeAvailable { get; set; }
+        public int MinutesAvailiable { get; set; }
         public string ZipCode { get; set; }
         public int ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
