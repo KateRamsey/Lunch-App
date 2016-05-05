@@ -198,6 +198,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\FilterLogic.cs" />
+    <Compile Include="Logic\HoursOfOperations.cs" />
     <Compile Include="Migrations\201605031615213_initial.cs" />
     <Compile Include="Migrations\201605031615213_initial.Designer.cs">
       <DependentUpon>201605031615213_initial.cs</DependentUpon>

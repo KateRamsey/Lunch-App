@@ -59,23 +59,7 @@ namespace Lunch_App.Logic
             var parsed = hoursOfOperation.Split(',');
 
             return parsed.SelectMany(s => HoursOfOperations.Parse(s.TrimStart())).ToList();
-
-
         }
-
-        //private static DateTime TimeToDateTime(string time, DateTime date)
-        //{
-        //    var hour = int.Parse(time.Substring(0, time.Length - 1));
-        //    var aOrP = time.Substring(time.Length - 1);
-
-        //    if (aOrP == "p" || aOrP == "P")
-        //    {
-        //        hour += 12;
-        //    }
-
-        //    var returnDate = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);
-        //    return returnDate;
-        //}
 
 
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
