@@ -127,5 +127,17 @@ namespace Lunch_App.Tests
             Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[2].Close);
         }
 
+        [TestMethod]
+        public void OpenResturant()
+        {
+            Assert.IsTrue(FilterLogic.ResturantOpen("Sunday-Saturday 1am-11pm", DateTime.Now));
+        }
+
+        [TestMethod]
+        public void ClosedResturant()
+        {
+            Assert.IsFalse(FilterLogic.ResturantOpen("Sunday 1am-2pm", DateTime.Now));
+        }
+
     }
 }

@@ -21,7 +21,7 @@ namespace Lunch_App.Logic
             {
                 if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues)
                     && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
-                    //&& ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
                     && surveyTotal.ZipCodes.Contains(r.LocationZip))
                 {
                     results.Add(r.Id);
@@ -47,11 +47,11 @@ namespace Lunch_App.Logic
             return result;
         }
 
-        private static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
+        public static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
         {
             var dateRanges = BreakHoursToRanges(hoursOfOperation);
-            //TODO: check ranges against lunchTime
-            return true;
+
+            return dateRanges.Where(dr => lunchTime.DayOfWeek == dr.DayOfWeek).Any(dr => lunchTime.Hour >= dr.Open.Hour && lunchTime.AddHours(1).Hour <= dr.Close.Hour);
         }
 
         public static IEnumerable<HoursOfOperations> BreakHoursToRanges(string hoursOfOperation)
