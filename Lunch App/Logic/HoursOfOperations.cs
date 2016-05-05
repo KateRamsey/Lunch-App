@@ -6,8 +6,6 @@ namespace Lunch_App.Logic
 {
     public class HoursOfOperations
     {
-        private string s;
-
         public static IEnumerable<HoursOfOperations> Parse(string s)
         {
             //Examples 

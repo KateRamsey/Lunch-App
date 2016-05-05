@@ -16,7 +16,7 @@ namespace Lunch_App.Models
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public Resturant SuggestedResturant { get; set; }
-        public int DiataryIssues { get; set; } = 0;
+        public int DietaryIssues { get; set; } = 0;
     }
 
     public class SurveyFilterModel
@@ -31,7 +31,7 @@ namespace Lunch_App.Models
             CuisineWanted = s.CuisineWanted;
             CuisineNotWanted = s.CuisineNotWanted;
             SuggestedResturantId = s.SuggestedResturant.Id;
-            DiataryIssues = s.DiataryIssues;
+            DietaryIssues = s.DietaryIssues;
             IsComing = s.IsComing;
         }
 
@@ -43,7 +43,7 @@ namespace Lunch_App.Models
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public int SuggestedResturantId { get; set; }
-        public int DiataryIssues { get; set; }
+        public int DietaryIssues { get; set; }
     }
 
     public enum DiataryIssues

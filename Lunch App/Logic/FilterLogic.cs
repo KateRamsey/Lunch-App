@@ -15,21 +15,41 @@ namespace Lunch_App.Logic
         {
             var surveyTotal = CombineSurveys(surveys);
 
-            var passingResturants = resturants.Where(r => 
-            ((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
-            && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType) 
-            && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime) 
-            && surveyTotal.ZipCodes.Contains(r.LocationZip)).ToList();
+            var passingResturants = resturants.Where(r =>
+            RestaurantMeetsDietaryNeeds(surveyTotal, r)
+            && CuisineWanted(r, surveyTotal)
+            && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+            && AcceptableLocation(r, surveyTotal)).ToList();
 
             return Rank(passingResturants, surveyTotal);
+        }
+
+        private static bool AcceptableLocation(ResturantFilterModel r, SurveyTotal surveyTotal)
+        {
+            return surveyTotal.ZipCodes.Contains(r.LocationZip);
+        }
+
+        private static bool CuisineWanted(ResturantFilterModel r, SurveyTotal surveyTotal)
+        {
+            return !surveyTotal.NotWantedCuisines.Contains(r.CuisineType);
+        }
+
+        private static bool RestaurantMeetsDietaryNeeds(SurveyTotal surveyTotal, ResturantFilterModel r)
+        {
+            return ((surveyTotal.DietaryIssues & r.DietaryOptions) == surveyTotal.DietaryIssues);
         }
 
         private static List<int> Rank(List<ResturantFilterModel> resturants, SurveyTotal surveyTotal)
         {
 
             //TODO: sort on suggested resturants and cuisine types wanted
-            var result = new List<int>();
 
+
+            var result = new List<int>();
+            foreach (var r in resturants)
+            {
+                result.Add(r.Id);
+            }
 
             return result;
         }
@@ -53,14 +73,14 @@ namespace Lunch_App.Logic
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
         {
             surveys.RemoveAll(x => x.IsComing == false);
-            var result = new SurveyTotal { DiataryIssues = 0 };
+            var result = new SurveyTotal { DietaryIssues = 0 };
             foreach (var s in surveys)
             {
                 result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
                 result.NotWantedCuisines.Add(s.CuisineNotWanted);
                 result.WantedCuisines.Add(s.CuisineWanted);
                 result.SuggestedResturantIds.Add(s.SuggestedResturantId);
-                result.DiataryIssues = result.DiataryIssues | s.DiataryIssues;
+                result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
             }
 
             result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
