@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 using Lunch_App.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -70,15 +71,61 @@ namespace Lunch_App.Tests
         //}
 
         [TestMethod]
-        public void SunStringParce()
+        public void SingleDayStringParce()
         {
-            var result = FilterLogic.BreakHoursToRanges("Sun 8a-9p");
-            var expect = new HoursOfOperations
-            { SunOpen = new DateTime(2016, 5, 8, 8, 0, 0), SunClose = new DateTime(2016, 5, 8, 21, 0, 0)};
+            var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm").ToList();
 
-
-            Assert.AreEqual(expect.SunOpen, result.SunOpen);
-            Assert.AreEqual(expect.SunClose, result.SunClose);
+            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(DayOfWeek.Thursday, result[0].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[0].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[0].Close);
         }
+
+
+        [TestMethod]
+        public void SingleMultiDayStringParce()
+        {
+            var result = FilterLogic.BreakHoursToRanges("Thursday-Friday 8am-9pm").ToList();
+
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(DayOfWeek.Thursday, result[0].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[0].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[0].Close);
+            Assert.AreEqual(DayOfWeek.Friday, result[1].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[1].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[1].Close);
+        }
+
+        [TestMethod]
+        public void MultiDayStringParce()
+        {
+            var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm, Saturday 11am-10pm").ToList();
+
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(DayOfWeek.Thursday, result[0].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[0].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[0].Close);
+            Assert.AreEqual(DayOfWeek.Saturday, result[1].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 11, 0, 0), result[1].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[1].Close);
+        }
+
+        [TestMethod]
+        public void MultiDayMultiStringParce()
+        {
+            var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm, Saturday-Sunday 11am-10pm").ToList();
+
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(DayOfWeek.Thursday, result[0].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 8, 0, 0), result[0].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 21, 0, 0), result[0].Close);
+            Assert.AreEqual(DayOfWeek.Saturday, result[1].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 11, 0, 0), result[1].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[1].Close);
+            Assert.AreEqual(DayOfWeek.Sunday, result[2].DayOfWeek);
+            Assert.AreEqual(new DateTime(1, 1, 1, 11, 0, 0), result[2].Open);
+            Assert.AreEqual(new DateTime(1, 1, 1, 22, 0, 0), result[2].Close);
+        }
+
     }
 }

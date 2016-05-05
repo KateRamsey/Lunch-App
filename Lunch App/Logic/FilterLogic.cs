@@ -54,57 +54,28 @@ namespace Lunch_App.Logic
             return true;
         }
 
-        public static HoursOfOperations BreakHoursToRanges(string hoursOfOperation)
+        public static IEnumerable<HoursOfOperations> BreakHoursToRanges(string hoursOfOperation)
         {
-            var hours = new HoursOfOperations();
-
             var parsed = hoursOfOperation.Split(',');
 
-            var splitOn = new char[] { ' ', '-' };
+            return parsed.SelectMany(s => HoursOfOperations.Parse(s.TrimStart())).ToList();
 
-            foreach (var s in parsed)
-            {
-                if (s.StartsWith("M-F"))
-                {
-                    //set Mon-Fri start and end date
-                }
-                else if (s.StartsWith("Sa"))
-                {
-                    //set Sat start and end date
-                }
-                else if (s.StartsWith("Su"))
-                {
-                    //set Sun open and close
-                    var sunSplit = s.Split(splitOn);
-                    var sunOpen = sunSplit[1];
-                    var sunClose = sunSplit[2];
-                    var nextSunday = DateTime.Now;
 
-                    while (nextSunday.DayOfWeek != DayOfWeek.Sunday)
-                    {
-                        nextSunday = nextSunday.AddDays(1);
-                    }
-                    hours.SunOpen = TimeToDateTime(sunOpen, nextSunday);
-                    hours.SunClose = TimeToDateTime(sunClose, nextSunday);
-                }
-            }
-
-            return hours;
         }
 
-        private static DateTime TimeToDateTime(string time, DateTime date)
-        {
-            var hour = int.Parse(time.Substring(0, time.Length - 1));
-            var aOrP = time.Substring(time.Length - 1);
+        //private static DateTime TimeToDateTime(string time, DateTime date)
+        //{
+        //    var hour = int.Parse(time.Substring(0, time.Length - 1));
+        //    var aOrP = time.Substring(time.Length - 1);
 
-            if (aOrP == "p" || aOrP == "P")
-            {
-                hour += 12;
-            }
+        //    if (aOrP == "p" || aOrP == "P")
+        //    {
+        //        hour += 12;
+        //    }
 
-            var returnDate = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);
-            return returnDate;
-        }
+        //    var returnDate = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);
+        //    return returnDate;
+        //}
 
 
         private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
