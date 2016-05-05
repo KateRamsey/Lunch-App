@@ -13,28 +13,15 @@ namespace Lunch_App.Logic
     {
         public static List<int> Filter(List<ResturantFilterModel> resturants, List<SurveyFilterModel> surveys)
         {
-            var results = new List<int>();
             var surveyTotal = CombineSurveys(surveys);
 
+            var passingResturants = resturants.Where(r => 
+            ((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues) 
+            && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType) 
+            && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime) 
+            && surveyTotal.ZipCodes.Contains(r.LocationZip)).ToList();
 
-            foreach (var r in resturants)
-            {
-                if (((surveyTotal.DiataryIssues & r.DietaryOptions) == surveyTotal.DiataryIssues)
-                    && !surveyTotal.NotWantedCuisines.Contains(r.CuisineType)
-                    && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
-                    && surveyTotal.ZipCodes.Contains(r.LocationZip))
-                {
-                    results.Add(r.Id);
-                }
-            }
-
-
-
-            //TODO: Call Rank()
-
-
-
-            return results;
+            return Rank(passingResturants, surveyTotal);
         }
 
         private static List<int> Rank(List<ResturantFilterModel> resturants, SurveyTotal surveyTotal)
