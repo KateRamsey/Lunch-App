@@ -62,6 +62,6 @@ public enum Cuisine
     Cuban,
     Southern,
     MiddleEastern,
-    Mediterranean
-
+    Mediterranean,
+    Breakfast
 }
