@@ -26,6 +26,19 @@ namespace Lunch_App.Models
 
     }
 
+    public class UserVM
+    {
+        public UserVM(LunchUser u)
+        {
+            Id = u.Id;
+            Handle = u.Handle;
+            Email = u.Email;
+        }
+        public string Id { get; set; }
+        public string Handle { get; set; }
+        public string Email { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<LunchUser>
     {
         public ApplicationDbContext()

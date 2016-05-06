@@ -6,8 +6,8 @@ namespace Lunch_App.Models
     public class Lunch
     {
         public int Id { get; set; }
-        public virtual List<LunchMembers> Members { get; set; }
-        public virtual List<Survey> Surveys { get; set; }
+        public virtual List<LunchMembers> Members { get; set; } = new List<LunchMembers>();
+        public virtual List<Survey> Surveys { get; set; } = new List<Survey>();
         public DateTime MeetingDateTime { get; set; }
         public LunchUser Creator { get; set; }
         public virtual Resturant Resturant { get; set; }
