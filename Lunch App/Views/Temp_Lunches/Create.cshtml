@@ -1,4 +1,4 @@
-﻿@model Lunch_App.Models.Lunch
+﻿@model Lunch_App.Models.LunchCreationVM
 
 @{
     ViewBag.Title = "New Lunch Group";
@@ -16,18 +16,22 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.MeetingDateTime, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.MeetingTime, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetingDateTime, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.MeetingDateTime, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.MeetingTime, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.MeetingTime, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Members, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">Choose the members of your lunch group:</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Members, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Members, "", new { @class = "text-danger" })
+                @foreach (var m in Model.Members)
+                {
+                    <input type="checkbox" value=@m.Id/>
+                    <span>@m.Handle</span><span> | @m.Email</span>
+                    <br/>
+                }
             </div>
         </div>
 

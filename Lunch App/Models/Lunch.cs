@@ -29,4 +29,10 @@ namespace Lunch_App.Models
         public Lunch Lunch { get; set; }
         public DateTime InvitedTime { get; set; }
     }
+
+    public class LunchCreationVM
+    {
+        public List<UserVM> Members { get; set; } = new List<UserVM>();
+        public DateTime MeetingTime { get; set; }
+    }
 }

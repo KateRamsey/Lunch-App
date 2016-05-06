@@ -38,9 +38,9 @@ namespace Lunch_App.Controllers
         // GET: Temp_Lunches/Create
         public ActionResult Create()
         {
-            var newLunch = new Lunch();
-            var potentialMembers = db.Users.ToList()
-                .Select(u => new LunchMembers() {Member = u, InvitedTime = DateTime.Now});
+            var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now};
+            var potentialMembers = db.Users.Select(x=>x).ToList()
+                .Select(u => new UserVM(u));
             newLunch.Members.AddRange(potentialMembers);
 
             return View(newLunch);
