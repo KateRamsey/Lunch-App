@@ -76,11 +76,17 @@ namespace Lunch_App.Controllers
             var newLunch = new Lunch {Creator = db.Users.Find(User.Identity.GetUserId()),
                 MeetingDateTime = lunch.MeetingTime
             };
-            //foreach (var m in lunch.Members)
-            //{
-            //    db.LunchMembers.Add(new LunchMembers() {InvitedTime = DateTime.Now, Member = db.Users.Find(m.Id)});
-            //}
-                
+
+            var memberListIds = (from m in lunch.Members where m.IsChecked select m.Id).ToList();
+            var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id));
+
+            var members = new List<LunchMembers>();
+            foreach (var user in attendingUsers)
+            {
+             members.Add( new LunchMembers() { InvitedTime = DateTime.Now, Lunch =  newLunch, Member = user});
+            }
+            newLunch.Members.AddRange(members);
+
             //TODO: Create Surveys for each member
 
             db.Lunches.Add(newLunch);

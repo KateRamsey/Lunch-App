@@ -34,6 +34,7 @@ namespace Lunch_App.Models
     {
         public List<UserVM> Members { get; set; } = new List<UserVM>();
         public DateTime MeetingTime { get; set; }
+
     }
 
     public class LunchVM

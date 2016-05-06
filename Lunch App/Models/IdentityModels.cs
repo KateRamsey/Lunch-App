@@ -28,6 +28,10 @@ namespace Lunch_App.Models
 
     public class UserVM
     {
+        public UserVM()
+        {
+            
+        }
         public UserVM(LunchUser u)
         {
             Id = u.Id;
@@ -37,6 +41,7 @@ namespace Lunch_App.Models
         public string Id { get; set; }
         public string Handle { get; set; }
         public string Email { get; set; }
+        public bool IsChecked { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<LunchUser>
