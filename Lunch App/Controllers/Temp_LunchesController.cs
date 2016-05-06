@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lunch_App.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Lunch_App.Controllers
 {
@@ -47,20 +48,27 @@ namespace Lunch_App.Controllers
         }
 
         // POST: Temp_Lunches/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MeetingDateTime")] Lunch lunch)
+        [Authorize]
+        public ActionResult Create(LunchCreationVM lunch)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Lunches.Add(lunch);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(lunch);
             }
 
-            return View(lunch);
+            var newLunch = new Lunch {Creator = db.Users.Find(User.Identity.GetUserId()),
+                MeetingDateTime = lunch.MeetingTime
+                // newLunch.Members = ??
+            };
+            
+                
+            //TODO: Create Surveys for each member
+
+            db.Lunches.Add(newLunch);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Temp_Lunches/Edit/5
