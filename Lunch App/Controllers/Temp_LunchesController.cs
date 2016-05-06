@@ -60,9 +60,11 @@ namespace Lunch_App.Controllers
 
             var newLunch = new Lunch {Creator = db.Users.Find(User.Identity.GetUserId()),
                 MeetingDateTime = lunch.MeetingTime
-                // newLunch.Members = ??
             };
-            
+            //foreach (var m in lunch.Members)
+            //{
+            //    db.LunchMembers.Add(new LunchMembers() {InvitedTime = DateTime.Now, Member = db.Users.Find(m.Id)});
+            //}
                 
             //TODO: Create Surveys for each member
 

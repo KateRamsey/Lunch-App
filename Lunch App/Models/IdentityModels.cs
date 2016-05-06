@@ -71,10 +71,12 @@ namespace Lunch_App.Models
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
 
-        public System.Data.Entity.DbSet<Lunch_App.Models.Survey> Surveys { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
 
-        public System.Data.Entity.DbSet<Lunch_App.Models.Lunch> Lunches { get; set; }
+        public DbSet<Lunch> Lunches { get; set; }
 
-        public System.Data.Entity.DbSet<Lunch_App.Models.Resturant> Resturants { get; set; }
+        public DbSet<Resturant> Resturants { get; set; }
+
+        public DbSet<LunchMembers> LunchMembers { get; set; }
     }
 }
