@@ -34,9 +34,12 @@ namespace Lunch_App.Controllers
                 return HttpNotFound();
             }
 
-            var lunchView = new LunchVM() {Id=lunch.Id,
+            var lunchView = new LunchVM()
+            {
+                Id = lunch.Id,
                 Creator = new UserVM(lunch.Creator),
-                MeetingDateTime = lunch.MeetingDateTime};
+                MeetingDateTime = lunch.MeetingDateTime
+            };
 
             if (lunch.Resturant != null)
             {
@@ -54,8 +57,8 @@ namespace Lunch_App.Controllers
         // GET: Temp_Lunches/Create
         public ActionResult Create()
         {
-            var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now};
-            var potentialMembers = db.Users.Select(x=>x).ToList()
+            var newLunch = new LunchCreationVM() { MeetingTime = DateTime.Now };
+            var potentialMembers = db.Users.Select(x => x).ToList()
                 .Select(u => new UserVM(u));
             newLunch.Members.AddRange(potentialMembers);
 
@@ -73,7 +76,9 @@ namespace Lunch_App.Controllers
                 return View(lunch);
             }
 
-            var newLunch = new Lunch {Creator = db.Users.Find(User.Identity.GetUserId()),
+            var newLunch = new Lunch
+            {
+                Creator = db.Users.Find(User.Identity.GetUserId()),
                 MeetingDateTime = lunch.MeetingTime
             };
 
@@ -83,15 +88,19 @@ namespace Lunch_App.Controllers
             var members = new List<LunchMembers>();
             foreach (var user in attendingUsers)
             {
-             members.Add( new LunchMembers() { InvitedTime = DateTime.Now, Lunch =  newLunch, Member = user});
+                members.Add(new LunchMembers() { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user });
             }
             newLunch.Members.AddRange(members);
 
-            //TODO: Create Surveys for each member
+            foreach (var member in members)
+            {
+                db.Surveys.Add(new Survey() {Lunch = newLunch, User = db.Users.Find(member.Member.Id)});
+            }
+
 
             db.Lunches.Add(newLunch);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Temp_Lunches/Edit/5
