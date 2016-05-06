@@ -9,7 +9,7 @@ namespace Lunch_App.Models
         public virtual List<LunchMembers> Members { get; set; } = new List<LunchMembers>();
         public virtual List<Survey> Surveys { get; set; } = new List<Survey>();
         public DateTime MeetingDateTime { get; set; }
-        public LunchUser Creator { get; set; }
+        public virtual LunchUser Creator { get; set; }
         public virtual Resturant Resturant { get; set; }
         public virtual List<ResturantOptions> Options { get; set; } = new List<ResturantOptions>();
     }
@@ -34,5 +34,14 @@ namespace Lunch_App.Models
     {
         public List<UserVM> Members { get; set; } = new List<UserVM>();
         public DateTime MeetingTime { get; set; }
+    }
+
+    public class LunchVM
+    {
+        public int Id { get; set; }
+        public List<UserVM> Members { get; set; } = new List<UserVM>();
+        public DateTime MeetingDateTime { get; set; }
+        public LunchUser Creator { get; set; }
+        public ResturantVM Resturant { get; set; }
     }
 }

@@ -19,6 +19,31 @@ namespace Lunch_App.Models
         public virtual List<Lunch> Lunches { get; set; } = new List<Lunch>();
     }
 
+    public class ResturantVM
+    {
+        public ResturantVM(Resturant r)
+        {
+            Id = r.Id;
+            Name = r.Name;
+            LocationZip = r.LocationZip;
+            Location = r.Location;
+            HoursOfOperation = r.HoursOfOperation;
+            PriceRange = r.PriceRange;
+            Website = r.Website;
+            CuisineType = r.CuisineType;
+            DietaryOptions = r.DietaryOptions;
+        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public string LocationZip { get; set; }
+        public string HoursOfOperation { get; set; }
+        public int PriceRange { get; set; }
+        public string Website { get; set; }
+        public Cuisine CuisineType { get; set; }
+        public int DietaryOptions { get; set; }
+    }
+
 
     public class ResturantFilterModel
     {
