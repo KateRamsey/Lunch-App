@@ -41,7 +41,7 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public List<UserVM> Members { get; set; } = new List<UserVM>();
         public DateTime MeetingDateTime { get; set; }
-        public LunchUser Creator { get; set; }
+        public UserVM Creator { get; set; }
         public ResturantVM Resturant { get; set; }
     }
 }

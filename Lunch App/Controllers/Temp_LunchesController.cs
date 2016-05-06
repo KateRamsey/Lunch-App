@@ -28,12 +28,27 @@ namespace Lunch_App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Lunch lunch = db.Lunches.Find(id);
+            var lunch = db.Lunches.Find(id);
             if (lunch == null)
             {
                 return HttpNotFound();
             }
-            return View(lunch);
+
+            var lunchView = new LunchVM() {Id=lunch.Id,
+                Creator = new UserVM(lunch.Creator),
+                MeetingDateTime = lunch.MeetingDateTime};
+
+            if (lunch.Resturant != null)
+            {
+                lunchView.Resturant = new ResturantVM(lunch.Resturant);
+            }
+
+            foreach (var m in lunch.Members)
+            {
+                lunchView.Members.Add(new UserVM(db.Users.Find(m)));
+            }
+
+            return View(lunchView);
         }
 
         // GET: Temp_Lunches/Create

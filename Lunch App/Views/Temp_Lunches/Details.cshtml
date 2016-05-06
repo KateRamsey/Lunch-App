@@ -1,7 +1,7 @@
-﻿@model Lunch_App.Models.Lunch
+﻿@model Lunch_App.Models.LunchVM
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lunch Details";
 }
 
 <h2>Details</h2>
@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.MeetingDateTime)
+            Lunch Time: 
         </dt>
 
         <dd>
@@ -19,6 +19,55 @@
         </dd>
 
     </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Resturant:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resturant.Name)
+            @Html.DisplayFor(model => model.Resturant.Location)
+            @Html.DisplayFor(model=>model.Resturant.Website)
+        </dd>
+
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Organized by:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator.Handle)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Contact Organizer at:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator.Email)
+        </dd>
+
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Lunch Members:
+        </dt>
+
+        @foreach (var m in Model.Members)
+        {
+            <dd>
+                @Html.DisplayFor(p=>m.Handle)
+            </dd>
+        }
+
+    </dl>
+    <br />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
