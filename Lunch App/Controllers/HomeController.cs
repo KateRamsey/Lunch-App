@@ -20,7 +20,45 @@ namespace Lunch_App.Controllers
                 return RedirectToAction("Login", "Account", new {returnUrl = "/home/index"});
             }
 
-            return View();
+            var userId = User.Identity.GetUserId();
+            IndexVM indexView = BuildIndexVM(userId);
+
+            return View(indexView);
+        }
+
+
+        private IndexVM BuildIndexVM(string userId)
+        {
+            var indexView = new IndexVM();
+            foreach (var s in db.Surveys.Where(s => s.User.Id == userId && !s.IsFinished))
+            {
+                indexView.OutstandingSurveys.Add(s.Id);
+            }
+
+            foreach (var l in db.LunchMembers)
+            {
+                if (l.Member.Id == userId)
+                {
+                    var newLunch = new LunchVM();
+                    //build up newLunch
+                    indexView.Lunches.Add(newLunch);
+                }
+            }
+
+            if (indexView.Lunches != null)
+            {
+                //next lunch datetime
+            }
+
+            //waiting on surveys
+
+            //lunches ready to pick
+
+            //Buddies <--- add later
+
+            //Favorite Resturants <--- add later
+
+            return indexView;
         }
 
         // GET: Home/CreateLunch

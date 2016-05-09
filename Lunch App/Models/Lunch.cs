@@ -25,8 +25,10 @@ namespace Lunch_App.Models
     public class LunchMembers
     {
         public int Id { get; set; }
-        public LunchUser Member { get; set; }
-        public Lunch Lunch { get; set; }
+       // public string MemberId { get; set; }
+        public virtual LunchUser Member { get; set; }
+       // public int LunchId { get; set; }
+        public virtual Lunch Lunch { get; set; }
         public DateTime InvitedTime { get; set; }
     }
 
