@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lunch_App.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Lunch_App.Controllers
 {
@@ -80,19 +81,76 @@ namespace Lunch_App.Controllers
         }
 
         // POST: Temp_Surveys/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IsFinished,TimeAvailable,MinutesAvailiable,ZipCode,ZipCodeRadius,CuisineWanted,CuisineNotWanted,DiataryIssues")] Survey survey)
+        public ActionResult EditSurvey(SurveyEditVM surveyVM)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(survey).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(surveyVM);
             }
-            return View(survey);
+
+            var survey = db.Surveys.Find(surveyVM.Id);
+            if (survey == null)
+            {
+                return HttpNotFound();
+            }
+
+            survey.IsFinished = true;
+            survey.IsComing = surveyVM.IsComing;
+            survey.CuisineNotWanted = surveyVM.CuisineNotWanted;
+            survey.CuisineWanted = surveyVM.CuisineWanted;
+            survey.MinutesAvailiable = surveyVM.MinutesAvailiable;
+            survey.SuggestedResturant = db.Resturants.Find(surveyVM.SuggestedResturantId);
+            survey.TimeAvailable = surveyVM.TimeAvailable;
+            survey.ZipCode = surveyVM.ZipCode;
+            survey.ZipCodeRadius = surveyVM.ZipCodeRadius;
+
+            survey.DietaryIssues = SurveyDietaryIssues(surveyVM);
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        private int SurveyDietaryIssues(SurveyEditVM survey)
+        {
+            int issues = 0;
+
+            if (survey.Vegan)
+            {
+                issues += (int)DietaryIssues.Vegan;
+            }
+            if (survey.Vegetarian)
+            {
+                issues += (int)DietaryIssues.Vegetarian;
+            }
+            if (survey.GlutenFree)
+            {
+                issues += (int)DietaryIssues.GlutenFree;
+            }
+            if (survey.NutAllergy)
+            {
+                issues += (int)DietaryIssues.NutAllergy;
+            }
+            if (survey.ShellFishAllergy)
+            {
+                issues += (int)DietaryIssues.ShellFishAllergy;
+            }
+            if (survey.Kosher)
+            {
+                issues += (int)DietaryIssues.Kosher;
+            }
+            if (survey.Halaal)
+            {
+                issues += (int)DietaryIssues.Halaal;
+            }
+            if (survey.LactoseIntolerant)
+            {
+                issues += (int)DietaryIssues.LactoseIntolerant;
+            }
+
+            return issues;
         }
 
         // GET: Temp_Surveys/Delete/5

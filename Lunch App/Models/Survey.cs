@@ -46,7 +46,7 @@ namespace Lunch_App.Models
         public int DietaryIssues { get; set; }
     }
 
-    public enum DiataryIssues
+    public enum DietaryIssues
     {
         Vegan = 1,
         Vegetarian = 2,
