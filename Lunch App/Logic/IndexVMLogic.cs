@@ -22,7 +22,7 @@ namespace Lunch_App.Logic
             foreach (var l in lunches)
             {
                 var newLunch = new LunchVM();
-                //build up newLunch
+                //TODO: build up newLunch
                 newLunch.Id = l;
 
 
@@ -34,7 +34,7 @@ namespace Lunch_App.Logic
 
             if (indexView.Lunches != null)
             {
-                //next lunch datetime
+                //TODO: next lunch datetime
             }
 
 
@@ -52,7 +52,7 @@ namespace Lunch_App.Logic
 
 
 
-            //lunches ready to pick
+            //TODO: lunches ready to pick
 
             //Buddies <--- add later
 
