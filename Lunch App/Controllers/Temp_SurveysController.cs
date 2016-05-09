@@ -64,7 +64,7 @@ namespace Lunch_App.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Survey survey = db.Surveys.Find(id);
             if (survey == null)
