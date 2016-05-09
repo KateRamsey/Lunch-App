@@ -17,63 +17,17 @@ namespace Lunch_App.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account", new {returnUrl = "/home/index"});
+                return RedirectToAction("Login", "Account", new { returnUrl = "/home/index" });
             }
 
             var userId = User.Identity.GetUserId();
-            IndexVM indexView = BuildIndexVM(userId);
+            IndexVM indexView = IndexVMLogic.BuildIndexVM(userId, db);
 
             return View(indexView);
         }
 
 
-        private IndexVM BuildIndexVM(string userId)
-        {
-            var indexView = new IndexVM();
-            foreach (var s in db.Surveys.Where(s => s.User.Id == userId && !s.IsFinished))
-            {
-                indexView.OutstandingSurveys.Add(s.Id);
-            }
-
-
-            //foreach (var l in db.LunchMembers)
-            //{
-            //    if (l.Member.Id == userId)
-            //    {
-            //        var newLunch = new LunchVM();
-            //        //build up newLunch
-            //        indexView.Lunches.Add(newLunch);
-            //    }
-            //}
-
-            //if (indexView.Lunches != null)
-            //{
-            //    //next lunch datetime
-            //}
-
-
-            var listOfLunches = db.Lunches.Where(l => l.Creator.Id == userId).ToList();
-
-            foreach (var l in listOfLunches)
-            {
-                foreach (var s in l.Surveys.Where(s => !s.IsFinished))
-                {
-                    indexView.WaitingOnSurveys = true;
-                    break;
-                }
-            }
-
-
-
-
-            //lunches ready to pick
-
-            //Buddies <--- add later
-
-            //Favorite Resturants <--- add later
-
-            return indexView;
-        }
+        
 
         // GET: Home/CreateLunch
         public ActionResult CreateLunch()
@@ -107,7 +61,7 @@ namespace Lunch_App.Controllers
             var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id)).ToList();
 
             var members = attendingUsers.Select(user => new LunchMembers()
-                { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user}).ToList();
+            { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user }).ToList();
             newLunch.Members.AddRange(members);
 
             foreach (var member in members)
@@ -176,6 +130,6 @@ namespace Lunch_App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
     }
 }

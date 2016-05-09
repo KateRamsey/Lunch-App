@@ -200,6 +200,7 @@
     <Compile Include="Logic\DietartyIssueLogic.cs" />
     <Compile Include="Logic\FilterLogic.cs" />
     <Compile Include="Logic\HoursOfOperations.cs" />
+    <Compile Include="Logic\IndexVMLogic.cs" />
     <Compile Include="Migrations\201605031615213_initial.cs" />
     <Compile Include="Migrations\201605031615213_initial.Designer.cs">
       <DependentUpon>201605031615213_initial.cs</DependentUpon>
