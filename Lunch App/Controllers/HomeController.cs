@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Lunch_App.Models;
 using Microsoft.AspNet.Identity;
+using Lunch_App.Logic;
 
 namespace Lunch_App.Controllers
 {
@@ -119,51 +120,13 @@ namespace Lunch_App.Controllers
             survey.ZipCode = surveyVM.ZipCode;
             survey.ZipCodeRadius = surveyVM.ZipCodeRadius;
 
-            survey.DietaryIssues = SurveyDietaryIssues(surveyVM);
+            survey.DietaryIssues = DietartyIssueLogic.SurveyDietaryIssues(surveyVM);
 
 
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 
-        private int SurveyDietaryIssues(SurveyEditVM survey)
-        {
-            int issues = 0;
-
-            if (survey.Vegan)
-            {
-                issues += (int)DietaryIssues.Vegan;
-            }
-            if (survey.Vegetarian)
-            {
-                issues += (int)DietaryIssues.Vegetarian;
-            }
-            if (survey.GlutenFree)
-            {
-                issues += (int)DietaryIssues.GlutenFree;
-            }
-            if (survey.NutAllergy)
-            {
-                issues += (int)DietaryIssues.NutAllergy;
-            }
-            if (survey.ShellFishAllergy)
-            {
-                issues += (int)DietaryIssues.ShellFishAllergy;
-            }
-            if (survey.Kosher)
-            {
-                issues += (int)DietaryIssues.Kosher;
-            }
-            if (survey.Halaal)
-            {
-                issues += (int)DietaryIssues.Halaal;
-            }
-            if (survey.LactoseIntolerant)
-            {
-                issues += (int)DietaryIssues.LactoseIntolerant;
-            }
-
-            return issues;
-        }
+        
     }
 }
