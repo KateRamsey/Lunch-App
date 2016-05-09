@@ -35,22 +35,31 @@ namespace Lunch_App.Controllers
                 indexView.OutstandingSurveys.Add(s.Id);
             }
 
-            foreach (var l in db.LunchMembers)
+            //foreach (var l in db.LunchMembers)
+            //{
+            //    if (l.Member.Id == userId)
+            //    {
+            //        var newLunch = new LunchVM();
+            //        //build up newLunch
+            //        indexView.Lunches.Add(newLunch);
+            //    }
+            //}
+
+            //if (indexView.Lunches != null)
+            //{
+            //    //next lunch datetime
+            //}
+
+
+
+            foreach (var l in db.Lunches.Where(l => l.Creator.Id == userId))
             {
-                if (l.Member.Id == userId)
+                foreach (var s in l.Surveys.Where(s => !s.IsFinished))
                 {
-                    var newLunch = new LunchVM();
-                    //build up newLunch
-                    indexView.Lunches.Add(newLunch);
+                    indexView.WaitingOnSurveys = true;
+                    break;
                 }
             }
-
-            if (indexView.Lunches != null)
-            {
-                //next lunch datetime
-            }
-
-            //waiting on surveys
 
             //lunches ready to pick
 
