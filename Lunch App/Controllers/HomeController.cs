@@ -35,6 +35,7 @@ namespace Lunch_App.Controllers
                 indexView.OutstandingSurveys.Add(s.Id);
             }
 
+
             //foreach (var l in db.LunchMembers)
             //{
             //    if (l.Member.Id == userId)
