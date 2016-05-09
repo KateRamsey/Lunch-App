@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Survey</h4>
         <hr />
@@ -18,11 +18,11 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsFinished, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IsComing, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsFinished)
-                    @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IsComing)
+                    @Html.ValidationMessageFor(model => model.IsComing, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -82,6 +82,10 @@
                 @Html.ValidationMessageFor(model => model.DietaryIssues, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

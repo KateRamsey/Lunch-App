@@ -59,7 +59,7 @@ namespace Lunch_App.Controllers
         }
 
         // GET: Temp_Surveys/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult EditSurvey(int? id)
         {
             if (id == null)
             {
@@ -70,7 +70,13 @@ namespace Lunch_App.Controllers
             {
                 return HttpNotFound();
             }
-            return View(survey);
+            var surveyVM = new SurveyEditVM()
+            {
+                Id = survey.Id,
+                LunchId = survey.Lunch.Id,
+                UserId = survey.User.Id,
+            };
+            return View(surveyVM);
         }
 
         // POST: Temp_Surveys/Edit/5
