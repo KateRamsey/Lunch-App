@@ -9,13 +9,13 @@ namespace Lunch_App.Models
         public virtual Lunch Lunch { get; set; }
         public bool IsFinished { get; set; }
         public bool IsComing { get; set; }
-        public DateTime TimeAvailable { get; set; }
+        public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; }
         public string ZipCode { get; set; }
         public int ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
-        public Resturant SuggestedResturant { get; set; }
+        public virtual Resturant SuggestedResturant { get; set; }
         public int DietaryIssues { get; set; }
     }
 

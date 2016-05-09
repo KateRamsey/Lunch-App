@@ -51,8 +51,9 @@ namespace Lunch_App.Controllers
             //}
 
 
+            var listOfLunches = db.Lunches.Where(l => l.Creator.Id == userId).ToList();
 
-            foreach (var l in db.Lunches.Where(l => l.Creator.Id == userId))
+            foreach (var l in listOfLunches)
             {
                 foreach (var s in l.Surveys.Where(s => !s.IsFinished))
                 {
@@ -60,6 +61,9 @@ namespace Lunch_App.Controllers
                     break;
                 }
             }
+
+
+
 
             //lunches ready to pick
 
@@ -99,13 +103,10 @@ namespace Lunch_App.Controllers
             };
 
             var memberListIds = (from m in lunch.Members where m.IsChecked select m.Id).ToList();
-            var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id));
+            var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id)).ToList();
 
-            var members = new List<LunchMembers>();
-            foreach (var user in attendingUsers)
-            {
-                members.Add(new LunchMembers() { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user });
-            }
+            var members = attendingUsers.Select(user => new LunchMembers()
+                { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user}).ToList();
             newLunch.Members.AddRange(members);
 
             foreach (var member in members)
