@@ -17,7 +17,7 @@ namespace Lunch_App.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account", new { returnUrl = "/home/index" });
+                return RedirectToAction("Login", "Account", new {returnUrl = "/home/index"});
             }
 
             var userId = User.Identity.GetUserId();
@@ -27,12 +27,12 @@ namespace Lunch_App.Controllers
         }
 
 
-        
+
 
         // GET: Home/CreateLunch
         public ActionResult CreateLunch()
         {
-            var newLunch = new LunchCreationVM() { MeetingTime = DateTime.Now };
+            var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now};
             var potentialMembers = db.Users.Select(x => x).ToList()
                 .Select(u => new UserVM(u));
             newLunch.Members.AddRange(potentialMembers);
@@ -61,12 +61,13 @@ namespace Lunch_App.Controllers
             var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id)).ToList();
 
             var members = attendingUsers.Select(user => new LunchMembers()
-            { InvitedTime = DateTime.Now, Lunch = newLunch, Member = user }).ToList();
+            {InvitedTime = DateTime.Now, Lunch = newLunch, Member = user}).ToList();
             newLunch.Members.AddRange(members);
 
             foreach (var member in members)
             {
-                db.Surveys.Add(new Survey() { Lunch = newLunch, User = db.Users.Find(member.Member.Id) });
+                db.Surveys.Add(new Survey() {Lunch = newLunch, User = db.Users.Find(member.Member.Id)});
+                //TODO: Send notice of invite/survey to group
             }
 
 
@@ -144,7 +145,7 @@ namespace Lunch_App.Controllers
                 return RedirectToAction("Index");
             }
 
-            //TODO: Call FilterLogic!!
+           
             var surveys = new List<SurveyFilterModel>();
             foreach (var s in lunch.Surveys)
             {
@@ -157,13 +158,13 @@ namespace Lunch_App.Controllers
                 resturants.Add(new ResturantFilterModel(r));
             }
 
-            var options = FilterLogic.Filter(resturants,surveys);
+            var options = FilterLogic.Filter(resturants, surveys);
 
 
             int rank = 1;
             foreach (var o in options)
             {
-                lunch.Options.Add(new ResturantOptions() { Lunch = lunch, Resturant = db.Resturants.Find(o), Rank = rank });
+                lunch.Options.Add(new ResturantOptions() {Lunch = lunch, Resturant = db.Resturants.Find(o), Rank = rank});
                 rank++;
             }
 
@@ -171,7 +172,7 @@ namespace Lunch_App.Controllers
 
             var lunchPick = new LunchPickVM()
             {
-                Id= lunch.Id,
+                Id = lunch.Id,
                 MeetingDateTime = lunch.MeetingDateTime
             };
             foreach (var o in lunch.Options)
@@ -181,6 +182,18 @@ namespace Lunch_App.Controllers
 
             return View(lunchPick);
         }
+
+
+        // POST: Home/PickLunch/5
+        [HttpPost]
+        public ActionResult PickLunch(LunchPickVM pick)
+        {
+            //TODO: Save resturant pick to lunch in Database
+            //TODO: Send notice of pick to group
+            return RedirectToAction("Index", "Home");
+        }
+
+
 
     }
 }
