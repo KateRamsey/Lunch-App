@@ -12,25 +12,26 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>LunchPickVM</h4>
+        <h4>Where is your group going for lunch on @Model.MeetingDateTime.ToShortDateString()?</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(m=>m.MeetingDateTime)
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.Picks, htmlAttributes: new {@class = "control-label col-md-2"})
             <br/>
             @foreach (var p in Model.Picks)
             {
                 <div class="col-md-10 col-md-offset-2">
-                    @Html.RadioButtonFor(m => p.Selected, false) @p.Name
+                    @Html.HiddenFor(x => p.Id)
+                    @Html.RadioButtonFor(m => p.Selected, true) @p.Name
                 </div>
             }
-        </div>*@
+        </div>
 
 
-        <div class="col-md-10">
+        @*<div class="col-md-10">
             @for (int i = 0; i < Model.Picks.Count; i++)
                 {
                 @Html.HiddenFor(x => x.Picks[i].Id)
@@ -39,7 +40,7 @@
                     <br />
 
             }
-        </div>
+        </div>*@
 
 
 
