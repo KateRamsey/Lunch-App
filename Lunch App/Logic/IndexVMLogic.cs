@@ -34,13 +34,14 @@ namespace Lunch_App.Logic
 
             if (indexView.Lunches != null)
             {
-                //TODO: next lunch datetime
+                indexView.Lunches.OrderByDescending(x => x.MeetingDateTime);
+                indexView.NextLunch = indexView.Lunches.First().MeetingDateTime;
             }
 
 
-            var listOfLunches = db.Lunches.Where(l => l.Creator.Id == userId).ToList();
+            var listOfLunchesCreated = db.Lunches.Where(l => l.Creator.Id == userId).ToList();
 
-            foreach (var l in listOfLunches)
+            foreach (var l in listOfLunchesCreated)
             {
                 foreach (var s in l.Surveys.Where(s => !s.IsFinished))
                 {
@@ -50,9 +51,22 @@ namespace Lunch_App.Logic
             }
 
 
+            var ready = true;
+            foreach (var lunch in listOfLunchesCreated)
+            {
+                if (lunch.Surveys.Any(s => !s.IsFinished))
+                {
+                    ready = false;
+                }
 
+                if (ready)
+                {
+                    indexView.LunchReadyToPick.Add(lunch.Id);
+                }
 
-            //TODO: lunches ready to pick
+                ready = true;
+            }
+
 
             //Buddies <--- add later
 
