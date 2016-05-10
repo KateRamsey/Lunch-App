@@ -24,8 +24,7 @@
             @foreach (var p in Model.Picks)
             {
                 <div class="col-md-10 col-md-offset-2">
-                    @Html.HiddenFor(x => p.Id)
-                    @Html.RadioButtonFor(m => p.Selected, true) @p.Name
+                    <label>@Html.RadioButtonFor(model => model.SelectedId, p.Id) @p.Name</label> 
                 </div>
             }
         </div>

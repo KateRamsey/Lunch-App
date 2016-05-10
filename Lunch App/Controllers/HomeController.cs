@@ -191,7 +191,7 @@ namespace Lunch_App.Controllers
         public ActionResult PickLunch(LunchPickVM pick)
         {
             var lunch = db.Lunches.Find(pick.Id);
-            var pickedResturant = pick.Picks.FirstOrDefault(x => x.Selected);
+            var pickedResturant = db.Resturants.Find(pick.SelectedId);
 
             if (lunch == null || pickedResturant == null)
             {

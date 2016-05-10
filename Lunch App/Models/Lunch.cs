@@ -53,5 +53,6 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public DateTime MeetingDateTime { get; set; }
         public List<ResturantPickVM> Picks { get; set; } = new List<ResturantPickVM>();
+        public int SelectedId { get; set; }
     }
 }
