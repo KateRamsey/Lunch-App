@@ -38,6 +38,12 @@ namespace Lunch_App.Logic
             }
             //TODO: if still 2 or fewer just suggest rivermarket :)
 
+            if (passingResturants.Count == 0)
+            {
+                passingResturants = resturants.Where(x=>x.Id == 1).ToList();
+                //look up rivermarket id or find a different way
+            }
+
 
             return Rank(passingResturants, surveyTotal);
         }

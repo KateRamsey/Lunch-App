@@ -64,14 +64,17 @@ namespace Lunch_App.Logic
             var ready = true;
             foreach (var lunch in listOfLunchesCreated)
             {
-                if (lunch.Surveys.Any(s => !s.IsFinished))
+                if (lunch.Resturant == null)
                 {
-                    ready = false;
-                }
+                    if (lunch.Surveys.Any(s => !s.IsFinished))
+                    {
+                        ready = false;
+                    }
 
-                if (ready)
-                {
-                    indexView.LunchReadyToPick.Add(lunch.Id);
+                    if (ready)
+                    {
+                        indexView.LunchReadyToPick.Add(lunch.Id);
+                    }
                 }
 
                 ready = true;
