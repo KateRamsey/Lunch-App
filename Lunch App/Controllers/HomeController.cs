@@ -188,7 +188,22 @@ namespace Lunch_App.Controllers
         [HttpPost]
         public ActionResult PickLunch(LunchPickVM pick)
         {
-            //TODO: Save resturant pick to lunch in Database
+            var lunch = db.Lunches.Find(pick.Id);
+            var pickedResturant = pick.Picks.FirstOrDefault(x => x.Selected);
+
+            if (lunch == null || pickedResturant == null)
+            {
+                return View(pick);
+            }
+            var resturant = db.Resturants.Find(pickedResturant.Id);
+            if(resturant == null)
+            {
+                return View(pick);
+            }
+
+            lunch.Resturant = resturant;
+            db.SaveChanges();
+
             //TODO: Send notice of pick to group
             return RedirectToAction("Index", "Home");
         }
