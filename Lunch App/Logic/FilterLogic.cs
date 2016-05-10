@@ -21,6 +21,9 @@ namespace Lunch_App.Logic
             && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
             && AcceptableLocation(r, surveyTotal)).ToList();
 
+            //TODO: Less filtered version if 2 or fewer options (if still 2 or fewer just suggest rivermarket)
+
+
             return Rank(passingResturants, surveyTotal);
         }
 
