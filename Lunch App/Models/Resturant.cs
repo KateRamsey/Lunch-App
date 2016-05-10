@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lunch_App.Models
 {
@@ -17,6 +18,88 @@ namespace Lunch_App.Models
 
         public virtual List<LunchUser> Fans { get; set; } = new List<LunchUser>();
         public virtual List<Lunch> Lunches { get; set; } = new List<Lunch>();
+    }
+
+    public class ResturantCreateVM
+    {
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Location { get; set; }
+        [Required]
+        public string LocationZip { get; set; }
+        [Required]
+        public string HoursOfOperation { get; set; }
+        [Required]
+        public int PriceRange { get; set; }
+        public string Website { get; set; }
+        [Required]
+        public Cuisine CuisineType { get; set; }
+        public bool Vegan { get; set; }
+        public bool Vegetarian { get; set; }
+        public bool GlutenFree { get; set; }
+        public bool NutAllergy { get; set; }
+        public bool ShellFishAllergy { get; set; }
+        public bool Kosher { get; set; }
+        public bool Halaal { get; set; }
+        public bool LactoseIntolerant { get; set; }
+
+        public Resturant CreateResturant()
+        {
+            var resturant = new Resturant()
+            {
+                Name = this.Name,
+                Location = this.Location,
+                LocationZip = this.LocationZip,
+                HoursOfOperation = this.HoursOfOperation,
+                PriceRange = this.PriceRange,
+                Website = this.Website,
+                CuisineType = this.CuisineType,
+            };
+            resturant.DietaryOptions = GetDietaryOptions(this);
+
+            return resturant;
+        }
+
+        private int GetDietaryOptions(ResturantCreateVM resturantCreateVm)
+        {
+            int dietaryOptions = 0;
+
+            if (Vegan)
+            {
+                dietaryOptions += (int)DietaryIssues.Vegan;
+            }
+            if (Vegetarian)
+            {
+                dietaryOptions += (int)DietaryIssues.Vegetarian;
+            }
+            if (GlutenFree)
+            {
+                dietaryOptions += (int)DietaryIssues.GlutenFree;
+            }
+            if (NutAllergy)
+            {
+                dietaryOptions += (int)DietaryIssues.NutAllergy;
+            }
+            if (ShellFishAllergy)
+            {
+                dietaryOptions += (int)DietaryIssues.ShellFishAllergy;
+            }
+            if (Kosher)
+            {
+                dietaryOptions += (int)DietaryIssues.Kosher;
+            }
+            if (Halaal)
+            {
+                dietaryOptions += (int)DietaryIssues.Halaal;
+            }
+            if (LactoseIntolerant)
+            {
+                dietaryOptions += (int)DietaryIssues.LactoseIntolerant;
+            }
+
+            return dietaryOptions;
+        }
     }
 
     public class ResturantVM
@@ -144,6 +227,7 @@ namespace Lunch_App.Models
 
 public enum Cuisine
 {
+    None,
     Mexican,
     Sushi,
     Pizza,

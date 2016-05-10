@@ -9,10 +9,12 @@ using Lunch_App.Logic;
 
 namespace Lunch_App.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             if (!User.Identity.IsAuthenticated)
@@ -208,7 +210,29 @@ namespace Lunch_App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Home/CreateResturant
+        public ActionResult CreateResturant()
+        {
+            return View();
+        }
 
+
+        // POST: Home/CreateResturant
+        [HttpPost]
+        public ActionResult CreateResturant(ResturantCreateVM newResturant)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newResturant);
+            }
+
+            var resturant = newResturant.CreateResturant();
+
+            db.Resturants.Add(resturant);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
