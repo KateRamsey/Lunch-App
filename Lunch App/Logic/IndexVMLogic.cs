@@ -17,17 +17,27 @@ namespace Lunch_App.Logic
             }
 
 
-            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Select(x => x.Lunch.Id);
+            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Select(x => x.Lunch.Id).ToList();
 
             foreach (var l in lunches)
             {
                 var newLunch = new LunchVM();
-                //TODO: build up newLunch
+                var lunchFull = db.Lunches.Find(l);
+
                 newLunch.Id = l;
+                newLunch.MeetingDateTime = lunchFull.MeetingDateTime;
+                if (lunchFull.Resturant != null)
+                {
+                    newLunch.Resturant = new ResturantVM(lunchFull.Resturant);
+                }
+                newLunch.Creator = new UserVM(lunchFull.Creator);
 
-
-
-
+                foreach (var m in lunchFull.Members)
+                {
+                
+                    newLunch.Members.Add(new UserVM(db.Users.Find(m.Member.Id)));
+                }
+                
 
                 indexView.Lunches.Add(newLunch);
             }

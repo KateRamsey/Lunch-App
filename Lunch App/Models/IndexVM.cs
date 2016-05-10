@@ -11,7 +11,7 @@ namespace Lunch_App.Models
         public List<int> OutstandingSurveys { get; set; } = new List<int>();
         public DateTime NextLunch { get; set; }
         public bool WaitingOnSurveys { get; set; }
-        public List<int> LunchReadyToPick { get; set; }
+        public List<int> LunchReadyToPick { get; set; } = new List<int>();
 
         public IEnumerable<UserVM> Buddies { get; set; } = new List<UserVM>();
         public IEnumerable<ResturantVM> FavoriteResturants { get; set; } = new List<ResturantVM>();
