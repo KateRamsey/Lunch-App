@@ -76,7 +76,7 @@ namespace Lunch_App.Controllers
         }
 
 
-        // GET: Home/Edit/5
+        // GET: Home/EditSurvey/5
         public ActionResult EditSurvey(int? id)
         {
             if (id == null)
@@ -97,7 +97,7 @@ namespace Lunch_App.Controllers
             return View(surveyVM);
         }
 
-        // POST: Home/Edit/5
+        // POST: Home/EditSurvey/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditSurvey(SurveyEditVM surveyVM)
@@ -130,6 +130,57 @@ namespace Lunch_App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Home/PickLunch/5
+        public ActionResult PickLunch(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var lunch = db.Lunches.Find(id);
+            if (lunch == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            //TODO: Call FilterLogic!!
+            var surveys = new List<SurveyFilterModel>();
+            foreach (var s in lunch.Surveys)
+            {
+                surveys.Add(new SurveyFilterModel(s));
+            }
+
+            var resturants = new List<ResturantFilterModel>();
+            foreach (var r in db.Resturants)
+            {
+                resturants.Add(new ResturantFilterModel(r));
+            }
+
+            var options = FilterLogic.Filter(resturants,surveys);
+
+
+            int rank = 1;
+            foreach (var o in options)
+            {
+                lunch.Options.Add(new ResturantOptions() { Lunch = lunch, Resturant = db.Resturants.Find(o), Rank = rank });
+                rank++;
+            }
+
+
+
+            var lunchPick = new LunchPickVM()
+            {
+                Id= lunch.Id,
+                MeetingDateTime = lunch.MeetingDateTime
+            };
+            foreach (var o in lunch.Options)
+            {
+                lunchPick.Picks.Add(new ResturantPickVM(o.Resturant));
+            }
+
+            return View(lunchPick);
+        }
 
     }
 }

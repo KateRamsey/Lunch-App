@@ -82,26 +82,28 @@ namespace Lunch_App.Logic
         {
             surveys.RemoveAll(x => x.IsComing == false);
             var result = new SurveyTotal { DietaryIssues = 0 };
-            foreach (var s in surveys)
+            if (surveys.Count != 0)
             {
-                result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
-                result.NotWantedCuisines.Add(s.CuisineNotWanted);
-                result.WantedCuisines.Add(s.CuisineWanted);
-                result.SuggestedResturantIds.Add(s.SuggestedResturantId);
-                result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
-                result.BaseZips.Add(s.ZipCode);
+                foreach (var s in surveys)
+                {
+                    result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
+                    result.NotWantedCuisines.Add(s.CuisineNotWanted);
+                    result.WantedCuisines.Add(s.CuisineWanted);
+                    result.SuggestedResturantIds.Add(s.SuggestedResturantId);
+                    result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
+                    result.BaseZips.Add(s.ZipCode);
+                }
+
+                result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
+                    .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
+
+
+
+
+                //TODO: result.LunchTime complicated logic
+
+                result.LunchTime = surveys.First().TimeAvailable;
             }
-
-            result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
-                .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
-
-
-
-
-            //TODO: result.LunchTime complicated logic
-
-            result.LunchTime = surveys.First().TimeAvailable;
-
 
             return result;
         }
@@ -109,7 +111,7 @@ namespace Lunch_App.Logic
         public static IEnumerable<string> FindZipCodes(string zipCode, int zipCodeRadius)
         {
 
-            var client = new RestClient("http://www.zipcodeapi.com/rest/ye29DnmW3cFSb9nmn3EEm7qiaj1E2M6A18KEw7AzjgsupPQNTvsfCSyNbzsemzPn");
+            var client = new RestClient("http://www.zipcodeapi.com/rest/q6WfHQWcMccemF5D0GWGP9sE87bt1ObrV7GCYDOLP1ZbG5PGMLnBVQf4XrxYgIpb");
 
             var request = new RestRequest(
                 $"/radius.json/{zipCode}/{zipCodeRadius}/mile", Method.GET);

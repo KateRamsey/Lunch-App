@@ -30,7 +30,10 @@ namespace Lunch_App.Models
             ZipCodeRadius = s.ZipCodeRadius;
             CuisineWanted = s.CuisineWanted;
             CuisineNotWanted = s.CuisineNotWanted;
-            SuggestedResturantId = s.SuggestedResturant.Id;
+            if (s.SuggestedResturant != null)
+            {
+                SuggestedResturantId = s.SuggestedResturant.Id;
+            }
             DietaryIssues = s.DietaryIssues;
             IsComing = s.IsComing;
         }

@@ -296,6 +296,7 @@
     <Content Include="Views\Home\CreateLunch.cshtml" />
     <Content Include="Views\Temp_Surveys\EditSurvey.cshtml" />
     <Content Include="Views\Home\EditSurvey.cshtml" />
+    <Content Include="Views\Home\PickLunch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
