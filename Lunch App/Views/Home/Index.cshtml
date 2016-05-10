@@ -10,6 +10,19 @@
     @Html.ActionLink("Create New Lunch", "CreateLunch")
 </div>
 
+<div>Your Next lunch is at: @Model.NextLunch</div>
+
+@if (Model.LunchReadyToPick.Count() != 0)
+{
+    foreach (var l in Model.LunchReadyToPick)
+    {
+        @Html.ActionLink("It's time to pick a place to go for lunch!", "EditSurvey", new { Id = l })
+
+
+        <br />
+    }
+}
+<br />
 
 
 <div>Waiting for surveys = <span> @Model.WaitingOnSurveys </span> </div>
@@ -24,4 +37,10 @@
 
         <br/>
     }
+}
+<br />
+<div>Your Lunches:</div>
+@foreach (var l in Model.Lunches)
+{
+    <div>@l.MeetingDateTime</div>
 }

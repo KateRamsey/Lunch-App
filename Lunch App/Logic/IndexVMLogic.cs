@@ -44,7 +44,7 @@ namespace Lunch_App.Logic
 
             if (indexView.Lunches != null)
             {
-                indexView.Lunches.OrderByDescending(x => x.MeetingDateTime);
+                indexView.Lunches = indexView.Lunches.OrderByDescending(x => x.MeetingDateTime).ToList();
                 indexView.NextLunch = indexView.Lunches.First().MeetingDateTime;
             }
 
