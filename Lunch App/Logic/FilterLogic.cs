@@ -21,7 +21,22 @@ namespace Lunch_App.Logic
             && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
             && AcceptableLocation(r, surveyTotal)).ToList();
 
-            //TODO: Less filtered version if 2 or fewer options (if still 2 or fewer just suggest rivermarket)
+
+            if (passingResturants.Count <= 2)
+            {
+              passingResturants = resturants.Where(r =>
+              RestaurantMeetsDietaryNeeds(surveyTotal, r)
+              && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+              && AcceptableLocation(r, surveyTotal)).ToList();
+            }
+
+            if (passingResturants.Count <= 2)
+            {
+                passingResturants = resturants.Where(r =>
+                RestaurantMeetsDietaryNeeds(surveyTotal, r)
+                && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)).ToList();
+            }
+            //TODO: if still 2 or fewer just suggest rivermarket :)
 
 
             return Rank(passingResturants, surveyTotal);
@@ -48,19 +63,19 @@ namespace Lunch_App.Logic
             {
                 if (surveyTotal.SuggestedResturantIds.Contains(r.Id))
                 {
-                    r.Score += surveyTotal.SuggestedResturantIds.GroupBy(x=>x, v => v).Count(p => p.Key == r.Id) * 50;
+                    r.Score += surveyTotal.SuggestedResturantIds.GroupBy(x => x, v => v).Count(p => p.Key == r.Id) * 50;
                 }
                 if (surveyTotal.WantedCuisines.Contains(r.CuisineType))
                 {
-                    r.Score += surveyTotal.WantedCuisines.GroupBy(x => x, v => v).Count(p=>p.Key == r.CuisineType) * 25;
+                    r.Score += surveyTotal.WantedCuisines.GroupBy(x => x, v => v).Count(p => p.Key == r.CuisineType) * 25;
                 }
                 if (surveyTotal.BaseZips.Contains(r.LocationZip))
                 {
-                    r.Score += surveyTotal.BaseZips.GroupBy(x => x, v => v).Count(p=>p.Key == r.LocationZip) * 15;
+                    r.Score += surveyTotal.BaseZips.GroupBy(x => x, v => v).Count(p => p.Key == r.LocationZip) * 15;
                 }
             }
 
-            var result = resturants.OrderByDescending(x => x.Score).Select(v=>v.Id).ToList();
+            var result = resturants.OrderByDescending(x => x.Score).Select(v => v.Id).ToList();
 
             return result;
         }
