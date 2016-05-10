@@ -129,6 +129,10 @@ namespace Lunch_App.Models
 
     public class ResturantPickVM
     {
+        public ResturantPickVM()
+        {
+            
+        }
         public ResturantPickVM(Resturant r)
         {
             Id = r.Id;

@@ -10,6 +10,10 @@
     @Html.ActionLink("Create New Lunch", "CreateLunch")
 </div>
 
+<div class="btn btn-lg btn-warning">
+    @Html.ActionLink("Add a Resturant", "CreateResturant")
+</div>
+
 <div>Your Next lunch is at: @Model.NextLunch</div>
 
 @if (Model.LunchReadyToPick.Count() != 0)
