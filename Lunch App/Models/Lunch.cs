@@ -48,6 +48,15 @@ namespace Lunch_App.Models
         public ResturantVM Resturant { get; set; }
     }
 
+    public class LunchIndexVM
+    {
+        public int Id { get; set; }
+        public DateTime MeetingDateTime { get; set; }
+        public string CreatorHandle { get; set; }
+        public string ResturantName { get; set; }
+        public string ResturantLocation { get; set; }
+    }
+
     public class LunchPickVM
     {
         public int Id { get; set; }

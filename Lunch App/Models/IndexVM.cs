@@ -7,7 +7,7 @@ namespace Lunch_App.Models
 {
     public class IndexVM
     {
-        public List<LunchVM> Lunches { get; set; } = new List<LunchVM>();
+        public List<LunchIndexVM> Lunches { get; set; } = new List<LunchIndexVM>();
         public List<int> OutstandingSurveys { get; set; } = new List<int>();
         public DateTime NextLunch { get; set; }
         public bool WaitingOnSurveys { get; set; }

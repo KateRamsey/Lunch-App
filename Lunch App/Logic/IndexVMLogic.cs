@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Lunch_App.Models;
@@ -17,30 +18,27 @@ namespace Lunch_App.Logic
             }
 
 
-            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Select(x => x.Lunch.Id).ToList();
+            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Include("Lunch").ToList();
 
             foreach (var l in lunches)
             {
-                var newLunch = new LunchVM();
-                var lunchFull = db.Lunches.Find(l);
-
-                newLunch.Id = l;
-                newLunch.MeetingDateTime = lunchFull.MeetingDateTime;
-                if (lunchFull.Resturant != null)
+                var newLunch = new LunchIndexVM
                 {
-                    newLunch.Resturant = new ResturantVM(lunchFull.Resturant);
-                }
-                newLunch.Creator = new UserVM(lunchFull.Creator);
+                    Id = l.Lunch.Id,
+                    MeetingDateTime = l.Lunch.MeetingDateTime,
+                    CreatorHandle = l.Lunch.Creator.Handle
+                };
 
-                foreach (var m in lunchFull.Members)
+                if (l.Lunch.Resturant != null)
                 {
-                
-                    newLunch.Members.Add(new UserVM(db.Users.Find(m.Member.Id)));
+                    newLunch.ResturantName = l.Lunch.Resturant.Name;
+                    newLunch.ResturantLocation = l.Lunch.Resturant.Location;
                 }
                 
 
                 indexView.Lunches.Add(newLunch);
             }
+
 
             if (indexView.Lunches != null)
             {
