@@ -1,7 +1,7 @@
 ﻿@model Lunch_App.Models.ResturantCreateVM
 
 @{
-    ViewBag.Title = "CreateResturant";
+    ViewBag.Title = "LunchConnect | Create Resturant";
 }
 
 <h2>CreateResturant</h2>
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ResturantCreateVM</h4>
+        <h4>Resturant CreateVM</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
