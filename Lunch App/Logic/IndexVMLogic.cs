@@ -31,7 +31,10 @@ namespace Lunch_App.Logic
                 {
                     newLunch.ResturantName = l.Lunch.Resturant.Name;
                     newLunch.ResturantLocation = l.Lunch.Resturant.Location;
+                    newLunch.ResturantId = l.Lunch.Resturant.Id;
+                    newLunch.ResturantSelected = true;
                 }
+                
                 
 
                 indexView.Lunches.Add(newLunch);

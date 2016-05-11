@@ -36,15 +36,21 @@
 {
     foreach (var s in Model.OutstandingSurveys)
     {
-        @Html.ActionLink("You have an outstanding survey, click to fill it out and connect for lunch!", "EditSurvey", new { Id = s})
+        @Html.ActionLink("You have an outstanding survey, click to fill it out and connect for lunch!", "EditSurvey", new { Id = s })
 
 
-        <br/>
+        <br />
     }
 }
 <br />
 <div>Your Lunches:</div>
 @foreach (var l in Model.Lunches)
 {
-    <div>@l.MeetingDateTime</div>
+    <div>
+        @l.MeetingDateTime
+    @if (l.ResturantSelected)
+    {
+       <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
+    } 
+</div>
 }

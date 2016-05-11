@@ -53,6 +53,8 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public DateTime MeetingDateTime { get; set; }
         public string CreatorHandle { get; set; }
+        public bool ResturantSelected { get; set; }
+        public int ResturantId { get; set; }
         public string ResturantName { get; set; }
         public string ResturantLocation { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lunch_App.Models;
@@ -232,6 +233,25 @@ namespace Lunch_App.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Home/ResturantDetails/5
+        public ActionResult ResturantDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var resturant = db.Resturants.Find(id);
+
+            if (resturant == null)
+            {
+                return HttpNotFound();
+            }
+            var resturantView = new ResturantDetailVM(resturant);
+
+            return View(resturantView);
         }
 
     }

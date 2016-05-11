@@ -1,0 +1,131 @@
+﻿@model Lunch_App.Models.ResturantDetailVM
+
+@{
+    ViewBag.Title = "ResturantDetails";
+}
+
+<h2>ResturantDetails</h2>
+
+<div>
+    <h4>ResturantDetailVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoursOfOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoursOfOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceRange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceRange)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vegan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vegan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vegetarian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vegetarian)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GlutenFree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GlutenFree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NutAllergy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NutAllergy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShellFishAllergy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShellFishAllergy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kosher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kosher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Halaal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Halaal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LactoseIntolerant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LactoseIntolerant)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
