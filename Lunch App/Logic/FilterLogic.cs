@@ -106,28 +106,30 @@ namespace Lunch_App.Logic
         {
             surveys.RemoveAll(x => x.IsComing == false);
             var result = new SurveyTotal { DietaryIssues = 0 };
-            if (surveys.Count != 0)
+            if (surveys.Count == 0)
             {
-                foreach (var s in surveys)
-                {
-                    result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
-                    result.NotWantedCuisines.Add(s.CuisineNotWanted);
-                    result.WantedCuisines.Add(s.CuisineWanted);
-                    result.SuggestedResturantIds.Add(s.SuggestedResturantId);
-                    result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
-                    result.BaseZips.Add(s.ZipCode);
-                }
-
-                result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
-                    .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
-
-
-
-
-                //TODO: result.LunchTime complicated logic
-
-                result.LunchTime = surveys.First().TimeAvailable;
+                return result;
             }
+
+            foreach (var s in surveys)
+            {
+                result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
+                result.NotWantedCuisines.Add(s.CuisineNotWanted);
+                result.WantedCuisines.Add(s.CuisineWanted);
+                result.SuggestedResturantIds.Add(s.SuggestedResturantId);
+                result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
+                result.BaseZips.Add(s.ZipCode);
+            }
+
+            result.ZipCodes = result.PossibleZips.GroupBy(z => z, z => z)
+                .Where(g => g.Count() == surveys.Count()).Select(g => g.Key).ToList();
+
+
+
+
+            //TODO: result.LunchTime complicated logic
+
+            result.LunchTime = surveys.First().TimeAvailable;
 
             return result;
         }
