@@ -12,13 +12,11 @@ namespace Lunch_App.Logic
         public static IndexVM BuildIndexVM(string userId, ApplicationDbContext db)
         {
             var indexView = new IndexVM();
-            foreach (var s in db.Surveys.Where(s => s.User.Id == userId && !s.IsFinished))
-            {
-                indexView.OutstandingSurveys.Add(s.Id);
-            }
 
+            indexView.OutstandingSurveys = 
+                db.Surveys.Where(s => s.User.Id == userId && !s.IsFinished).Select(x => x.Id).ToList();
 
-            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Include("Lunch").ToList();
+            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Include("Lunch").Include("Lunch.Resturant").ToList();
 
             foreach (var l in lunches)
             {
@@ -47,37 +45,24 @@ namespace Lunch_App.Logic
             }
 
 
-            var listOfLunchesCreated = db.Lunches.Where(l => l.Creator.Id == userId).ToList();
+            var listOfLunchesCreated = db.Lunches.Where(l => l.Creator.Id == userId).Include(l=>l.Resturant)
+                .Include(l=>l.Surveys).ToList();
 
             foreach (var l in listOfLunchesCreated)
             {
-                foreach (var s in l.Surveys.Where(s => !s.IsFinished))
+                indexView.WaitingOnSurveys = l.Surveys.Any(x => !x.IsFinished);
+                if (indexView.WaitingOnSurveys)
                 {
-                    indexView.WaitingOnSurveys = true;
                     break;
                 }
             }
 
 
-            var ready = true;
-            foreach (var lunch in listOfLunchesCreated)
+            foreach (var lunch in listOfLunchesCreated.Where(lunch => lunch.Resturant == null).
+                Where(lunch => lunch.Surveys.All(s => s.IsFinished)))
             {
-                if (lunch.Resturant == null)
-                {
-                    if (lunch.Surveys.Any(s => !s.IsFinished))
-                    {
-                        ready = false;
-                    }
-
-                    if (ready)
-                    {
-                        indexView.LunchReadyToPick.Add(lunch.Id);
-                    }
-                }
-
-                ready = true;
+                indexView.LunchReadyToPick.Add(lunch.Id);
             }
-
 
             //Buddies <--- add later
 

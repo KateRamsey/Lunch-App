@@ -135,7 +135,7 @@ namespace Lunch_App.Logic
         public static IEnumerable<string> FindZipCodes(string zipCode, int zipCodeRadius)
         {
 
-            var client = new RestClient("http://www.zipcodeapi.com/rest/q6WfHQWcMccemF5D0GWGP9sE87bt1ObrV7GCYDOLP1ZbG5PGMLnBVQf4XrxYgIpb");
+            var client = new RestClient("http://www.zipcodeapi.com/rest/zKbfirTXQBrAdX5wLao5NUJ1VPVtNB2mmdBFFuCv636j0bPLldR98Bb3r6weIyA4");
 
             var request = new RestRequest(
                 $"/radius.json/{zipCode}/{zipCodeRadius}/mile", Method.GET);
