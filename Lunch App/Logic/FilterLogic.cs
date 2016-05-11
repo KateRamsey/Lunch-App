@@ -154,7 +154,7 @@ namespace Lunch_App.Logic
             var client = new RestClient("http://www.zipcodeapi.com/rest/zKbfirTXQBrAdX5wLao5NUJ1VPVtNB2mmdBFFuCv636j0bPLldR98Bb3r6weIyA4");
 
             var request = new RestRequest(
-                $"/radius.json/{zipCode}/{zipCodeRadius}/mile", Method.GET);
+                $"/radius.json/{zipCode}/{(int)zipCodeRadius}/mile", Method.GET);
 
             var response = client.Execute(request);
 
@@ -167,6 +167,7 @@ namespace Lunch_App.Logic
             //Add to ZipCache
             var totalZipString = zips.Aggregate("", (current, z) => current + (z + " "));
             db.ZipCache.Add(new ZipCache() {Radius = (int)zipCodeRadius, Zip = zipCode, ZipsInRadius = totalZipString});
+            db.SaveChanges();
 
             return zips;
         }
