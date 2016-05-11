@@ -27,10 +27,12 @@ namespace Lunch_App.Models
         [Required]
         public string Location { get; set; }
         [Required]
+        [Display(Name = "Zip Code")]
         public string LocationZip { get; set; }
         [Required]
+        [Display(Name = "Hours of Operation")]
         public string HoursOfOperation { get; set; }
-        [Required]
+        [Display(Name = "Price Range")]
         public int PriceRange { get; set; }
         public string Website { get; set; }
         [Required]

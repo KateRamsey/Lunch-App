@@ -5,13 +5,15 @@
 }
 
 
+<div class="indexButtons">
+    <div class="btn btn-lg btn-warning">
+        @Html.ActionLink("Create New Lunch", "CreateLunch")
+    </div>
 
-<div class="btn btn-lg btn-warning">
-    @Html.ActionLink("Create New Lunch", "CreateLunch")
-</div>
 
-<div class="btn btn-lg btn-default">
-    @Html.ActionLink("Add a Resturant", "CreateResturant")
+    <div class="btn btn-lg btn-default">
+        @Html.ActionLink("Add a Resturant", "CreateResturant")
+    </div>
 </div>
 
 @if(@Model.NextLunch != DateTime.MinValue)
