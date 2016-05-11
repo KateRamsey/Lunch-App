@@ -43,8 +43,13 @@ namespace Lunch_App.Logic
 
             if (indexView.Lunches != null)
             {
+                indexView.Lunches = indexView.Lunches.OrderBy(x => x.MeetingDateTime).ToList();
+                foreach (var l in indexView.Lunches.Where(l => l.MeetingDateTime == DateTime.Today))
+                {
+                    indexView.NextLunch = l.MeetingDateTime;
+                }
+
                 indexView.Lunches = indexView.Lunches.OrderByDescending(x => x.MeetingDateTime).ToList();
-                indexView.NextLunch = indexView.Lunches.First().MeetingDateTime;
             }
 
 

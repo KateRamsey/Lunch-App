@@ -1,131 +1,70 @@
 ﻿@model Lunch_App.Models.ResturantDetailVM
 
 @{
-    ViewBag.Title = "ResturantDetails";
+    ViewBag.Title = "Resturant Details - Lunch App";
 }
 
-<h2>ResturantDetails</h2>
+<h2>Resturant Details for @Model.Name</h2>
 
 <div>
-    <h4>ResturantDetailVM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <hr/>
+    <div class="row ResturantInfo">
+        <div class="Location col-md-8">
+            <div>@Model.Location, @Model.LocationZip</div>
+            @*google map link?*@
+            <div>@Model.Website</div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <div class="HoursOfOperation col-md-4">
+            <span class="bold">Hours of Operation:</span> @Model.HoursOfOperation
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h5 class="lead">Dietary Issues Accommodated by <span class="bold">@Model.Name</span></h5>
+            @if (Model.Vegan)
+            {
+                <div class="DietaryOption col-md-2">Vegan</div>
+            }
+            @if (Model.Vegetarian)
+            {
+                <div class="DietaryOption col-md-2">Vegetarian</div>
+            }
+            @if (Model.ShellFishAllergy)
+            {
+                <div class="DietaryOption col-md-3">Shellfish Alleries</div>
+            }
+            @if (Model.GlutenFree)
+            {
+                <div class="DietaryOption col-md-2">Gluten Free</div>
+            }
+            @if (Model.NutAllergy)
+            {
+                <div class="DietaryOption col-md-2">Nut Alleries</div>
+            }
+            @if (Model.LactoseIntolerant)
+            {
+                <div class="DietaryOption col-md-3">Lactose Intolerance</div>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
+            @if (Model.Kosher)
+            {
+                <div class="DietaryOption col-md-2">Kosher</div>
+            }
+            @if (Model.Halaal)
+            {
+                <div class="DietaryOption col-md-2">Halaal</div>
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationZip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationZip)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HoursOfOperation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoursOfOperation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PriceRange)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PriceRange)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Website)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Website)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vegan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vegan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vegetarian)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vegetarian)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GlutenFree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GlutenFree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NutAllergy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NutAllergy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShellFishAllergy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShellFishAllergy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kosher)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kosher)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Halaal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Halaal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LactoseIntolerant)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LactoseIntolerant)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<br />
+
+<span class="col-md-12">
+    @Html.ActionLink("Back Home", "Index")
+</span>
+
+<br />

@@ -14,7 +14,10 @@
     @Html.ActionLink("Add a Resturant", "CreateResturant")
 </div>
 
-<div>Your Next lunch is at: @Model.NextLunch</div>
+@if(@Model.NextLunch != DateTime.MinValue)
+{ 
+    <div>Your Next lunch is at: @Model.NextLunch</div>
+}
 
 @if (Model.LunchReadyToPick.Count() != 0)
 {

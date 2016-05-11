@@ -150,35 +150,35 @@ namespace Lunch_App.Models
 
         private void SetDietaryBools()
         {
-            if ((DietaryOptions & (int)DietaryIssues.Vegan) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.Vegan) == (int)DietaryIssues.Vegan)
             {
                 Vegan = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.Vegetarian) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.Vegetarian) == (int)DietaryIssues.Vegetarian)
             {
                 Vegetarian = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.GlutenFree) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.GlutenFree) == (int)DietaryIssues.GlutenFree)
             {
                 GlutenFree = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.NutAllergy) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.NutAllergy) == (int)DietaryIssues.NutAllergy)
             {
                 NutAllergy = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.ShellFishAllergy) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.ShellFishAllergy) == (int)DietaryIssues.ShellFishAllergy)
             {
                 ShellFishAllergy = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.Kosher) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.Kosher) == (int)DietaryIssues.Kosher)
             {
                 Kosher = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.Halaal) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.Halaal) == (int)DietaryIssues.Halaal)
             {
                 Halaal = true;
             }
-            if ((DietaryOptions & (int)DietaryIssues.LactoseIntolerant) == DietaryOptions)
+            if ((DietaryOptions & (int)DietaryIssues.LactoseIntolerant) == (int)DietaryIssues.LactoseIntolerant)
             {
                 LactoseIntolerant = true;
             }
@@ -224,7 +224,7 @@ namespace Lunch_App.Models
             CuisineType = r.CuisineType;
             DietaryOptions = r.DietaryOptions;
 
-            SetDietaryBools();
+            this.SetDietaryBools();
         }
 
         public int Id { get; set; }
@@ -247,35 +247,35 @@ namespace Lunch_App.Models
 
         private void SetDietaryBools()
         {
-            if ((DietaryOptions & (int) DietaryIssues.Vegan) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.Vegan) == (int)DietaryIssues.Vegan)
             {
                 Vegan = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.Vegetarian) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.Vegetarian) == (int)DietaryIssues.Vegetarian)
             {
                 Vegetarian = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.GlutenFree) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.GlutenFree) == (int)DietaryIssues.GlutenFree)
             {
                 GlutenFree = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.NutAllergy) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.NutAllergy) == (int)DietaryIssues.NutAllergy)
             {
                 NutAllergy = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.ShellFishAllergy) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.ShellFishAllergy) == (int)DietaryIssues.ShellFishAllergy)
             {
                 ShellFishAllergy = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.Kosher) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.Kosher) == (int)DietaryIssues.Kosher)
             {
                 Kosher = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.Halaal) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.Halaal) == (int)DietaryIssues.Halaal)
             {
                 Halaal = true;
             }
-            if ((DietaryOptions & (int) DietaryIssues.LactoseIntolerant) == DietaryOptions)
+            if ((DietaryOptions & (int) DietaryIssues.LactoseIntolerant) == (int)DietaryIssues.LactoseIntolerant)
             {
                 LactoseIntolerant = true;
             }

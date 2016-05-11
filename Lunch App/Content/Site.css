@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.DietaryOption {
+    border: 1px solid #468847;
+    padding: 14px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ResturantInfo {
+    margin-bottom: 10px;
+}
