@@ -161,7 +161,7 @@ namespace Lunch_App.Controllers
                 resturants.Add(new ResturantFilterModel(r));
             }
 
-            var options = FilterLogic.Filter(resturants, surveys);
+            var options = FilterLogic.Filter(resturants, surveys, db);
 
 
             int rank = 1;

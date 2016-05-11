@@ -11,9 +11,9 @@ namespace Lunch_App.Logic
 {
     public static class FilterLogic
     {
-        public static List<int> Filter(List<ResturantFilterModel> resturants, List<SurveyFilterModel> surveys)
+        public static List<int> Filter(List<ResturantFilterModel> resturants, List<SurveyFilterModel> surveys, ApplicationDbContext db)
         {
-            var surveyTotal = CombineSurveys(surveys);
+            var surveyTotal = CombineSurveys(surveys, db);
 
             var passingResturants = resturants.Where(r =>
             RestaurantMeetsDietaryNeeds(surveyTotal, r)
@@ -102,7 +102,7 @@ namespace Lunch_App.Logic
         }
 
 
-        private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys)
+        private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys, ApplicationDbContext db)
         {
             surveys.RemoveAll(x => x.IsComing == false);
             var result = new SurveyTotal { DietaryIssues = 0 };
@@ -113,7 +113,7 @@ namespace Lunch_App.Logic
 
             foreach (var s in surveys)
             {
-                result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius));
+                result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius, db));
                 result.NotWantedCuisines.Add(s.CuisineNotWanted);
                 result.WantedCuisines.Add(s.CuisineWanted);
                 result.SuggestedResturantIds.Add(s.SuggestedResturantId);
@@ -134,8 +134,22 @@ namespace Lunch_App.Logic
             return result;
         }
 
-        public static IEnumerable<string> FindZipCodes(string zipCode, int zipCodeRadius)
+        public static IEnumerable<string> FindZipCodes(string zipCode, ZipCodeRadiusOption zipCodeRadius, ApplicationDbContext db)
         {
+            var cache = db.ZipCache.Where(x => x.Zip == zipCode && x.Radius == (int)zipCodeRadius);
+            if (cache.Count() != 0)
+            {
+                var zipString = "";
+                foreach (var c in cache)
+                {
+                    zipString += c.ZipsInRadius;
+                }
+
+                var zipsFromDB = zipString.Split(' ').ToList();
+
+                return zipsFromDB;
+            }
+
 
             var client = new RestClient("http://www.zipcodeapi.com/rest/zKbfirTXQBrAdX5wLao5NUJ1VPVtNB2mmdBFFuCv636j0bPLldR98Bb3r6weIyA4");
 
@@ -146,8 +160,13 @@ namespace Lunch_App.Logic
 
             var content = (JObject)JsonConvert.DeserializeObject(response.Content);
 
+            
 
-            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x => x.zip_code);
+            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x => x.zip_code).ToList();
+
+            //Add to ZipCache
+            var totalZipString = zips.Aggregate("", (current, z) => current + (z + " "));
+            db.ZipCache.Add(new ZipCache() {Radius = (int)zipCodeRadius, Zip = zipCode, ZipsInRadius = totalZipString});
 
             return zips;
         }

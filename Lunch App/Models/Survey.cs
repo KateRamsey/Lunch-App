@@ -12,11 +12,18 @@ namespace Lunch_App.Models
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; }
         public string ZipCode { get; set; }
-        public int ZipCodeRadius { get; set; }
+        public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public virtual Resturant SuggestedResturant { get; set; }
         public int DietaryIssues { get; set; }
+    }
+
+    public enum ZipCodeRadiusOption
+    {
+        Five = 5,
+        Fifteen = 15,
+        Thirty = 30
     }
 
     public class SurveyFilterModel
@@ -42,7 +49,7 @@ namespace Lunch_App.Models
         public DateTime TimeAvailable { get; set; }
         public int MinutesAvailiable { get; set; }
         public string ZipCode { get; set; }
-        public int ZipCodeRadius { get; set; }
+        public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public int SuggestedResturantId { get; set; }
@@ -71,7 +78,7 @@ namespace Lunch_App.Models
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
         public string ZipCode { get; set; } = "72120";
-        public int ZipCodeRadius { get; set; } = 100;
+        public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
         public int SuggestedResturantId { get; set; }

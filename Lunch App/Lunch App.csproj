@@ -235,6 +235,10 @@
     <Compile Include="Migrations\201605061520574_Friday.Designer.cs">
       <DependentUpon>201605061520574_Friday.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605111629429_AddZipCache.cs" />
+    <Compile Include="Migrations\201605111629429_AddZipCache.Designer.cs">
+      <DependentUpon>201605111629429_AddZipCache.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -244,6 +248,7 @@
     <Compile Include="Models\Resturant.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Logic\SurveyTotal.cs" />
+    <Compile Include="Models\ZipCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -342,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605061520574_Friday.resx">
       <DependentUpon>201605061520574_Friday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605111629429_AddZipCache.resx">
+      <DependentUpon>201605111629429_AddZipCache.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

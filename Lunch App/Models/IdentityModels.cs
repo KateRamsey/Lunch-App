@@ -83,5 +83,7 @@ namespace Lunch_App.Models
         public DbSet<Resturant> Resturants { get; set; }
 
         public DbSet<LunchMembers> LunchMembers { get; set; }
+
+        public DbSet<ZipCache> ZipCache { get; set; }
     }
 }
