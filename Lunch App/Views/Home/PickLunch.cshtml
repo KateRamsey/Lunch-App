@@ -4,9 +4,6 @@
     ViewBag.Title = "LunchConnect | Pick A Resturant";
 }
 
-<h2>PickLunch</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -19,7 +16,7 @@
         @Html.HiddenFor(m=>m.MeetingDateTime)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Picks, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div>Here are your options based on the surveys for your group:</div>
             <br/>
             @foreach (var p in Model.Picks)
             {
@@ -30,31 +27,16 @@
         </div>
 
 
-        @*<div class="col-md-10">
-            @for (int i = 0; i < Model.Picks.Count; i++)
-                {
-                @Html.HiddenFor(x => x.Picks[i].Id)
-                @Html.RadioButtonFor(x => x.Picks[i].Selected, false)
-                @Model.Picks[i].Name <span> | @Model.Picks[i].Location </span><span>@Model.Picks[i].Website</span>
-                    <br />
-
-            }
-        </div>*@
-
-
-
-
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="It's a plan, send those notices!" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("LunchConnect Home", "Index")
 </div>
 
 @section Scripts {
