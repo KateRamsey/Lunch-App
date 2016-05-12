@@ -6,7 +6,7 @@
 
 
 <div class="indexButtons">
-    <div class="btn btn-lg btn-warning">
+    <div class="btn btn-lg btn-warning col-md-offset-8">
         @Html.ActionLink("Create New Lunch", "CreateLunch")
     </div>
 
@@ -16,8 +16,8 @@
     </div>
 </div>
 
-@if(@Model.NextLunch != DateTime.MinValue)
-{ 
+@if (@Model.NextLunch != DateTime.MinValue)
+{
     <div>Your Next lunch is at: @Model.NextLunch</div>
 }
 
@@ -25,37 +25,53 @@
 {
     foreach (var l in Model.LunchReadyToPick)
     {
-        @Html.ActionLink("It's time to pick a place to go for lunch!", "PickLunch", new { Id = l })
-
-
-        <br />
+        <div class="alert alert-success PickLunch">
+            @Html.ActionLink("It's time to pick a place to go for lunch!", "PickLunch", new { Id = l })
+        </div>
     }
 }
-<br />
 
 
-<div>Waiting for surveys = <span> @Model.WaitingOnSurveys </span> </div>
+@if (@Model.WaitingOnSurveys)
+{
+    <div class="alert alert-danger col-md-10 col-md-offset-1 Waiting">
+        You're waiting for surveys to be finished before you pick a place for lunch
+    </div>
+    <br />
+}
+
 
 
 @if (Model.OutstandingSurveys.Count() != 0)
 {
-    foreach (var s in Model.OutstandingSurveys)
-    {
-        @Html.ActionLink("You have an outstanding survey, click to fill it out and connect for lunch!", "EditSurvey", new { Id = s })
+    <div class="row OutstandingSurveys">
+        @foreach (var s in Model.OutstandingSurveys)
+        {
+            <div class="btn btn-info col-md-offset-3 col-md-6 OutstandingSurveyBtn">
+                @Html.ActionLink("You have an outstanding survey, click to fill it out and connect for lunch!", "EditSurvey", new { Id = s })
+            </div>
 
+                <br />
+        }
+    </div>
 
-        <br />
-    }
 }
+
 <br />
-<div>Your Lunches:</div>
-@foreach (var l in Model.Lunches)
-{
-    <div>
-        @l.MeetingDateTime
-    @if (l.ResturantSelected)
-    {
-       <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
-    } 
+
+<div class="row">
+
+    <div class="list-group col-md-5 com-md-offset-1">
+        <div class="list-group-item active">Your Lunches:</div>
+        @foreach (var l in Model.Lunches)
+        {
+            <div class="list-group-item">
+                @l.MeetingDateTime
+                @if (l.ResturantSelected)
+                {
+                    <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
+                }
+            </div>
+        }
+    </div>
 </div>
-}

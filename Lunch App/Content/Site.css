@@ -49,3 +49,17 @@ textarea {
 .indexButtons {
     margin: 5px;
 }
+
+.OutstandingSurveyBtn > a {
+    font-weight: bold;
+    color: whitesmoke;
+
+}
+
+.Waiting, .PickLunch{
+    text-align: center;
+}
+
+.OutstandingSurveys {
+    margin-bottom: 10px;
+}
