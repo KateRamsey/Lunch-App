@@ -22,7 +22,7 @@
     foreach (var l in Model.LunchReadyToPick)
     {
         <div class="alert alert-success PickLunch">
-            @Html.ActionLink("It's time to pick a place to go for lunch!", "PickLunch", new { Id = l })
+            @Html.ActionLink("It's time to pick a place to go for lunch! Click here to connect for lunch", "PickLunch", new { Id = l })
         </div>
     }
 }
@@ -38,26 +38,29 @@
 
 
 
-@if (Model.OutstandingSurveys.Count() != 0)
-{
-    <div class="row OutstandingSurveys">
-        @foreach (var s in Model.OutstandingSurveys)
-        {
-            <div class="btn btn-info col-md-offset-3 col-md-6 OutstandingSurveyBtn">
-                @Html.ActionLink("You have an outstanding survey, click to fill it out and connect for lunch!", "EditSurvey", new { Id = s })
-            </div>
 
-                <br />
-        }
-    </div>
-
-}
 
 <br />
 
 <div class="row">
+    @if (Model.OutstandingSurveys.Count() != 0)
+    {
+        <div class="list-group col-md-7 com-md-offset-1 OutstandingSurveys">
+            <div class="list-group-item active">Your Outstanding Surveys:</div>
+            @foreach (var s in Model.OutstandingSurveys)
+            {
+                string linkString = $"/Home/EditSurvey/{s}";
+                <a href=@linkString>
+                    <div class="list-group-item btn btn-info OutstandingSurveyBtn">
+                        You have an outstanding survey, click to fill it out and connect for lunch!
+                    </div>
+                </a>
+            }
+        </div>
 
-    <div class="list-group col-md-5 com-md-offset-1">
+    }
+
+    <div class="list-group col-md-5 com-md-offset-9">
         <div class="list-group-item active">Your Lunches:</div>
         @foreach (var l in Model.Lunches)
         {

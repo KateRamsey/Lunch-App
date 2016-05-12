@@ -50,14 +50,17 @@ textarea {
     margin: 5px;
 }
 
-.OutstandingSurveyBtn > a {
+ a > .OutstandingSurveyBtn {
+     margin-top: 2px;
     font-weight: bold;
     color: whitesmoke;
+    background-color: #772953
 
 }
 
 .Waiting, .PickLunch{
     text-align: center;
+    font-weight: bold;
 }
 
 .OutstandingSurveys {
