@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using Lunch_App.Models;
 using Microsoft.AspNet.Identity;
 using Lunch_App.Logic;
@@ -36,8 +37,11 @@ namespace Lunch_App.Controllers
         public ActionResult CreateLunch()
         {
             var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now};
-            var potentialMembers = db.Users.Select(x => x).ToList()
-                .Select(u => new UserVM(u));
+            var user = new List<LunchUser>();
+            user.Add(db.Users.Find(User.Identity.GetUserId()));
+            
+            var potentialMembers = db.Users.Select(x => x).ToList().Except(user)
+                .Select(u => new UserVM(u)).ToList();
             newLunch.Members.AddRange(potentialMembers);
 
             return View(newLunch);
@@ -53,15 +57,17 @@ namespace Lunch_App.Controllers
             {
                 return View(lunch);
             }
-
+            var userId = User.Identity.GetUserId();
             var newLunch = new Lunch
             {
-                Creator = db.Users.Find(User.Identity.GetUserId()),
+                Creator = db.Users.Find(userId),
                 MeetingDateTime = lunch.MeetingTime
             };
 
             var memberListIds = (from m in lunch.Members where m.IsChecked select m.Id).ToList();
+            memberListIds.Add(userId);
             var attendingUsers = db.Users.Where(x => memberListIds.Contains(x.Id)).ToList();
+            
 
             var members = attendingUsers.Select(user => new LunchMembers()
             {InvitedTime = DateTime.Now, Lunch = newLunch, Member = user}).ToList();
