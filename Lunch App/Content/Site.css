@@ -50,19 +50,19 @@ textarea {
     margin: 5px;
 }
 
- a > .OutstandingSurveyBtn {
-     margin-top: 2px;
+a > .OutstandingSurveyBtn {
+    margin-top: 2px;
     font-weight: bold;
     color: whitesmoke;
-    background-color: #772953
-
+    background-color: #772953;
 }
-  .IssuesLabel {
-      font-weight: bold;
-      font-size: 2rem;
-  }
 
-.Waiting, .PickLunch,{
+.IssuesLabel {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.Waiting, .PickLunch {
     text-align: center;
     font-weight: bold;
 }
@@ -70,3 +70,24 @@ textarea {
 .OutstandingSurveys {
     margin-bottom: 10px;
 }
+
+.DietaryButtonGroup, .IsComing {
+    margin: 5px;
+}
+
+.DietaryButtonGroup > .btn-primary, .DietaryButtonGroup > .btn-warning {
+        background-color: white;
+        color: black;
+    }
+
+    .DietaryButtonGroup > .btn-warning.active {
+        color: #ffffff;
+        background-color: #e7a413;
+        border-color: #dd9d12;
+    }
+
+    .DietaryButtonGroup > .btn-primary.active {
+        color: #ffffff;
+        background-color: #8d2e0d;
+        border-color: #682209;
+    }

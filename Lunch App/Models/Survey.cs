@@ -75,19 +75,27 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public string UserId { get; set; }
         public int LunchId { get; set; }
-        [Display(Name = "Are You Coming to Lunch?")]
+        [Display(Name = "Are you coming to lunch?")]
         public bool IsComing { get; set; }
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
+        [Display(Name = "What zip code are you coming from?")]
         public string ZipCode { get; set; } = "72120";
+        [Display(Name = "How many miles can you travel?")]
         public ZipCodeRadiusOption ZipCodeRadius { get; set; }
+        [Display(Name = "What type of food do you want to eat?")]
         public Cuisine CuisineWanted { get; set; }
+        [Display(Name = "Anything you don't want to eat?")]
         public Cuisine CuisineNotWanted { get; set; }
+        [Display(Name = "Is there a particular place that you want to go?")]
         public int SuggestedResturantId { get; set; }
         public bool Vegan { get; set; }
         public bool Vegetarian { get; set; }
+        [Display(Name = "Gluten Free")]
         public bool GlutenFree { get; set; }
+        [Display(Name = "Nut Allergy")]
         public bool NutAllergy { get; set; }
+        [Display(Name = "Shellfish Allergy")]
         public bool ShellFishAllergy { get; set; }
         public bool Kosher { get; set; }
         public bool Halaal { get; set; }

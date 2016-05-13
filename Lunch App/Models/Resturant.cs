@@ -310,7 +310,7 @@ namespace Lunch_App.Models
 public enum Cuisine
 {
     None,
-    Mexican,
+    Mexican = 1,
     Sushi,
     Pizza,
     Cajun,
@@ -326,7 +326,7 @@ public enum Cuisine
     Buffet,
     Cuban,
     Southern,
-    MiddleEastern,
+    Middleeastern,
     Mediterranean,
     Breakfast
 }
