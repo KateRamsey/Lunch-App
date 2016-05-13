@@ -81,6 +81,8 @@
                 </div>
             </div>*@
 
+        <div class="IssuesLabel">What dietary restrictions/issues do you have?</div>
+
         <div class="btn-group" data-toggle="buttons">
             <div class="btn btn-md btn-warning">
                 @Html.LabelFor(model => model.Vegan, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -113,16 +115,6 @@
             </div>
 
             <div class="btn btn-md btn-warning">
-                @Html.LabelFor(model => model.NutAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    @Html.EditorFor(model => model.NutAllergy)
-                    @Html.ValidationMessageFor(model => model.NutAllergy, "", new { @class = "text-danger" })
-
-                </div>
-            </div>
-
-            <div class="btn btn-md btn-warning">
                 @Html.LabelFor(model => model.ShellFishAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
 
@@ -131,7 +123,18 @@
 
                 </div>
             </div>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
 
+            <div class="btn btn-md btn-warning">
+                @Html.LabelFor(model => model.NutAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+
+                    @Html.EditorFor(model => model.NutAllergy)
+                    @Html.ValidationMessageFor(model => model.NutAllergy, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
             <div class="btn btn-md btn-warning">
                 @Html.LabelFor(model => model.Kosher, htmlAttributes: new { @class = "control-label col-md-2" })
 

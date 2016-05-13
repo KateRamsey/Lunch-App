@@ -57,8 +57,12 @@ textarea {
     background-color: #772953
 
 }
+  .IssuesLabel {
+      font-weight: bold;
+      font-size: 2rem;
+  }
 
-.Waiting, .PickLunch{
+.Waiting, .PickLunch,{
     text-align: center;
     font-weight: bold;
 }
