@@ -87,6 +87,84 @@ namespace Lunch_App.Tests
         }
 
         [TestMethod]
+        public void TotalOneSurvey()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Thai,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72115",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+
+            var kateList = new List<SurveyFilterModel> {kate};
+            var result = FilterLogic.CombineSurveys(kateList,db);
+
+            Assert.AreEqual(DateTime.Now.Date, result.LunchTime.Date);
+            Assert.IsTrue(result.BaseZips.Contains("72115"));
+            Assert.IsTrue(result.PossibleZips.Contains("72115"));
+            Assert.IsTrue(result.PossibleZips.Contains("72198"));
+            Assert.AreEqual(result.DietaryIssues, 0);
+            Assert.IsTrue(result.NotWantedCuisines.Contains(Cuisine.American));
+            Assert.IsTrue(result.WantedCuisines.Contains(Cuisine.Thai));
+
+        }
+
+        [TestMethod]
+        public void TotalTwoSurveys()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Thai,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72115",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.American,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 2,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72198",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+            var result = FilterLogic.CombineSurveys(surveyList, db);
+
+            Assert.AreEqual(DateTime.Now.Date, result.LunchTime.Date);
+            Assert.IsTrue(result.BaseZips.Contains("72115"));
+            Assert.IsTrue(result.BaseZips.Contains("72198"));
+            Assert.IsTrue(result.PossibleZips.Contains("72115"));
+            Assert.IsTrue(result.PossibleZips.Contains("72198"));
+            Assert.IsTrue(result.PossibleZips.Contains("72202"));
+            Assert.AreEqual(result.DietaryIssues, 2);
+            Assert.IsTrue(result.NotWantedCuisines.Contains(Cuisine.American));
+            Assert.IsTrue(result.NotWantedCuisines.Contains(Cuisine.Japanese));
+            Assert.IsTrue(result.WantedCuisines.Contains(Cuisine.Thai));
+            Assert.IsTrue(result.WantedCuisines.Contains(Cuisine.American));
+
+        }
+
+
+        //TODO: Write tests for filtering and ranking resturants!!!
+
+        [TestMethod]
         public void SingleDayStringParce()
         {
             var result = FilterLogic.BreakHoursToRanges("Thursday 8am-9pm").ToList();
