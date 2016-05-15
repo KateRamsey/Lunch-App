@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Lunch_App.Logic;
+using Lunch_App.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lunch_App.Tests
@@ -13,6 +14,7 @@ namespace Lunch_App.Tests
     [TestClass]
     public class Logic_Tests
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public Logic_Tests()
         {
             //
@@ -60,15 +62,29 @@ namespace Lunch_App.Tests
         //
         #endregion
 
-        //[TestMethod]
-        //public void TestZipMethod()
-        //{
-        //   var result = FilterLogic.FindZipCodes("72023", 2);
-        //   var expect = new List<string>() {"72023"};
+        [TestMethod]
+        public void TestZipMethodSimple()
+        {
+            var result = FilterLogic.FindZipCodes("72120", (ZipCodeRadiusOption) 5, db);
+            var expect = new List<string>() { "72120" };
 
-        //   //Assert.AreEqual(expect, result);
-        //   Assert.AreSame(expect, result);
-        //}
+            Assert.IsTrue(result.Contains("72120"));
+        }
+
+        [TestMethod]
+        public void TestZipMethodComplex()
+        {
+            var result = FilterLogic.FindZipCodes("72115", (ZipCodeRadiusOption)5, db);
+            var expect = new List<string>()
+            { "72115", "72202", "72201", "72260", "72114", "72198", "72124", "72190", "72199", "72116", "72119" };
+
+            Assert.AreEqual(11, result.Count());
+            foreach (var x in expect)
+            {
+                Assert.IsTrue(result.Contains(x));
+            }
+            
+        }
 
         [TestMethod]
         public void SingleDayStringParce()

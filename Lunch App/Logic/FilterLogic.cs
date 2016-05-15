@@ -102,7 +102,7 @@ namespace Lunch_App.Logic
         }
 
 
-        private static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys, ApplicationDbContext db)
+        public static SurveyTotal CombineSurveys(List<SurveyFilterModel> surveys, ApplicationDbContext db)
         {
             surveys.RemoveAll(x => x.IsComing == false);
             var result = new SurveyTotal { DietaryIssues = 0 };
@@ -145,7 +145,7 @@ namespace Lunch_App.Logic
                     zipString += c.ZipsInRadius;
                 }
 
-                var zipsFromDB = zipString.Split(' ').ToList();
+                var zipsFromDB = zipString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
                 return zipsFromDB;
             }
