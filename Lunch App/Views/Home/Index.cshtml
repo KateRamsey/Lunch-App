@@ -4,73 +4,70 @@
     ViewBag.Title = "LunchConnect";
 }
 
-
-<div class="indexButtons">
-    <div class="btn btn-lg btn-warning col-md-offset-8">
-        @Html.ActionLink("Create New Lunch", "CreateLunch")
-    </div>
-
-
-    <div class="btn btn-lg btn-default">
-        @Html.ActionLink("Add a Resturant", "CreateResturant")
-    </div>
-</div>
-
-
-@if (Model.LunchReadyToPick.Count() != 0)
+@if (TempData["Message"] != null)
 {
-    foreach (var l in Model.LunchReadyToPick)
-    {
-        <div class="alert alert-success PickLunch">
-            @Html.ActionLink("It's time to pick a place to go for lunch! Click here to connect for lunch", "PickLunch", new { Id = l })
-        </div>
-    }
+    <div class="alert alert-dismissible alert-info col-md-8 col-md-offset-2 tempDataMessage">
+        <button class="close" type="button" data-dismiss="alert">&times;</button>
+        <span class=""> @TempData["Message"] </span>
+    </div>
+    <br/>
 }
 
 
-@if (@Model.WaitingOnSurveys)
-{
-    <div class="alert alert-danger col-md-10 col-md-offset-1 Waiting">
-        You're waiting for surveys to be finished before you pick a place for lunch
-    </div>
-    <br />
-}
-
-
-
-
-
-<br />
-
-<div class="row">
-    @if (Model.OutstandingSurveys.Count() != 0)
+    @if (Model.LunchReadyToPick.Count() != 0)
     {
-        <div class="list-group col-md-7 com-md-offset-1 OutstandingSurveys">
-            <div class="list-group-item active">Your Outstanding Surveys:</div>
-            @foreach (var s in Model.OutstandingSurveys)
-            {
-                string linkString = $"/Home/EditSurvey/{s}";
-                <a href=@linkString>
-                    <div class="list-group-item btn btn-info OutstandingSurveyBtn">
-                        You have an outstanding survey, click to fill it out and connect for lunch!
-                    </div>
-                </a>
-            }
-        </div>
-
-    }
-
-    <div class="list-group col-md-5 com-md-offset-9">
-        <div class="list-group-item active">Your Lunches:</div>
-        @foreach (var l in Model.Lunches)
+        foreach (var l in Model.LunchReadyToPick)
         {
-            <div class="list-group-item">
-                @l.MeetingDateTime
-                @if (l.ResturantSelected)
-                {
-                    <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
-                }
+            <div class="alert alert-success PickLunch col-md-12">
+                @Html.ActionLink("It's time to pick a place to go for lunch! Click here to connect for lunch", "PickLunch", new { Id = l })
             </div>
         }
+    }
+
+
+    @if (@Model.WaitingOnSurveys)
+    {
+        <div class="alert alert-danger col-md-10 col-md-offset-1 Waiting">
+            You're waiting for surveys to be finished before you pick a place for lunch
+        </div>
+        <br />
+    }
+
+
+
+
+
+    <br />
+
+    <div class="row">
+        @if (Model.OutstandingSurveys.Count() != 0)
+        {
+            <div class="list-group col-md-7 com-md-offset-1 OutstandingSurveys">
+                <div class="list-group-item active">Your Outstanding Surveys:</div>
+                @foreach (var s in Model.OutstandingSurveys)
+                {
+                    string linkString = $"/Home/EditSurvey/{s}";
+                    <a href=@linkString>
+                        <div class="list-group-item btn btn-info OutstandingSurveyBtn">
+                            You have an outstanding survey, click to fill it out and connect for lunch!
+                        </div>
+                    </a>
+                }
+            </div>
+
+        }
+
+        <div class="list-group col-md-5 com-md-offset-9">
+            <div class="list-group-item active">Your Lunches:</div>
+            @foreach (var l in Model.Lunches)
+            {
+                <div class="list-group-item">
+                    @l.MeetingDateTime
+                    @if (l.ResturantSelected)
+                    {
+                        <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
+                    }
+                </div>
+            }
+        </div>
     </div>
-</div>

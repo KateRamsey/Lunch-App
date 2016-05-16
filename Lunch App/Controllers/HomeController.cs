@@ -82,6 +82,7 @@ namespace Lunch_App.Controllers
 
             db.Lunches.Add(newLunch);
             db.SaveChanges();
+            TempData["Message"] = "Lunch group created and notices sent... time to fill out your survey";
             return RedirectToAction("Index", "Home");
         }
 
@@ -137,6 +138,7 @@ namespace Lunch_App.Controllers
 
 
             db.SaveChanges();
+            TempData["Message"] = "Survey Submitted, Thanks!";
             return RedirectToAction("Index", "Home");
         }
 
@@ -214,6 +216,7 @@ namespace Lunch_App.Controllers
             db.SaveChanges();
 
             //TODO: Send notice of pick to group
+            TempData["Message"] = "Resturant picked and notices sent, have a great lunch!";
             return RedirectToAction("Index", "Home");
         }
 

@@ -9,22 +9,23 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("LunchConnect | by Kate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                @Html.Partial("_LoginPartial")
-            </div>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            </button>
+            @Html.ActionLink("LunchConnect | by Kate", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            <span class="icon-bar btn btn-default indexButtons">@Html.ActionLink("Add a Resturant", "CreateResturant", "Home")</span>
+            <span class="icon-bar btn btn-warning indexButtons">@Html.ActionLink("Create New Lunch", "CreateLunch", "Home")</span>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
-    <div class="container body-content">
+</div>
+
+<div class="container body-content">
         @RenderBody()
         <hr />
         <footer>

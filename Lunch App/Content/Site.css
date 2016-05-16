@@ -62,9 +62,15 @@ a > .OutstandingSurveyBtn {
     font-size: 2rem;
 }
 
-.Waiting, .PickLunch {
+.Waiting, .PickLunch, .tempDataMessage {
     text-align: center;
     font-weight: bold;
+    font-size: 2rem;
+    margin-top: 8px;
+}
+
+.alert-dismissible {
+    margin-bottom: 8px;
 }
 
 .OutstandingSurveys {
