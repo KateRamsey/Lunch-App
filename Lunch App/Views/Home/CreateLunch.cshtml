@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MeetingTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetingTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MeetingTime, new { htmlAttributes = new { @class = "form-control", id= "LunchDate" } })
                 @Html.ValidationMessageFor(model => model.MeetingTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -32,7 +32,7 @@
                         @Html.CheckBoxFor(x => x.Members[i].IsChecked)
                         @Model.Members[i].Handle
                     </span>
-                        <br />
+                    <br />
 
                 }
             </div>
@@ -50,6 +50,31 @@
     @Html.ActionLink("LunchConnect Home", "Index")
 </div>
 
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#LunchDate').datetimepicker({
+                defaultDate: '@Model.MeetingTime',
+                toolbarPlacement: 'bottom',
+                sideBySide: true,
+                icons: {
+                    time: 'glyphicon glyphicon-time',
+                    date: 'glyphicon glyphicon-calendar',
+                    up: 'glyphicon glyphicon-chevron-up',
+                    down: 'glyphicon glyphicon-chevron-down',
+                    previous: 'glyphicon glyphicon-chevron-left',
+                    next: 'glyphicon glyphicon-chevron-right',
+                    today: 'glyphicon glyphicon-screenshot',
+                    clear: 'glyphicon glyphicon-trash',
+                    close: 'glyphicon glyphicon-remove'
+                }
+            });
+        });
+    </script>
+
 }

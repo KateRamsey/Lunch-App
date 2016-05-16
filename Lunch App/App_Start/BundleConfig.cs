@@ -26,6 +26,10 @@ namespace Lunch_App
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetime").Include(
+                "~/Scripts/moment*",
+                 "~/Scripts/bootstrap-datetimepicker*"));
         }
     }
 }
