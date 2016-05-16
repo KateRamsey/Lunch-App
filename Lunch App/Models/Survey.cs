@@ -79,9 +79,13 @@ namespace Lunch_App.Models
         public bool IsComing { get; set; }
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
+
         [Display(Name = "What zip code are you coming from?")]
+        [Required]
         public string ZipCode { get; set; } = "72120";
+
         [Display(Name = "How many miles can you travel?")]
+        [Required]
         public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         [Display(Name = "What type of food do you want to eat?")]
         public Cuisine CuisineWanted { get; set; }

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.DynamicData;
 using Lunch_App.Logic;
 using Lunch_App.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -161,8 +162,470 @@ namespace Lunch_App.Tests
 
         }
 
+        [TestMethod]
+        public void DietaryNeedCheckPass()
+        {
+            var list = new List<SurveyFilterModel>();
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.American,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 2,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72198",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+            list.Add(bruce);
 
-        //TODO: Write tests for filtering and ranking resturants!!!
+            var surveyTotal = FilterLogic.CombineSurveys(list, db);
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id =3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var result = FilterLogic.RestaurantMeetsDietaryNeeds(surveyTotal, seafood);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void DietaryNeedCheckFail()
+        {
+            var list = new List<SurveyFilterModel>();
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.American,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 18,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72198",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+            list.Add(bruce);
+
+            var surveyTotal = FilterLogic.CombineSurveys(list, db);
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var result = FilterLogic.RestaurantMeetsDietaryNeeds(surveyTotal, seafood);
+
+            Assert.IsFalse(result);
+        }
+
+
+        [TestMethod]
+        public void FilterNone()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.Japanese,
+                CuisineWanted = Cuisine.Pizza,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72115",
+                ZipCodeRadius = ZipCodeRadiusOption.Thirty,
+                TimeAvailable = DateTime.Now
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.BBQ,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72198",
+                ZipCodeRadius = ZipCodeRadiusOption.Thirty,
+                TimeAvailable = DateTime.Now
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var burger = new ResturantFilterModel(new Resturant()
+            {
+                Id = 2,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.American,
+                DietaryOptions = 255
+            });
+
+            var pizza = new ResturantFilterModel(new Resturant()
+            {
+                Id = 10,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Pizza,
+                DietaryOptions = 251
+            });
+
+            var resturantList = new List<ResturantFilterModel>() {seafood, burger, pizza};
+
+            var result = FilterLogic.Filter(resturantList, surveyList, db);
+
+            Assert.IsTrue(result.Count == 3);
+            Assert.IsTrue(result.Contains(10));
+            Assert.IsTrue(result.Contains(2));
+            Assert.IsTrue(result.Contains(3));
+            Assert.IsTrue(result[0] == 10);
+
+        }
+
+        [TestMethod]
+        public void FilterOne()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Pizza,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72115",
+                ZipCodeRadius = ZipCodeRadiusOption.Thirty,
+                TimeAvailable = DateTime.Now
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.BBQ,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72198",
+                ZipCodeRadius = ZipCodeRadiusOption.Thirty,
+                TimeAvailable = DateTime.Now
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var burger = new ResturantFilterModel(new Resturant()
+            {
+                Id = 2,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.American,
+                DietaryOptions = 255
+            });
+
+            var pizza = new ResturantFilterModel(new Resturant()
+            {
+                Id = 10,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Pizza,
+                DietaryOptions = 251
+            });
+
+            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza };
+
+            var result = FilterLogic.Filter(resturantList, surveyList, db);
+
+            Assert.IsTrue(result.Count == 2);
+            Assert.IsTrue(result.Contains(10));
+            Assert.IsFalse(result.Contains(2));
+            Assert.IsTrue(result.Contains(3));
+            Assert.IsTrue(result[0] == 10);
+
+        }
+
+        [TestMethod]
+        public void FilterAllByZip()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Pizza,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "20002",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.BBQ,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "20002",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = DateTime.Now
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var burger = new ResturantFilterModel(new Resturant()
+            {
+                Id = 2,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.American,
+                DietaryOptions = 255
+            });
+
+            var pizza = new ResturantFilterModel(new Resturant()
+            {
+                Id = 10,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Pizza,
+                DietaryOptions = 251
+            });
+
+            var defaultPick = new ResturantFilterModel(new Resturant()
+            {
+                Id = 1,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday 2am-3am",
+                PriceRange = 2,
+                CuisineType = Cuisine.None,
+                DietaryOptions = 0
+            });
+
+            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+
+            var result = FilterLogic.Filter(resturantList, surveyList, db);
+
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.Contains(1));
+            Assert.IsTrue(result[0] == 1);
+
+        }
+
+        [TestMethod]
+        public void FilterAllByTime()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Pizza,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72120",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = new DateTime(2016, 5, 15, 3, 0, 0)
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.BBQ,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72120",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = new DateTime(2016, 5, 15, 3, 0, 0)
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var burger = new ResturantFilterModel(new Resturant()
+            {
+                Id = 2,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.American,
+                DietaryOptions = 255
+            });
+
+            var pizza = new ResturantFilterModel(new Resturant()
+            {
+                Id = 10,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Pizza,
+                DietaryOptions = 251
+            });
+
+            var defaultPick = new ResturantFilterModel(new Resturant()
+            {
+                Id = 1,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday 2am-3am",
+                PriceRange = 2,
+                CuisineType = Cuisine.None,
+                DietaryOptions = 0
+            });
+
+            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+
+            var result = FilterLogic.Filter(resturantList, surveyList, db);
+
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.Contains(1));
+            Assert.IsTrue(result[0] == 1);
+
+        }
+
+        [TestMethod]
+        public void FilterAllByDietary()
+        {
+            var kate = new SurveyFilterModel(new Survey()
+            {
+                CuisineNotWanted = Cuisine.American,
+                CuisineWanted = Cuisine.Pizza,
+                DietaryIssues = 255,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72120",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = new DateTime(2016, 5, 15, 3, 0, 0)
+            });
+
+            var bruce = new SurveyFilterModel(new Survey()
+            {
+                CuisineWanted = Cuisine.BBQ,
+                CuisineNotWanted = Cuisine.Japanese,
+                DietaryIssues = 0,
+                IsComing = true,
+                IsFinished = true,
+                Id = 1,
+                ZipCode = "72120",
+                ZipCodeRadius = ZipCodeRadiusOption.Five,
+                TimeAvailable = new DateTime(2016, 5, 15, 3, 0, 0)
+            });
+
+            var surveyList = new List<SurveyFilterModel> { kate, bruce };
+
+
+            var seafood = new ResturantFilterModel(new Resturant()
+            {
+                Id = 3,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Seafood,
+                DietaryOptions = 239
+            });
+
+            var burger = new ResturantFilterModel(new Resturant()
+            {
+                Id = 2,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.American,
+                DietaryOptions = 251
+            });
+
+            var pizza = new ResturantFilterModel(new Resturant()
+            {
+                Id = 10,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday-Saturday 9am-9pm",
+                PriceRange = 2,
+                CuisineType = Cuisine.Pizza,
+                DietaryOptions = 251
+            });
+
+            var defaultPick = new ResturantFilterModel(new Resturant()
+            {
+                Id = 1,
+                LocationZip = "72120",
+                HoursOfOperation = "Monday 2am-3am",
+                PriceRange = 2,
+                CuisineType = Cuisine.None,
+                DietaryOptions = 0
+            });
+
+            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+
+            var result = FilterLogic.Filter(resturantList, surveyList, db);
+
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.Contains(1));
+            Assert.IsTrue(result[0] == 1);
+
+        }
 
         [TestMethod]
         public void SingleDayStringParce()

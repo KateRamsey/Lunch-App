@@ -22,19 +22,12 @@ namespace Lunch_App.Logic
             && AcceptableLocation(r, surveyTotal)).ToList();
 
 
-            if (passingResturants.Count <= 2)
+            if (passingResturants.Count == 0)
             {
               passingResturants = resturants.Where(r =>
               RestaurantMeetsDietaryNeeds(surveyTotal, r)
               && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
               && AcceptableLocation(r, surveyTotal)).ToList();
-            }
-
-            if (passingResturants.Count <= 2)
-            {
-                passingResturants = resturants.Where(r =>
-                RestaurantMeetsDietaryNeeds(surveyTotal, r)
-                && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)).ToList();
             }
 
             if (passingResturants.Count == 0)
@@ -55,7 +48,7 @@ namespace Lunch_App.Logic
             return !surveyTotal.NotWantedCuisines.Contains(r.CuisineType);
         }
 
-        private static bool RestaurantMeetsDietaryNeeds(SurveyTotal surveyTotal, ResturantFilterModel r)
+        public static bool RestaurantMeetsDietaryNeeds(SurveyTotal surveyTotal, ResturantFilterModel r)
         {
             return ((surveyTotal.DietaryIssues & r.DietaryOptions) == surveyTotal.DietaryIssues);
         }
@@ -148,7 +141,7 @@ namespace Lunch_App.Logic
             }
 
 
-            var client = new RestClient("http://www.zipcodeapi.com/rest/ji5DVPh9RX9K2NTiLctF6xP45h7TJSG2aLG6BYftVpdXd7gYjJEqgtvmLDfuvVxG");
+            var client = new RestClient("http://www.zipcodeapi.com/rest/vztkfYolIlSUb6ScFKub2AB4Yb9QNnaiXDDcC1ykmqfxx7KcRenTPZYOb7EYvOhs");
 
             var request = new RestRequest(
                 $"/radius.json/{zipCode}/{(int)zipCodeRadius}/mile", Method.GET);
