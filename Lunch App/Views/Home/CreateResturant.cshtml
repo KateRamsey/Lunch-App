@@ -70,10 +70,13 @@
             </div>
         </div>
 
-        <div>
+        <div class="row">
             <span class="bold lead">
-                Dietary issues this resturant can accommodate:</span>
-                <div class="DietaryOption">
+                Dietary issues this resturant can accommodate:
+            </span>
+
+            <div class="btn-group DietaryButtonGroup col-md-9" data-toggle="buttons">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.Vegan, htmlAttributes: new { @class = "control-label col-md-2" })
 
                     <div class="checkbox">
@@ -84,7 +87,7 @@
 
 
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.Vegetarian, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -94,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.GlutenFree, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -104,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.NutAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -113,8 +116,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="DietaryOption">
+            <div class="btn-group DietaryButtonGroup col-md-offset-4" data-toggle="buttons">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.ShellFishAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -124,7 +129,7 @@
                     </div>
                 </div>
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.Kosher, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -134,7 +139,7 @@
                     </div>
                 </div>
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.Halaal, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -144,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="DietaryOption">
+                <div class="btn btn-md btn-primary DietaryButton">
                     @Html.LabelFor(model => model.LactoseIntolerant, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -153,7 +158,8 @@
                         </div>
                     </div>
                 </div>
-</div>
+            </div>
+        </div>
         <br />
 
         <div class="form-group">

@@ -75,19 +75,37 @@ a > .OutstandingSurveyBtn {
     margin: 5px;
 }
 
-.DietaryButtonGroup > .btn-primary, .DietaryButtonGroup > .btn-warning {
+    .DietaryButtonGroup > .btn-primary, .DietaryButtonGroup > .btn-warning, .IsComing > .btn-lg {
         background-color: white;
         color: black;
+       margin-bottom: 5px;
     }
 
-    .DietaryButtonGroup > .btn-warning.active {
-        color: #ffffff;
-        background-color: #e7a413;
-        border-color: #dd9d12;
+    .IsComing > .btn-lg {
+        border-color: #772953;
     }
 
-    .DietaryButtonGroup > .btn-primary.active {
-        color: #ffffff;
-        background-color: #8d2e0d;
-        border-color: #682209;
-    }
+        .DietaryButtonGroup > .btn-warning.active {
+            color: #ffffff;
+            background-color: #e7a413;
+            border-color: #dd9d12;
+        }
+
+        .DietaryButtonGroup > .btn-primary.active {
+            color: #ffffff;
+            background-color: #8d2e0d;
+            border-color: #682209;
+        }
+
+
+        .IsComing > .btn-lg.active {
+            color: #ffffff;
+            background-color: #772953;
+            border-color: #772953;
+        }
+
+
+        .MemberToInvite {
+            font-weight: bold;
+            font-size: 2rem;
+        }

@@ -27,12 +27,13 @@
             <div class="col-md-10">
                 @for (int i = 0; i < Model.Members.Count; i++)
                 {
-                    @Html.HiddenFor(x=>x.Members[i].Id)
-                    @Html.CheckBoxFor(x=>x.Members[i].IsChecked)
-                    @Model.Members[i].Handle <span> | </span>
-                    @Model.Members[i].Email 
-                    <br/>
-                
+                    <span class="MemberToInvite">
+                        @Html.HiddenFor(x => x.Members[i].Id)
+                        @Html.CheckBoxFor(x => x.Members[i].IsChecked)
+                        @Model.Members[i].Handle
+                    </span>
+                        <br />
+
                 }
             </div>
         </div>

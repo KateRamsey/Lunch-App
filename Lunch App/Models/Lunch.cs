@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lunch_App.Models
 {
@@ -35,6 +36,7 @@ namespace Lunch_App.Models
     public class LunchCreationVM
     {
         public List<UserVM> Members { get; set; } = new List<UserVM>();
+        [Display(Name="Lunch Time:")]
         public DateTime MeetingTime { get; set; }
 
     }
