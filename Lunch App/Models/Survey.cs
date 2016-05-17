@@ -86,6 +86,7 @@ namespace Lunch_App.Models
 
         [Display(Name = "How many miles can you travel?")]
         [Required]
+        [Range(5, int.MaxValue, ErrorMessage = "Select a range")]
         public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         [Display(Name = "What type of food do you want to eat?")]
         public Cuisine CuisineWanted { get; set; }
