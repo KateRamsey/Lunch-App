@@ -134,3 +134,10 @@ a > .OutstandingSurveyBtn {
     font-weight: bold;
     font-size: 2rem;
 }
+
+a.SmallLink {
+    font-size: 1rem;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+}

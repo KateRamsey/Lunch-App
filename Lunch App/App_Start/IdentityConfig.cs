@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -30,7 +31,11 @@ namespace Lunch_App
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
             myMessage.From = new System.Net.Mail.MailAddress(
+                                "Lunch@LunchConnect.azurewebsites.net", "LunchConnect");
+            var kate = new System.Net.Mail.MailAddress(
                                 "kateramsey@live.com", "Kate Ramsey");
+            myMessage.ReplyTo = new MailAddress[1];
+            myMessage.ReplyTo[0] = kate;
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;

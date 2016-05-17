@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Lunch_App.Models;
 using Microsoft.AspNet.Identity;
 using Lunch_App.Logic;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Lunch_App.Controllers
 {
@@ -15,6 +17,19 @@ namespace Lunch_App.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         [AllowAnonymous]
         public ActionResult Index()
@@ -75,15 +90,23 @@ namespace Lunch_App.Controllers
 
             foreach (var member in members)
             {
-                db.Surveys.Add(new Survey() {Lunch = newLunch, User = db.Users.Find(member.Member.Id)});
-                //TODO: Send notice of invite/survey to group
+                db.Surveys.Add(new Survey() {Lunch = newLunch, User = db.Users.Find(member.Member.Id)});  
             }
-
+            SendSurveyEmails(attendingUsers);
 
             db.Lunches.Add(newLunch);
             db.SaveChanges();
             TempData["Message"] = "Lunch group created and notices sent... time to fill out your survey";
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task SendSurveyEmails(List<LunchUser> attendingUsers)
+        {
+            const string message = "You have been invited to lunch, please login to http://lunchconnect.azurewebsites.net/ to fill out a short survey";
+            foreach (var user in attendingUsers)
+            {
+                await UserManager.SendEmailAsync(user.Id, "New Lunch Survey", message);
+            }
         }
 
 
@@ -138,7 +161,7 @@ namespace Lunch_App.Controllers
 
 
             db.SaveChanges();
-            TempData["Message"] = "Survey Submitted, Thanks!";
+            TempData["Message"] = "Survey submitted";
             return RedirectToAction("Index", "Home");
         }
 
@@ -215,9 +238,25 @@ namespace Lunch_App.Controllers
             lunch.Resturant = resturant;
             db.SaveChanges();
 
-            //TODO: Send notice of pick to group
+
+            var attendingUsers = db.LunchMembers.Where(x => x.Lunch == lunch).Select(y=>y.Member.Id);
+            
+            SendLunchPickEmails(attendingUsers, resturant, pick);
+
             TempData["Message"] = "Resturant picked and notices sent, have a great lunch!";
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task SendLunchPickEmails(IQueryable<string> attendingUserIds, Resturant resturant, LunchPickVM lunch)
+        {
+            var message = $"It's a plan! Join your group for lunch at {resturant.Name}, " +
+                          $"located at {resturant.Location}, {resturant.LocationZip}. " +
+                          $"Lunch starts at {lunch.MeetingDateTime.ToShortTimeString()} on {lunch.MeetingDateTime.ToShortDateString()}. " +
+                          "Thank you for using LunchConnect, and have a great lunch! -Kate";
+            foreach (var userId in attendingUserIds)
+            {
+                await UserManager.SendEmailAsync(userId, "Lunch Plan", message);
+            }
         }
 
         // GET: Home/CreateResturant
