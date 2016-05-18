@@ -63,7 +63,7 @@
             @foreach (var l in Model.Lunches)
             {
                 <div class="list-group-item">
-                    @l.MeetingDateTime
+                    @l.MeetingDateTime.ToString("g")
                     <span>by @l.CreatorHandle</span>
                     @if (l.ResturantSelected)
                     {

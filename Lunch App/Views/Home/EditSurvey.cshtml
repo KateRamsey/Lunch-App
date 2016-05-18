@@ -4,7 +4,7 @@
     ViewBag.Title = "LunchConnect | Survey";
 }
 
-<h2>So, what do you think about lunch at @Model.MeetingTime.ToShortTimeString() on @Model.MeetingTime.ToLongDateString()?</h2>
+<h2>What about lunch at <span>@Model.MeetingTime.ToShortTimeString()</span> on <span>@Model.MeetingTime.ToString("ddd, MMM dd")?</span></h2>
 <h4>You were invited by @Model.CreatorHandle</h4>
 
 @using (Html.BeginForm())
@@ -21,7 +21,8 @@
             @*<div class="btn-group IsComing" data-toggle="buttons">*@
             @Html.LabelFor(model => model.IsComing, htmlAttributes: new { @class = "control-label col-md-2" })
 
-            @Html.EditorFor(model => model.IsComing)
+
+            @Html.CheckBoxFor(model => model.IsComing)
         </div>
         <div id="hideIfNotComing">
             @*<div class="form-group">
@@ -51,7 +52,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ZipCodeRadius, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.ZipCodeRadius, "Pick a radius (in miles)", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EnumDropDownListFor(model => model.ZipCodeRadius, "Pick a radius (in miles)", new { @class = "form-control" }     )
                     @Html.ValidationMessageFor(model => model.ZipCodeRadius, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -180,11 +181,23 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @*<script>
+    <script>
         $(function () {
-            $("#hideIfNotComing").addClass("hidden");
+            $('#IsComing').change(function () {
+                console.log("changed!");
+                if ($(this).is(":checked")) {
+                    //var returnVal = confirm("Are you sure?");
+                    //$(this).attr("checked", returnVal);
+                    $('#hideIfNotComing').show('fast');
+                } else {
+                    $('#hideIfNotComing').hide('fast');
+                    
+                }
+
+            });
+
         });
-    </script>*@
+    </script>
 
 
 }
