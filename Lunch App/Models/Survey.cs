@@ -75,7 +75,7 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public string UserId { get; set; }
         public int LunchId { get; set; }
-        [Display(Name = "Are you coming to lunch?")]
+        [Display(Name = "Are you coming to lunch? Leave blank if you can't make it")]
         public bool IsComing { get; set; }
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
@@ -87,7 +87,7 @@ namespace Lunch_App.Models
         [Display(Name = "How many miles can you travel?")]
         [Required]
         [Range(5, int.MaxValue, ErrorMessage = "Select a range")]
-        public ZipCodeRadiusOption ZipCodeRadius { get; set; }
+        public ZipCodeRadiusOption ZipCodeRadius { get; set; } = ZipCodeRadiusOption.Thirty;
         [Display(Name = "What type of food do you want to eat?")]
         public Cuisine CuisineWanted { get; set; }
         [Display(Name = "Anything you don't want to eat?")]
