@@ -4,7 +4,7 @@
     ViewBag.Title = "LunchConnect | Survey";
 }
 
-<h2>So, what do you think about lunch?</h2>
+<h2>So, what do you think about lunch at @Model.MeetingTime.ToShortTimeString() on @Model.MeetingTime.ToLongDateString()?</h2>
 
 
 @using (Html.BeginForm())

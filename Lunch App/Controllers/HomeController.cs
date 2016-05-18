@@ -117,7 +117,7 @@ namespace Lunch_App.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Survey survey = db.Surveys.Find(id);
+            var survey = db.Surveys.Find(id);
             if (survey == null)
             {
                 return HttpNotFound();
@@ -127,6 +127,7 @@ namespace Lunch_App.Controllers
                 Id = survey.Id,
                 LunchId = survey.Lunch.Id,
                 UserId = survey.User.Id,
+                MeetingTime = survey.Lunch.MeetingDateTime
             };
             return View(surveyVM);
         }

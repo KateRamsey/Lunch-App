@@ -72,6 +72,7 @@ namespace Lunch_App.Models
 
     public class SurveyEditVM
     {
+        public DateTime MeetingTime { get; set; }
         public int Id { get; set; }
         public string UserId { get; set; }
         public int LunchId { get; set; }
@@ -82,7 +83,7 @@ namespace Lunch_App.Models
 
         [Display(Name = "What zip code are you coming from?")]
         [Required]
-        public string ZipCode { get; set; } = "72120";
+        public string ZipCode { get; set; } = "72201";
 
         [Display(Name = "How many miles can you travel?")]
         [Required]
