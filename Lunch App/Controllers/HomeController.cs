@@ -51,7 +51,7 @@ namespace Lunch_App.Controllers
         // GET: Home/CreateLunch
         public ActionResult CreateLunch()
         {
-            var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now};
+            var newLunch = new LunchCreationVM() {MeetingTime = DateTime.Now.ToLocalTime().AddMinutes(-DateTime.Now.Minute).AddHours(1)};
             var user = new List<LunchUser>();
             user.Add(db.Users.Find(User.Identity.GetUserId()));
             
