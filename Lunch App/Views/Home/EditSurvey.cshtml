@@ -4,7 +4,7 @@
     ViewBag.Title = "LunchConnect | Survey";
 }
 
-<h2>What about lunch at <span>@Model.MeetingTime.ToShortTimeString()</span> on <span>@Model.MeetingTime.ToString("ddd, MMM dd")?</span></h2>
+<h2>What about lunch at <span>@Model.MeetingTime.ToShortTimeString()</span> on <span>@Model.MeetingTime.ToString("dddd, MMM dd")?</span></h2>
 <h4>You were invited by @Model.CreatorHandle</h4>
 
 @using (Html.BeginForm())

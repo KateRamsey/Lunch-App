@@ -86,6 +86,7 @@ a > .OutstandingSurveyBtn {
 
 .alert-dismissible {
     margin-bottom: 8px;
+    display: block;
 }
 
 .OutstandingSurveys {

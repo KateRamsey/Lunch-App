@@ -1,34 +1,80 @@
-﻿@model IEnumerable<Lunch_App.Models.LunchDashboardVM>
+﻿@using Microsoft.Owin.Security.DataHandler.Encoder
+@model IEnumerable<Lunch_App.Models.LunchDashboardVM>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "LunchConnect | Dashboard";
 }
 
-<h2>Index</h2>
+<h2 class="col-md-8 col-md-offset-1">My Lunches</h2>
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="list-group">
-            @foreach (var item in Model.OrderByDescending(x=>x.MeetingTime))
+            @foreach (var item in Model.OrderByDescending(x => x.MeetingTime))
             {
                 <div class="list-group-item">
-                    <div class="pull-left">BADGE</div>
-                    <div class="pull-right">BUTTONS</div>
+                    @if (item.LunchToday)
+                    {
+                        <div class="pull-left"><span class="label label-primary">Today</span></div>
+                    }
+                    <div class="pull-right">
+                        @if (item.NeedsResponse)
+                        {
+                            <a class="btn btn-info btn-sm" href="/home/editsurvey/@item.SurveyId">Respond</a>
+                        }
+                        @if (item.IsCreatedByMe && item.SurveysFinished && item.ResturantId == 0)
+                        {
+                            <a class="btn btn-warning btn-sm" href="/home/picklunch/@item.LunchId">Pick Lunch</a>
+                        }
+                    </div>
 
                     <div>
-                        @Html.DisplayFor(modelItem => item.LunchId)
-                        @Html.DisplayFor(modelItem => item.MeetingTime)
-                        @Html.DisplayFor(modelItem => item.ResturantName)
-                        @Html.DisplayFor(modelItem => item.ResturantId)
-                        @Html.DisplayFor(modelItem => item.NumberOfSurveys)
-                        @Html.DisplayFor(modelItem => item.NumberOfSurveyFinished)
-                        @Html.DisplayFor(modelItem => item.SurveysFinished)
-                        @Html.DisplayFor(modelItem => item.IsCreatedByMe)
-                        @Html.DisplayFor(modelItem => item.NeedsResponse)
-                        @Html.DisplayFor(modelItem => item.SurveyId)
-                        @Html.DisplayFor(modelItem => item.LunchToday)
-                        @Html.DisplayFor(modelItem => item.LunchPast)
 
+                        @if (item.LunchPast)
+                        {
+                            <div class="text-muted">
+                                <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
+                                    @item.MeetingTime.ToString("ddd, MMM dd")
+                                </span>
+                                @if (item.ResturantId != 0)
+                                {
+                                    <span>
+                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                    </span>
+                                }
+                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                        }
+                        @if (!item.LunchPast && item.IsCreatedByMe)
+                        {
+                            <div class="text-success">
+                                <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
+                                    @item.MeetingTime.ToString("dddd, MMM dd")
+                                </span>
+                                @if (item.ResturantId != 0)
+                                {
+                                    <span>
+                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                    </span>
+                                }
+                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                        }
+                        @if (!item.LunchPast && !item.IsCreatedByMe)
+                        {
+                            <div>
+                                <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
+                                    @item.MeetingTime.ToString("dddd, MMM dd")
+                                </span>
+                                @if (item.ResturantId != 0)
+                                {
+                                    <span>
+                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                    </span>
+                                }
+                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                        }
 
 
 
