@@ -10,6 +10,7 @@ namespace Lunch_App.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Public User Name")]
         public string Handle { get; set; }
     }
 
@@ -68,7 +69,7 @@ namespace Lunch_App.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Handle")]
+        [Display(Name = "Public User Name")]
         public string Handle { get; set; }
 
         [Required]

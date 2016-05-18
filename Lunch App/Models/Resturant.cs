@@ -317,7 +317,7 @@ public enum Cuisine
     American,
     Chinese,
     Italian,
-    Sandwitch,
+    Sandwich,
     Japanese,
     Seafood,
     Thai,
