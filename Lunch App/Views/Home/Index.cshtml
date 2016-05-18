@@ -63,6 +63,7 @@
             {
                 <div class="list-group-item">
                     @l.MeetingDateTime
+                    <span>by @l.CreatorHandle</span>
                     @if (l.ResturantSelected)
                     {
                         <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
