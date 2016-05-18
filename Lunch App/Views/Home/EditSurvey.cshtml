@@ -17,151 +17,151 @@
         @Html.HiddenFor(model => model.Id)
 
 
-        <div class="btn-group IsComing" data-toggle="buttons">
-            <div class="btn btn-lg">
-                @Html.LabelFor(model => model.IsComing, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.IsComing)
-                @Html.ValidationMessageFor(model => model.IsComing, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="form-group">
+            @*<div class="btn-group IsComing" data-toggle="buttons">*@
+            @Html.LabelFor(model => model.IsComing, htmlAttributes: new { @class = "control-label col-md-2" })
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.TimeAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.IsComing)
+        </div>
+        <div id="hideIfNotComing">
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.TimeAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TimeAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TimeAvailable, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinutesAvailiable, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MinutesAvailiable, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinutesAvailiable, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TimeAvailable, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TimeAvailable, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MinutesAvailiable, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ZipCodeRadius, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MinutesAvailiable, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MinutesAvailiable, "", new { @class = "text-danger" })
+                    @Html.EnumDropDownListFor(model => model.ZipCodeRadius, "Pick a radius (in miles)", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ZipCodeRadius, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ZipCodeRadius, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.ZipCodeRadius,"Pick a radius (in miles)", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ZipCodeRadius, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CuisineWanted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.CuisineWanted, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CuisineWanted, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CuisineNotWanted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.CuisineNotWanted, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CuisineNotWanted, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.SuggestedResturantId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CuisineWanted, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SuggestedResturantId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SuggestedResturantId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="IssuesLabel">What dietary restrictions/issues do you have?</div>
-
-        <div class="btn-group DietaryButtonGroup" data-toggle="buttons">
-            <div class="btn btn-md btn-warning DietaryButton">
-                @Html.LabelFor(model => model.Vegan, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    @Html.EditorFor(model => model.Vegan)
-                    @Html.ValidationMessageFor(model => model.Vegan, "", new { @class = "text-danger" })
-
+                    @Html.EnumDropDownListFor(model => model.CuisineWanted, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CuisineWanted, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="btn btn-md btn-primary DietaryButton">
-                @Html.LabelFor(model => model.Vegetarian, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    @Html.EditorFor(model => model.Vegetarian)
-                    @Html.ValidationMessageFor(model => model.Vegetarian, "", new { @class = "text-danger" })
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.CuisineNotWanted, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.CuisineNotWanted, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CuisineNotWanted, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="btn btn-md btn-warning DietaryButton">
-                @Html.LabelFor(model => model.GlutenFree, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.SuggestedResturantId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SuggestedResturantId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SuggestedResturantId, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
 
-                    @Html.EditorFor(model => model.GlutenFree)
-                    @Html.ValidationMessageFor(model => model.GlutenFree, "", new { @class = "text-danger" })
+            <div class="IssuesLabel">What dietary restrictions/issues do you have?</div>
 
-                </div>
-            </div>
+            <div class="btn-group DietaryButtonGroup" data-toggle="buttons">
+                <div class="btn btn-md btn-warning DietaryButton">
+                    @Html.LabelFor(model => model.Vegan, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
 
-            <div class="btn btn-md btn-primary DietaryButton">
-                @Html.LabelFor(model => model.ShellFishAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                        @Html.EditorFor(model => model.Vegan)
+                        @Html.ValidationMessageFor(model => model.Vegan, "", new { @class = "text-danger" })
 
-                    @Html.EditorFor(model => model.ShellFishAllergy)
-                    @Html.ValidationMessageFor(model => model.ShellFishAllergy, "", new { @class = "text-danger" })
-
-                </div>
-            </div>
-        </div>
-        <div class="btn-group DietaryButtonGroup" data-toggle="buttons">
-
-            <div class="btn btn-md btn-warning DietaryButton">
-                @Html.LabelFor(model => model.NutAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-
-                    @Html.EditorFor(model => model.NutAllergy)
-                    @Html.ValidationMessageFor(model => model.NutAllergy, "", new { @class = "text-danger" })
-
-                </div>
-            </div>
-            <div class="btn btn-md btn-primary DietaryButton">
-                @Html.LabelFor(model => model.Kosher, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Kosher)
-                    @Html.ValidationMessageFor(model => model.Kosher, "", new { @class = "text-danger" })
+                    </div>
                 </div>
 
-            </div>
+                <div class="btn btn-md btn-primary DietaryButton">
+                    @Html.LabelFor(model => model.Vegetarian, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
 
-            <div class="btn btn-md btn-warning DietaryButton">
-                @Html.LabelFor(model => model.Halaal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                        @Html.EditorFor(model => model.Vegetarian)
+                        @Html.ValidationMessageFor(model => model.Vegetarian, "", new { @class = "text-danger" })
 
-                    @Html.EditorFor(model => model.Halaal)
-                    @Html.ValidationMessageFor(model => model.Halaal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
+                <div class="btn btn-md btn-warning DietaryButton">
+                    @Html.LabelFor(model => model.GlutenFree, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+
+                        @Html.EditorFor(model => model.GlutenFree)
+                        @Html.ValidationMessageFor(model => model.GlutenFree, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="btn btn-md btn-primary DietaryButton">
+                    @Html.LabelFor(model => model.ShellFishAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+
+                        @Html.EditorFor(model => model.ShellFishAllergy)
+                        @Html.ValidationMessageFor(model => model.ShellFishAllergy, "", new { @class = "text-danger" })
+
+                    </div>
                 </div>
             </div>
+            <div class="btn-group DietaryButtonGroup" data-toggle="buttons">
 
-            <div class="btn btn-md btn-primary DietaryButton">
-                @Html.LabelFor(model => model.LactoseIntolerant, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                <div class="btn btn-md btn-warning DietaryButton">
+                    @Html.LabelFor(model => model.NutAllergy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
 
-                    @Html.EditorFor(model => model.LactoseIntolerant)
-                    @Html.ValidationMessageFor(model => model.LactoseIntolerant, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.NutAllergy)
+                        @Html.ValidationMessageFor(model => model.NutAllergy, "", new { @class = "text-danger" })
 
+                    </div>
+                </div>
+                <div class="btn btn-md btn-primary DietaryButton">
+                    @Html.LabelFor(model => model.Kosher, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.Kosher)
+                        @Html.ValidationMessageFor(model => model.Kosher, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="btn btn-md btn-warning DietaryButton">
+                    @Html.LabelFor(model => model.Halaal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+
+                        @Html.EditorFor(model => model.Halaal)
+                        @Html.ValidationMessageFor(model => model.Halaal, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="btn btn-md btn-primary DietaryButton">
+                    @Html.LabelFor(model => model.LactoseIntolerant, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+
+                        @Html.EditorFor(model => model.LactoseIntolerant)
+                        @Html.ValidationMessageFor(model => model.LactoseIntolerant, "", new { @class = "text-danger" })
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,6 +178,13 @@
     @Html.ActionLink("LunchConnect Home", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @*<script>
+        $(function () {
+            $("#hideIfNotComing").addClass("hidden");
+        });
+    </script>*@
+
+
 }

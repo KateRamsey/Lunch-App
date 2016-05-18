@@ -79,8 +79,9 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public string UserId { get; set; }
         public int LunchId { get; set; }
-        [Display(Name = "Are you coming to lunch? Leave blank if you can't make it")]
-        public bool IsComing { get; set; }
+
+        [Display(Name = "Are you coming to lunch?")]
+        public bool IsComing { get; set; } = true;
         public DateTime TimeAvailable { get; set; } = DateTime.Now;
         public int MinutesAvailiable { get; set; } = 10000;
 

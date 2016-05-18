@@ -49,6 +49,20 @@ textarea {
 
 .indexButtons {
     margin: 5px;
+    box-shadow: 4px 4px 5px #888888;
+}
+
+.indexButtons > a, .btn-success > a {
+    color: white;
+}
+
+.PickLunch > div {
+        display: inline;
+}
+
+.Connect {
+    margin: 10px;
+
 }
 
 a > .OutstandingSurveyBtn {

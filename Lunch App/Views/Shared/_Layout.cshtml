@@ -16,7 +16,7 @@
             </button>
             @Html.ActionLink("LunchConnect | by Kate", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
             <span class="icon-bar btn btn-default hidden-xs hidden-sm indexButtons">@Html.ActionLink("Add a Resturant", "CreateResturant", "Home")</span>
-            <span class="icon-bar btn btn-warning hidden-xs indexButtons">@Html.ActionLink("Make a New Lunch", "CreateLunch", "Home")</span>
+            <span class="icon-bar btn btn-info hidden-xs indexButtons">@Html.ActionLink("Make a New Lunch", "CreateLunch", "Home")</span>
         </div>
         @Html.ActionLink("Make a New Lunch", "CreateLunch", "Home", new { area = "" }, new { @class = "hidden-sm hidden-md hidden-lg SmallLink" })
         <div class="navbar-collapse collapse">
@@ -37,5 +37,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/datetime")
     @RenderSection("scripts", required: false)
-</body>
+    </body>
 </html>

@@ -19,8 +19,9 @@
         foreach (var l in Model.LunchReadyToPick)
         {
             <div class="alert alert-success PickLunch col-md-12">
-                @Html.ActionLink("It's time to pick a place to go for lunch! Click here to connect for lunch", "PickLunch", new { Id = l })
-            </div>
+              <div>It's time to pick a place to go for lunch!  </div>
+               <div class="btn btn-success Connect">  @Html.ActionLink("Connect for lunch", "PickLunch", new {Id = l}) </div>
+</div>
         }
     }
 
