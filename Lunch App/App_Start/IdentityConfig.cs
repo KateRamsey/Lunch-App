@@ -34,8 +34,10 @@ namespace Lunch_App
                                 "Lunch@LunchConnect.azurewebsites.net", "LunchConnect");
             var kate = new System.Net.Mail.MailAddress(
                                 "kateramsey@live.com", "Kate Ramsey");
-            myMessage.ReplyTo = new MailAddress[1];
-            myMessage.ReplyTo[0] = kate;
+
+
+            myMessage.ReplyTo = new[] {kate};
+    
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;

@@ -82,13 +82,13 @@ a > .OutstandingSurveyBtn {
     margin: 5px;
 }
 
-    .DietaryButtonGroup > .btn-primary, .DietaryButtonGroup > .btn-warning, .IsComing > .btn-lg {
+    .DietaryButtonGroup > .btn-primary, .DietaryButtonGroup > .btn-warning, .IsComing > .btn-lg, .Remember {
         background-color: white;
         color: black;
         margin-bottom: 5px;
     }
 
-    .IsComing > .btn-lg {
+    .IsComing > .btn-lg, .Remember {
         border-color: #772953;
     }
 
@@ -117,13 +117,13 @@ a > .OutstandingSurveyBtn {
     }
 
 
-    .IsComing > .btn-lg.active {
+    .IsComing > .btn-lg.active, .Remember.active {
         color: #ffffff;
         background-color: #772953;
         border-color: #772953;
     }
 
-    .IsComing > .btn-lg:hover, .IsComing > .btn-lg:focus {
+    .IsComing > .btn-lg:hover, .IsComing > .btn-lg:focus, .Remember:focus, .Remember:hover {
         color: #ffffff;
         background-color: #511c39;
         border-color: #491933;
