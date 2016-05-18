@@ -244,6 +244,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexVM.cs" />
     <Compile Include="Models\Lunch.cs" />
+    <Compile Include="Models\LunchDashboardVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Resturant.cs" />
     <Compile Include="Models\Survey.cs" />

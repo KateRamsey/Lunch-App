@@ -31,18 +31,18 @@ namespace Lunch_App.Controllers
             }
         }
 
-        [AllowAnonymous]
         public ActionResult Index()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "Account", new {returnUrl = "/home/index"});
-            }
 
             var userId = User.Identity.GetUserId();
-            IndexVM indexView = IndexVMLogic.BuildIndexVM(userId, db);
 
-            return View(indexView);
+
+            var model = db.Lunches.Include("Surveys").Include("Resturant").Where(x => x.Creator.Id == userId || x.Members.Any(m => m.Member.Id == userId)).ToList()
+                .Select(l => new LunchDashboardVM(l, userId));
+
+            //IndexVM indexView = IndexVMLogic.BuildIndexVM(userId, db);
+
+            return View(model);
         }
 
 

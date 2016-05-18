@@ -26,12 +26,20 @@
 </div>
 
 <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year | LunchConnect | by Kate Ramsey</p>
-        </footer>
-    </div>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-dismissible alert-info col-md-8 col-md-offset-2 tempDataMessage">
+            <button class="close" type="button" data-dismiss="alert">&times;</button>
+            <span class=""> @TempData["Message"] </span>
+        </div>
+        <br />
+    }
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year | LunchConnect | by Kate Ramsey</p>
+    </footer>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

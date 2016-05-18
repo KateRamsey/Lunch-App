@@ -1,75 +1,42 @@
-﻿@model Lunch_App.Models.IndexVM
+﻿@model IEnumerable<Lunch_App.Models.LunchDashboardVM>
 
 @{
-    ViewBag.Title = "LunchConnect";
+    ViewBag.Title = "Index";
 }
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-dismissible alert-info col-md-8 col-md-offset-2 tempDataMessage">
-        <button class="close" type="button" data-dismiss="alert">&times;</button>
-        <span class=""> @TempData["Message"] </span>
-    </div>
-    <br/>
-}
+<h2>Index</h2>
 
-
-    @if (Model.LunchReadyToPick.Count() != 0)
-    {
-        foreach (var l in Model.LunchReadyToPick)
-        {
-            <div class="alert alert-success PickLunch col-md-12">
-              <div>It's time to pick a place to go for lunch!  </div>
-               <div class="btn btn-success Connect">  @Html.ActionLink("Connect for lunch", "PickLunch", new {Id = l}) </div>
-</div>
-        }
-    }
-
-
-    @if (@Model.WaitingOnSurveys)
-    {
-        <div class="alert alert-danger col-md-10 col-md-offset-1 Waiting">
-            You're waiting for surveys to be finished before you pick a place for lunch
-        </div>
-        <br />
-    }
-
-
-
-
-
-    <br />
-
-    <div class="row">
-        @if (Model.OutstandingSurveys.Count() != 0)
-        {
-            <div class="list-group col-md-7 com-md-offset-1 OutstandingSurveys">
-                <div class="list-group-item active">Your Outstanding Surveys:</div>
-                @foreach (var s in Model.OutstandingSurveys)
-                {
-                    string linkString = $"/Home/EditSurvey/{s}";
-                    <a href=@linkString>
-                        <div class="list-group-item btn btn-info OutstandingSurveyBtn">
-                            You have an outstanding survey, click to fill it out and connect for lunch!
-                        </div>
-                    </a>
-                }
-            </div>
-
-        }
-
-        <div class="list-group col-md-5 com-md-offset-9">
-            <div class="list-group-item active">Your Lunches:</div>
-            @foreach (var l in Model.Lunches)
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="list-group">
+            @foreach (var item in Model.OrderByDescending(x=>x.MeetingTime))
             {
                 <div class="list-group-item">
-                    @l.MeetingDateTime.ToString("g")
-                    <span>by @l.CreatorHandle</span>
-                    @if (l.ResturantSelected)
-                    {
-                        <span> at @Html.ActionLink(@l.ResturantName, "ResturantDetails", new { Id = l.ResturantId }) </span>
-                    }
+                    <div class="pull-left">BADGE</div>
+                    <div class="pull-right">BUTTONS</div>
+
+                    <div>
+                        @Html.DisplayFor(modelItem => item.LunchId)
+                        @Html.DisplayFor(modelItem => item.MeetingTime)
+                        @Html.DisplayFor(modelItem => item.ResturantName)
+                        @Html.DisplayFor(modelItem => item.ResturantId)
+                        @Html.DisplayFor(modelItem => item.NumberOfSurveys)
+                        @Html.DisplayFor(modelItem => item.NumberOfSurveyFinished)
+                        @Html.DisplayFor(modelItem => item.SurveysFinished)
+                        @Html.DisplayFor(modelItem => item.IsCreatedByMe)
+                        @Html.DisplayFor(modelItem => item.NeedsResponse)
+                        @Html.DisplayFor(modelItem => item.SurveyId)
+                        @Html.DisplayFor(modelItem => item.LunchToday)
+                        @Html.DisplayFor(modelItem => item.LunchPast)
+
+
+
+
+                    </div>
                 </div>
             }
+
         </div>
+
     </div>
+</div>
