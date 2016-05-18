@@ -127,7 +127,8 @@ namespace Lunch_App.Controllers
                 Id = survey.Id,
                 LunchId = survey.Lunch.Id,
                 UserId = survey.User.Id,
-                MeetingTime = survey.Lunch.MeetingDateTime
+                MeetingTime = survey.Lunch.MeetingDateTime,
+                CreatorHandle = survey.Lunch.Creator.Handle
             };
             return View(surveyVM);
         }

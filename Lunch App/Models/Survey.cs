@@ -73,6 +73,9 @@ namespace Lunch_App.Models
     public class SurveyEditVM
     {
         public DateTime MeetingTime { get; set; }
+
+        public string CreatorHandle { get; set; }
+
         public int Id { get; set; }
         public string UserId { get; set; }
         public int LunchId { get; set; }
@@ -105,6 +108,7 @@ namespace Lunch_App.Models
         public bool ShellFishAllergy { get; set; }
         public bool Kosher { get; set; }
         public bool Halaal { get; set; }
+        [Display(Name = "Lactose Intolerant")]
         public bool LactoseIntolerant { get; set; }
     }
 }
