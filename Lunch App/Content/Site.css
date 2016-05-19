@@ -151,8 +151,13 @@ a > .OutstandingSurveyBtn {
     font-size: 2rem;
 }
 
+.SmallLink {
+    background-color: #772953;
+}
+
 a.SmallLink {
-    font-size: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
     color: white;
     padding: 5px;
     margin: 5px;

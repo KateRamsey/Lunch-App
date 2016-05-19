@@ -17,27 +17,27 @@
                     continue;
                 }
                 <div class="list-group-item row">
-                    @if (item.LunchToday)
-                    {
-                        <div class="pull-left"><span class="label label-primary">Today</span></div>
-                    }
+
                     <div class="pull-right">
 
                         @if (item.NeedsResponse)
                         {
-                            <a class="btn btn-info btn-sm" href="/home/editsurvey/@item.SurveyId">Respond</a>
+                            <a class="btn btn-info btn-sm col-xs-12" href="/home/editsurvey/@item.SurveyId">Respond</a>
                         }
                         @if (item.IsCreatedByMe && item.SurveysFinished && item.RestaurantId == 0)
                         {
-                            <a class="btn btn-warning btn-sm" href="/home/picklunch/@item.LunchId">Pick Lunch</a>
+                            <a class="btn btn-warning btn-sm col-xs-12" href="/home/picklunch/@item.LunchId">Pick Lunch</a>
                         }
                     </div>
 
                     <div>
-
                         @if (item.LunchPast)
                         {
-                            <div class="text-muted col-md-8">
+                            <div class="text-muted col-md-8 col-xs-12">
+                                @if (item.LunchToday)
+                                {
+                                <span class="label label-primary">Today</span>
+                                }
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -54,7 +54,12 @@
                         }
                         @if (!item.LunchPast && item.IsCreatedByMe)
                         {
-                            <div class="text-success col-md-8">
+                           
+                            <div class="text-success col-md-8 col-xs-12">
+                                @if (item.LunchToday)
+                                {
+                                    <span class="label label-primary">Today</span>
+                                }
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -65,13 +70,17 @@
                                     </span>
                                 }
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-1 hidden-xs">
                                 <small>(@item.NumberOfSurveyFinished / @item.NumberOfSurveys) </small>
                             </div>
                         }
                         @if (!item.LunchPast && !item.IsCreatedByMe)
                         {
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-10">
+                                @if (item.LunchToday)
+                                {
+                                    <span class="label label-primary">Today</span>
+                                }
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -82,7 +91,7 @@
                                     </span>
                                 }
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-1 hidden-xs">
                                 <small>(@item.NumberOfSurveyFinished / @item.NumberOfSurveys) </small>
                             </div>
                         }
