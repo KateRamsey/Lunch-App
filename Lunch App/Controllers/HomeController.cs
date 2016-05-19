@@ -138,7 +138,7 @@ namespace Lunch_App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditSurvey(SurveyEditVM surveyVM)
         {
-            if (!ModelState.IsValid)
+            if (surveyVM.ZipCode == null)
             {
                 return View(surveyVM);
             }

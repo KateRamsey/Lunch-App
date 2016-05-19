@@ -18,7 +18,7 @@
             <span class="icon-bar btn btn-default hidden-xs hidden-sm indexButtons">@Html.ActionLink("Add a Restaurant", "CreateRestaurant", "Home")</span>
             <span class="icon-bar btn btn-info hidden-xs indexButtons">@Html.ActionLink("Make a New Lunch", "CreateLunch", "Home")</span>
         </div>
-        @Html.ActionLink("Make a New Lunch", "CreateLunch", "Home", new { area = "" }, new { @class = "hidden-sm hidden-md hidden-lg SmallLink" })
+        @Html.ActionLink("Start Planning Lunch", "CreateLunch", "Home", new { area = "" }, new { @class = "hidden-sm hidden-md hidden-lg SmallLink" })
         <div class="navbar-collapse collapse">
             @Html.Partial("_LoginPartial")
         </div>
