@@ -24,15 +24,15 @@ namespace Lunch_App.Logic
 
             if (passingResturants.Count == 0)
             {
-              passingResturants = resturants.Where(r =>
-              RestaurantMeetsDietaryNeeds(surveyTotal, r)
-              && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
-              && AcceptableLocation(r, surveyTotal)).ToList();
+                passingResturants = resturants.Where(r =>
+                RestaurantMeetsDietaryNeeds(surveyTotal, r)
+                && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+                && AcceptableLocation(r, surveyTotal)).ToList();
             }
 
             if (passingResturants.Count == 0)
             {
-                passingResturants = resturants.Where(x=>x.Id == 1).ToList();
+                passingResturants = resturants.Where(x => x.Id == 1).ToList();
             }
 
             return Rank(passingResturants, surveyTotal);
@@ -140,24 +140,29 @@ namespace Lunch_App.Logic
                 return zipsFromDB;
             }
 
+            var zips = new List<string>();
+            try
+            {
+                var client = new RestClient("http://www.zipcodeapi.com/rest/gVIuqtTOYNwxZcBKnRVDJtIZF6HAoOlFJ4aay4ZwRv4RHFB4xxIg0qfGwXgVLBBv");
 
-            var client = new RestClient("http://www.zipcodeapi.com/rest/Wl2coZb3l27RbgiWAK4uM8hoXM2sIQkEcnRBm3EI5Mzg2RdDCi7oqpMocPQUFbyS");
+                var request = new RestRequest(
+                    $"/radius.json/{zipCode}/{(int)zipCodeRadius}/mile", Method.GET);
 
-            var request = new RestRequest(
-                $"/radius.json/{zipCode}/{(int)zipCodeRadius}/mile", Method.GET);
+                var response = client.Execute(request);
 
-            var response = client.Execute(request);
+                var content = (JObject)JsonConvert.DeserializeObject(response.Content);
 
-            var content = (JObject)JsonConvert.DeserializeObject(response.Content);
+                zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x => x.zip_code).ToList();
 
-            
+                var totalZipString = zips.Aggregate("", (current, z) => current + (z + " "));
+                db.ZipCache.Add(new ZipCache() { Radius = (int)zipCodeRadius, Zip = zipCode, ZipsInRadius = totalZipString });
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                zips.Add(zipCode);
+            }
 
-            var zips = content["zip_codes"].ToObject<List<ZipsFromAPI>>().Select(x => x.zip_code).ToList();
-
-            //Add to ZipCache
-            var totalZipString = zips.Aggregate("", (current, z) => current + (z + " "));
-            db.ZipCache.Add(new ZipCache() {Radius = (int)zipCodeRadius, Zip = zipCode, ZipsInRadius = totalZipString});
-            db.SaveChanges();
 
             return zips;
         }

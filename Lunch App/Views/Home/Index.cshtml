@@ -12,12 +12,13 @@
         <div class="list-group">
             @foreach (var item in Model.OrderByDescending(x => x.MeetingTime))
             {
-                <div class="list-group-item">
+                <div class="list-group-item row">
                     @if (item.LunchToday)
                     {
                         <div class="pull-left"><span class="label label-primary">Today</span></div>
                     }
                     <div class="pull-right">
+                        
                         @if (item.NeedsResponse)
                         {
                             <a class="btn btn-info btn-sm" href="/home/editsurvey/@item.SurveyId">Respond</a>
@@ -32,7 +33,7 @@
 
                         @if (item.LunchPast)
                         {
-                            <div class="text-muted">
+                            <div class="text-muted col-md-offset-1">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -47,9 +48,9 @@
                         }
                         @if (!item.LunchPast && item.IsCreatedByMe)
                         {
-                            <div class="text-success">
+                            <div class="text-success col-md-offset-1">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
-                                    @item.MeetingTime.ToString("dddd, MMM dd")
+                                    @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
                                 @if (item.ResturantId != 0)
                                 {
@@ -62,9 +63,9 @@
                         }
                         @if (!item.LunchPast && !item.IsCreatedByMe)
                         {
-                            <div>
+                            <div class="col-md-offset-1">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
-                                    @item.MeetingTime.ToString("dddd, MMM dd")
+                                    @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
                                 @if (item.ResturantId != 0)
                                 {
