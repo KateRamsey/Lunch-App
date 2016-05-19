@@ -143,7 +143,7 @@ namespace Lunch_App.Logic
             var zips = new List<string>();
             try
             {
-                var client = new RestClient("http://www.zipcodeapi.com/rest/gVIuqtTOYNwxZcBKnRVDJtIZF6HAoOlFJ4aay4ZwRv4RHFB4xxIg0qfGwXgVLBBv");
+                var client = new RestClient("http://www.zipcodeapi.com/rest/pJuRQ3lCA17L2D7Awot7IWUDo6r5Q0jfKN6BRsdsukdxYl7uJABsxw5VDw1txkIh");
 
                 var request = new RestRequest(
                     $"/radius.json/{zipCode}/{(int)zipCodeRadius}/mile", Method.GET);
