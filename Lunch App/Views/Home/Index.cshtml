@@ -12,6 +12,10 @@
         <div class="list-group">
             @foreach (var item in Model.OrderByDescending(x => x.MeetingTime))
             {
+                if (item.LunchPast && item.ResturantId == 0)
+                {
+                    continue;
+                }
                 <div class="list-group-item row">
                     @if (item.LunchToday)
                     {

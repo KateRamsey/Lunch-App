@@ -169,7 +169,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="That's it, you're one step closer to lunch!" class="btn btn-success" />
+                <input type="submit" value="That's it, you're one step closer to lunch!" class="btn btn-success" id="SubmitBtn" />
             </div>
         </div>
     </div>
@@ -186,11 +186,11 @@
             $('#IsComing').change(function () {
                 console.log("changed!");
                 if ($(this).is(":checked")) {
-                    //var returnVal = confirm("Are you sure?");
-                    //$(this).attr("checked", returnVal);
                     $('#hideIfNotComing').show('fast');
+                    $('#SubmitBtn').val("That's it, you're one step closer to lunch!");
                 } else {
                     $('#hideIfNotComing').hide('fast');
+                    $('#SubmitBtn').val("Bummer, maybe next time");
                     
                 }
 
