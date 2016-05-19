@@ -1,10 +1,10 @@
 ﻿@model Lunch_App.Models.ResturantCreateVM
 
 @{
-    ViewBag.Title = "LunchConnect | Add Resturant";
+    ViewBag.Title = "LunchConnect | Add Restaurant";
 }
 
-<h2>Add A Resturant</h2>
+<h2>Add A Restaurant</h2>
 
 
 @using (Html.BeginForm())
@@ -72,7 +72,7 @@
 
         <div class="row">
             <span class="bold lead">
-                Dietary issues this resturant can accommodate:
+                Dietary issues this restaurant can accommodate:
             </span>
 
             <div class="btn-group DietaryButtonGroup col-md-9" data-toggle="buttons">
@@ -164,14 +164,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add Resturant" class="btn btn-warning btn-lg" />
+                <input type="submit" value="Add Restaurant" class="btn btn-warning btn-lg" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("LunchConnect Home", "Index")
+    @Html.ActionLink("LunchConnect Dashboard", "Index")
 </div>
 
 @section Scripts {
