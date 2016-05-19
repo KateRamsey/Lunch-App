@@ -18,7 +18,7 @@
                         <div class="pull-left"><span class="label label-primary">Today</span></div>
                     }
                     <div class="pull-right">
-                        
+
                         @if (item.NeedsResponse)
                         {
                             <a class="btn btn-info btn-sm" href="/home/editsurvey/@item.SurveyId">Respond</a>
@@ -33,7 +33,7 @@
 
                         @if (item.LunchPast)
                         {
-                            <div class="text-muted col-md-offset-1">
+                            <div class="text-muted col-md-8">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -43,12 +43,14 @@
                                         at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
                                     </span>
                                 }
-                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                            <div class="col-md-1">
+                                <small>(@item.NumberOfSurveyFinished / @item.NumberOfSurveys) </small>
                             </div>
                         }
                         @if (!item.LunchPast && item.IsCreatedByMe)
                         {
-                            <div class="text-success col-md-offset-1">
+                            <div class="text-success col-md-8">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -58,12 +60,14 @@
                                         at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
                                     </span>
                                 }
-                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                            <div class="col-md-1">
+                                <small>(@item.NumberOfSurveyFinished / @item.NumberOfSurveys) </small>
                             </div>
                         }
                         @if (!item.LunchPast && !item.IsCreatedByMe)
                         {
-                            <div class="col-md-offset-1">
+                            <div class="col-md-8">
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
@@ -73,7 +77,9 @@
                                         at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
                                     </span>
                                 }
-                                <small>Surveys Finished: @item.NumberOfSurveyFinished / @item.NumberOfSurveys </small>
+                            </div>
+                            <div class="col-md-1">
+                                <small>(@item.NumberOfSurveyFinished / @item.NumberOfSurveys) </small>
                             </div>
                         }
 
