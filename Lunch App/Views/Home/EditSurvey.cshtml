@@ -18,11 +18,12 @@
 
 
         <div class="form-group">
+            
             @*<div class="btn-group IsComing" data-toggle="buttons">*@
-            @Html.LabelFor(model => model.IsComing, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IsComing, htmlAttributes: new {@class = "control-label col-md-2"})
 
 
-            @Html.CheckBoxFor(model => model.IsComing)
+            @Html.CheckBoxFor(model => model.IsComing, new {@class="form-control"})
         </div>
         <div id="hideIfNotComing">
             @*<div class="form-group">
@@ -188,9 +189,11 @@
                 if ($(this).is(":checked")) {
                     $('#hideIfNotComing').show('fast');
                     $('#SubmitBtn').val("That's it, you're one step closer to lunch!");
+                    $('#IsComing').val("Yup, I'm coming to lunch");
                 } else {
                     $('#hideIfNotComing').hide('fast');
                     $('#SubmitBtn').val("Bummer, maybe next time");
+                    $('#IsComing').val("Nope, not this time");
                     
                 }
 

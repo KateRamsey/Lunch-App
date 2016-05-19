@@ -166,3 +166,8 @@ a.SmallLink {
 .Pick {
     margin-top: 2px;
 }
+
+#IsComing {
+    box-shadow: none;
+    outline: none;
+}
