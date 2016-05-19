@@ -16,7 +16,7 @@ namespace Lunch_App.Logic
             indexView.OutstandingSurveys = 
                 db.Surveys.Where(s => s.User.Id == userId && !s.IsFinished).Select(x => x.Id).ToList();
 
-            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Include("Lunch").Include("Lunch.Resturant").ToList();
+            var lunches = db.LunchMembers.Where(x => x.Member.Id == userId).Include("Lunch").Include("Lunch.Restaurant").ToList();
 
             foreach (var l in lunches)
             {
@@ -27,12 +27,12 @@ namespace Lunch_App.Logic
                     CreatorHandle = l.Lunch.Creator.Handle
                 };
 
-                if (l.Lunch.Resturant != null)
+                if (l.Lunch.Restaurant != null)
                 {
-                    newLunch.ResturantName = l.Lunch.Resturant.Name;
-                    newLunch.ResturantLocation = l.Lunch.Resturant.Location;
-                    newLunch.ResturantId = l.Lunch.Resturant.Id;
-                    newLunch.ResturantSelected = true;
+                    newLunch.RestaurantName = l.Lunch.Restaurant.Name;
+                    newLunch.RestaurantLocation = l.Lunch.Restaurant.Location;
+                    newLunch.RestaurantId = l.Lunch.Restaurant.Id;
+                    newLunch.RestaurantSelected = true;
                 }
                 
                 
@@ -53,7 +53,7 @@ namespace Lunch_App.Logic
             }
 
 
-            var listOfLunchesCreated = db.Lunches.Where(l => l.Creator.Id == userId).Include(l=>l.Resturant)
+            var listOfLunchesCreated = db.Lunches.Where(l => l.Creator.Id == userId).Include(l=>l.Restaurant)
                 .Include(l=>l.Surveys).ToList();
 
             foreach (var l in listOfLunchesCreated)
@@ -66,7 +66,7 @@ namespace Lunch_App.Logic
             }
 
 
-            foreach (var lunch in listOfLunchesCreated.Where(lunch => lunch.Resturant == null).
+            foreach (var lunch in listOfLunchesCreated.Where(lunch => lunch.Restaurant == null).
                 Where(lunch => lunch.Surveys.All(s => s.IsFinished)))
             {
                 indexView.LunchReadyToPick.Add(lunch.Id);
@@ -74,7 +74,7 @@ namespace Lunch_App.Logic
 
             //Buddies <--- add later
 
-            //Favorite Resturants <--- add later
+            //Favorite Restaurants <--- add later
 
             return indexView;
         }

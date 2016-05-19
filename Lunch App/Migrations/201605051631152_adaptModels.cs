@@ -7,7 +7,7 @@ namespace Lunch_App.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Resturants", "LocationZip", c => c.String());
+            AddColumn("dbo.Restaurants", "LocationZip", c => c.String());
             AddColumn("dbo.Surveys", "IsComing", c => c.Boolean(nullable: false));
             AlterColumn("dbo.Surveys", "ZipCode", c => c.String());
         }
@@ -16,7 +16,7 @@ namespace Lunch_App.Migrations
         {
             AlterColumn("dbo.Surveys", "ZipCode", c => c.Int(nullable: false));
             DropColumn("dbo.Surveys", "IsComing");
-            DropColumn("dbo.Resturants", "LocationZip");
+            DropColumn("dbo.Restaurants", "LocationZip");
         }
     }
 }

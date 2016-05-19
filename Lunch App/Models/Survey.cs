@@ -16,7 +16,7 @@ namespace Lunch_App.Models
         public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
-        public virtual Resturant SuggestedResturant { get; set; }
+        public virtual Restaurant SuggestedRestaurant { get; set; }
         public int DietaryIssues { get; set; }
     }
 
@@ -38,9 +38,9 @@ namespace Lunch_App.Models
             ZipCodeRadius = s.ZipCodeRadius;
             CuisineWanted = s.CuisineWanted;
             CuisineNotWanted = s.CuisineNotWanted;
-            if (s.SuggestedResturant != null)
+            if (s.SuggestedRestaurant != null)
             {
-                SuggestedResturantId = s.SuggestedResturant.Id;
+                SuggestedRestaurantId = s.SuggestedRestaurant.Id;
             }
             DietaryIssues = s.DietaryIssues;
             IsComing = s.IsComing;
@@ -53,7 +53,7 @@ namespace Lunch_App.Models
         public ZipCodeRadiusOption ZipCodeRadius { get; set; }
         public Cuisine CuisineWanted { get; set; }
         public Cuisine CuisineNotWanted { get; set; }
-        public int SuggestedResturantId { get; set; }
+        public int SuggestedRestaurantId { get; set; }
         public int DietaryIssues { get; set; }
     }
 
@@ -98,7 +98,7 @@ namespace Lunch_App.Models
         [Display(Name = "Anything you don't want to eat?")]
         public Cuisine CuisineNotWanted { get; set; }
         [Display(Name = "Is there a particular place that you want to go?")]
-        public int SuggestedResturantId { get; set; }
+        public int SuggestedRestaurantId { get; set; }
         public bool Vegan { get; set; }
         public bool Vegetarian { get; set; }
         [Display(Name = "Gluten Free")]

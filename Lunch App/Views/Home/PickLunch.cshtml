@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Where is your group going for lunch on @Model.MeetingDateTime.ToShortDateString()?</h4>
+        <h2>Where is your group going for lunch on @Model.MeetingDateTime.ToShortDateString()?</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -20,7 +20,7 @@
             <br />
             @foreach (var p in Model.Picks)
             {
-                <div class="col-md-10 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-2 Pick">
                     <label>
                         @Html.RadioButtonFor(model => model.SelectedId, p.Id)
                         @p.Name (<small>@p.Location, @p.LocationZip  Cuisine: @p.CuisineType</small>)

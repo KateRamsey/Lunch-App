@@ -44,7 +44,7 @@ textarea {
     margin: 5px;
 }
 
-.ResturantInfo {
+.RestaurantInfo {
     margin-bottom: 10px;
 }
 
@@ -156,4 +156,8 @@ a.SmallLink {
     color: white;
     padding: 5px;
     margin: 5px;
+}
+
+.Pick {
+    margin-top: 2px;
 }

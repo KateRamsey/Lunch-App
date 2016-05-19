@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Lunch_App.Models
 {
-    public class Resturant
+    public class Restaurant
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace Lunch_App.Models
         public virtual List<Lunch> Lunches { get; set; } = new List<Lunch>();
     }
 
-    public class ResturantCreateVM
+    public class RestaurantCreateVM
     {
         [Required]
         public string Name { get; set; }
@@ -46,9 +46,9 @@ namespace Lunch_App.Models
         public bool Halaal { get; set; }
         public bool LactoseIntolerant { get; set; }
 
-        public Resturant CreateResturant()
+        public Restaurant CreateRestaurant()
         {
-            var resturant = new Resturant()
+            var restaurant = new Restaurant()
             {
                 Name = this.Name,
                 Location = this.Location,
@@ -58,12 +58,12 @@ namespace Lunch_App.Models
                 Website = this.Website,
                 CuisineType = this.CuisineType,
             };
-            resturant.DietaryOptions = GetDietaryOptions(this);
+            restaurant.DietaryOptions = GetDietaryOptions(this);
 
-            return resturant;
+            return restaurant;
         }
 
-        private int GetDietaryOptions(ResturantCreateVM resturantCreateVm)
+        private int GetDietaryOptions(RestaurantCreateVM restaurantCreateVm)
         {
             int dietaryOptions = 0;
 
@@ -104,9 +104,9 @@ namespace Lunch_App.Models
         }
     }
 
-    public class ResturantVM
+    public class RestaurantVM
     {
-        public ResturantVM(Resturant r)
+        public RestaurantVM(Restaurant r)
         {
             Id = r.Id;
             Name = r.Name;
@@ -129,13 +129,13 @@ namespace Lunch_App.Models
         public int DietaryOptions { get; set; }
     }
 
-    public class ResturantPickVM
+    public class RestaurantPickVM
     {
-        public ResturantPickVM()
+        public RestaurantPickVM()
         {
             
         }
-        public ResturantPickVM(Resturant r)
+        public RestaurantPickVM(Restaurant r)
         {
             Id = r.Id;
             Name = r.Name;
@@ -207,14 +207,14 @@ namespace Lunch_App.Models
         public bool Selected { get; set; }
     }
 
-    public class ResturantDetailVM
+    public class RestaurantDetailVM
     {
-        public ResturantDetailVM()
+        public RestaurantDetailVM()
         {
 
         }
 
-        public ResturantDetailVM(Resturant r)
+        public RestaurantDetailVM(Restaurant r)
         {
             Id = r.Id;
             Name = r.Name;
@@ -284,9 +284,9 @@ namespace Lunch_App.Models
         }
     }
 
-    public class ResturantFilterModel
+    public class RestaurantFilterModel
     {
-        public ResturantFilterModel(Resturant r)
+        public RestaurantFilterModel(Restaurant r)
         {
             Id = r.Id;
             LocationZip = r.LocationZip;

@@ -11,10 +11,10 @@ namespace Lunch_App.Models
         {
             LunchId = lunch.Id;
             MeetingTime = lunch.MeetingDateTime;
-            if (lunch.Resturant != null)
+            if (lunch.Restaurant != null)
             {
-                ResturantId = lunch.Resturant.Id;
-                ResturantName = lunch.Resturant.Name;
+                RestaurantId = lunch.Restaurant.Id;
+                RestaurantName = lunch.Restaurant.Name;
             }
             NumberOfSurveys = lunch.Surveys.Count();
             NumberOfSurveyFinished = lunch.Surveys.Count(x => x.IsFinished);
@@ -29,8 +29,8 @@ namespace Lunch_App.Models
 
         public int LunchId { get; set; }
         public DateTime MeetingTime { get; set; }
-        public string ResturantName { get; set; }
-        public int ResturantId { get; set; }
+        public string RestaurantName { get; set; }
+        public int RestaurantId { get; set; }
         public int NumberOfSurveys { get; set; }
         public int NumberOfSurveyFinished { get; set; }
         public bool SurveysFinished => NumberOfSurveys == NumberOfSurveyFinished;

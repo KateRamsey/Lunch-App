@@ -11,55 +11,55 @@ namespace Lunch_App.Logic
 {
     public static class FilterLogic
     {
-        public static List<int> Filter(List<ResturantFilterModel> resturants, List<SurveyFilterModel> surveys, ApplicationDbContext db)
+        public static List<int> Filter(List<RestaurantFilterModel> restaurants, List<SurveyFilterModel> surveys, ApplicationDbContext db)
         {
             var surveyTotal = CombineSurveys(surveys, db);
 
-            var passingResturants = resturants.Where(r =>
+            var passingRestaurants = restaurants.Where(r =>
             RestaurantMeetsDietaryNeeds(surveyTotal, r)
             && CuisineWanted(r, surveyTotal)
-            && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+            && RestaurantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
             && AcceptableLocation(r, surveyTotal)).ToList();
 
 
-            if (passingResturants.Count == 0)
+            if (passingRestaurants.Count == 0)
             {
-                passingResturants = resturants.Where(r =>
+                passingRestaurants = restaurants.Where(r =>
                 RestaurantMeetsDietaryNeeds(surveyTotal, r)
-                && ResturantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
+                && RestaurantOpen(r.HoursOfOperation, surveyTotal.LunchTime)
                 && AcceptableLocation(r, surveyTotal)).ToList();
             }
 
-            if (passingResturants.Count == 0)
+            if (passingRestaurants.Count == 0)
             {
-                passingResturants = resturants.Where(x => x.Id == 1).ToList();
+                passingRestaurants = restaurants.Where(x => x.Id == 1).ToList();
             }
 
-            return Rank(passingResturants, surveyTotal);
+            return Rank(passingRestaurants, surveyTotal);
         }
 
-        private static bool AcceptableLocation(ResturantFilterModel r, SurveyTotal surveyTotal)
+        private static bool AcceptableLocation(RestaurantFilterModel r, SurveyTotal surveyTotal)
         {
             return surveyTotal.ZipCodes.Contains(r.LocationZip);
         }
 
-        private static bool CuisineWanted(ResturantFilterModel r, SurveyTotal surveyTotal)
+        private static bool CuisineWanted(RestaurantFilterModel r, SurveyTotal surveyTotal)
         {
             return !surveyTotal.NotWantedCuisines.Contains(r.CuisineType);
         }
 
-        public static bool RestaurantMeetsDietaryNeeds(SurveyTotal surveyTotal, ResturantFilterModel r)
+        public static bool RestaurantMeetsDietaryNeeds(SurveyTotal surveyTotal, RestaurantFilterModel r)
         {
             return ((surveyTotal.DietaryIssues & r.DietaryOptions) == surveyTotal.DietaryIssues);
         }
 
-        private static List<int> Rank(List<ResturantFilterModel> resturants, SurveyTotal surveyTotal)
+        private static List<int> Rank(List<RestaurantFilterModel> restaurants, SurveyTotal surveyTotal)
         {
-            foreach (var r in resturants)
+            foreach (var r in restaurants)
             {
-                if (surveyTotal.SuggestedResturantIds.Contains(r.Id))
+                if (surveyTotal.SuggestedRestaurantIds.Contains(r.Id))
                 {
-                    r.Score += surveyTotal.SuggestedResturantIds.GroupBy(x => x, v => v).Count(p => p.Key == r.Id) * 50;
+                    r.Score += surveyTotal.SuggestedRestaurantIds.GroupBy(x => x, v => v).Count(p => p.Key == r.Id) * 50;
                 }
                 if (surveyTotal.WantedCuisines.Contains(r.CuisineType))
                 {
@@ -71,12 +71,12 @@ namespace Lunch_App.Logic
                 }
             }
 
-            var result = resturants.OrderByDescending(x => x.Score).Select(v => v.Id).ToList();
+            var result = restaurants.OrderByDescending(x => x.Score).Select(v => v.Id).ToList();
 
             return result;
         }
 
-        public static bool ResturantOpen(string hoursOfOperation, DateTime lunchTime)
+        public static bool RestaurantOpen(string hoursOfOperation, DateTime lunchTime)
         {
             var dateRanges = BreakHoursToRanges(hoursOfOperation);
 
@@ -106,7 +106,7 @@ namespace Lunch_App.Logic
                 result.PossibleZips.AddRange(FindZipCodes(s.ZipCode, s.ZipCodeRadius, db));
                 result.NotWantedCuisines.Add(s.CuisineNotWanted);
                 result.WantedCuisines.Add(s.CuisineWanted);
-                result.SuggestedResturantIds.Add(s.SuggestedResturantId);
+                result.SuggestedRestaurantIds.Add(s.SuggestedRestaurantId);
                 result.DietaryIssues = result.DietaryIssues | s.DietaryIssues;
                 result.BaseZips.Add(s.ZipCode);
             }

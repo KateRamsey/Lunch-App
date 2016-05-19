@@ -37,7 +37,7 @@ namespace Lunch_App.Controllers
             var userId = User.Identity.GetUserId();
 
 
-            var model = db.Lunches.Include("Surveys").Include("Resturant").Where(x => x.Creator.Id == userId || x.Members.Any(m => m.Member.Id == userId)).ToList()
+            var model = db.Lunches.Include("Surveys").Include("Restaurant").Where(x => x.Creator.Id == userId || x.Members.Any(m => m.Member.Id == userId)).ToList()
                 .Select(l => new LunchDashboardVM(l, userId));
 
             //IndexVM indexView = IndexVMLogic.BuildIndexVM(userId, db);
@@ -154,7 +154,7 @@ namespace Lunch_App.Controllers
             survey.CuisineNotWanted = surveyVM.CuisineNotWanted;
             survey.CuisineWanted = surveyVM.CuisineWanted;
             survey.MinutesAvailiable = surveyVM.MinutesAvailiable;
-            survey.SuggestedResturant = db.Resturants.Find(surveyVM.SuggestedResturantId);
+            survey.SuggestedRestaurant = db.Restaurants.Find(surveyVM.SuggestedRestaurantId);
             survey.TimeAvailable = surveyVM.TimeAvailable;
             survey.ZipCode = surveyVM.ZipCode;
             survey.ZipCodeRadius = surveyVM.ZipCodeRadius;
@@ -188,19 +188,19 @@ namespace Lunch_App.Controllers
                 surveys.Add(new SurveyFilterModel(s));
             }
 
-            var resturants = new List<ResturantFilterModel>();
-            foreach (var r in db.Resturants)
+            var restaurants = new List<RestaurantFilterModel>();
+            foreach (var r in db.Restaurants)
             {
-                resturants.Add(new ResturantFilterModel(r));
+                restaurants.Add(new RestaurantFilterModel(r));
             }
 
-            var options = FilterLogic.Filter(resturants, surveys, db);
+            var options = FilterLogic.Filter(restaurants, surveys, db);
 
 
             int rank = 1;
             foreach (var o in options)
             {
-                lunch.Options.Add(new ResturantOptions() {Lunch = lunch, Resturant = db.Resturants.Find(o), Rank = rank});
+                lunch.Options.Add(new RestaurantOptions() {Lunch = lunch, Restaurant = db.Restaurants.Find(o), Rank = rank});
                 rank++;
             }
 
@@ -213,7 +213,7 @@ namespace Lunch_App.Controllers
             };
             foreach (var o in lunch.Options)
             {
-                lunchPick.Picks.Add(new ResturantPickVM(o.Resturant));
+                lunchPick.Picks.Add(new RestaurantPickVM(o.Restaurant));
             }
 
             return View(lunchPick);
@@ -225,34 +225,34 @@ namespace Lunch_App.Controllers
         public ActionResult PickLunch(LunchPickVM pick)
         {
             var lunch = db.Lunches.Find(pick.Id);
-            var pickedResturant = db.Resturants.Find(pick.SelectedId);
+            var pickedRestaurant = db.Restaurants.Find(pick.SelectedId);
 
-            if (lunch == null || pickedResturant == null)
+            if (lunch == null || pickedRestaurant == null)
             {
                 return View(pick);
             }
-            var resturant = db.Resturants.Find(pickedResturant.Id);
-            if(resturant == null)
+            var restaurant = db.Restaurants.Find(pickedRestaurant.Id);
+            if(restaurant == null)
             {
                 return View(pick);
             }
 
-            lunch.Resturant = resturant;
+            lunch.Restaurant = restaurant;
             db.SaveChanges();
 
 
             var attendingUsers = db.LunchMembers.Where(x => x.Lunch == lunch).Select(y=>y.Member.Id);
             
-            SendLunchPickEmails(attendingUsers, resturant, pick);
+            SendLunchPickEmails(attendingUsers, restaurant, pick);
 
-            TempData["Message"] = "Resturant picked and notices sent, have a great lunch!";
+            TempData["Message"] = "Restaurant picked and notices sent, have a great lunch!";
             return RedirectToAction("Index", "Home");
         }
 
-        private async Task SendLunchPickEmails(IQueryable<string> attendingUserIds, Resturant resturant, LunchPickVM lunch)
+        private async Task SendLunchPickEmails(IQueryable<string> attendingUserIds, Restaurant restaurant, LunchPickVM lunch)
         {
-            var message = $"It's a plan! Join your group for lunch at {resturant.Name}, " +
-                          $"located at {resturant.Location}, {resturant.LocationZip}. " +
+            var message = $"It's a plan! Join your group for lunch at {restaurant.Name}, " +
+                          $"located at {restaurant.Location}, {restaurant.LocationZip}. " +
                           $"Lunch starts at {lunch.MeetingDateTime.ToShortTimeString()} on {lunch.MeetingDateTime.ToShortDateString()}. " +
                           "Thank you for using LunchConnect, and have a great lunch! -Kate";
             foreach (var userId in attendingUserIds)
@@ -261,47 +261,47 @@ namespace Lunch_App.Controllers
             }
         }
 
-        // GET: Home/CreateResturant
-        public ActionResult CreateResturant()
+        // GET: Home/CreateRestaurant
+        public ActionResult CreateRestaurant()
         {
             return View();
         }
 
 
-        // POST: Home/CreateResturant
+        // POST: Home/CreateRestaurant
         [HttpPost]
-        public ActionResult CreateResturant(ResturantCreateVM newResturant)
+        public ActionResult CreateRestaurant(RestaurantCreateVM newRestaurant)
         {
             if (!ModelState.IsValid)
             {
-                return View(newResturant);
+                return View(newRestaurant);
             }
 
-            var resturant = newResturant.CreateResturant();
+            var restaurant = newRestaurant.CreateRestaurant();
 
-            db.Resturants.Add(resturant);
+            db.Restaurants.Add(restaurant);
             db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Home/ResturantDetails/5
-        public ActionResult ResturantDetails(int? id)
+        // GET: Home/RestaurantDetails/5
+        public ActionResult RestaurantDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var resturant = db.Resturants.Find(id);
+            var restaurant = db.Restaurants.Find(id);
 
-            if (resturant == null)
+            if (restaurant == null)
             {
                 return HttpNotFound();
             }
-            var resturantView = new ResturantDetailVM(resturant);
+            var restaurantView = new RestaurantDetailVM(restaurant);
 
-            return View(resturantView);
+            return View(restaurantView);
         }
 
     }

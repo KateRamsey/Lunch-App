@@ -101,7 +101,7 @@ namespace Lunch_App.Controllers
             survey.CuisineNotWanted = surveyVM.CuisineNotWanted;
             survey.CuisineWanted = surveyVM.CuisineWanted;
             survey.MinutesAvailiable = surveyVM.MinutesAvailiable;
-            survey.SuggestedResturant = db.Resturants.Find(surveyVM.SuggestedResturantId);
+            survey.SuggestedRestaurant = db.Restaurants.Find(surveyVM.SuggestedRestaurantId);
             survey.TimeAvailable = surveyVM.TimeAvailable;
             survey.ZipCode = surveyVM.ZipCode;
             survey.ZipCodeRadius = surveyVM.ZipCodeRadius;

@@ -11,15 +11,15 @@ namespace Lunch_App.Models
         public virtual List<Survey> Surveys { get; set; } = new List<Survey>();
         public DateTime MeetingDateTime { get; set; }
         public virtual LunchUser Creator { get; set; }
-        public virtual Resturant Resturant { get; set; }
-        public virtual List<ResturantOptions> Options { get; set; } = new List<ResturantOptions>();
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual List<RestaurantOptions> Options { get; set; } = new List<RestaurantOptions>();
     }
 
-    public class ResturantOptions
+    public class RestaurantOptions
     {
         public int Id { get; set; }
         public Lunch Lunch { get; set; }
-        public Resturant Resturant { get; set; }
+        public Restaurant Restaurant { get; set; }
         public int Rank { get; set; }
     }
 
@@ -47,7 +47,7 @@ namespace Lunch_App.Models
         public List<UserVM> Members { get; set; } = new List<UserVM>();
         public DateTime MeetingDateTime { get; set; }
         public UserVM Creator { get; set; }
-        public ResturantVM Resturant { get; set; }
+        public RestaurantVM Restaurant { get; set; }
     }
 
     public class LunchIndexVM
@@ -55,17 +55,17 @@ namespace Lunch_App.Models
         public int Id { get; set; }
         public DateTime MeetingDateTime { get; set; }
         public string CreatorHandle { get; set; }
-        public bool ResturantSelected { get; set; }
-        public int ResturantId { get; set; }
-        public string ResturantName { get; set; }
-        public string ResturantLocation { get; set; }
+        public bool RestaurantSelected { get; set; }
+        public int RestaurantId { get; set; }
+        public string RestaurantName { get; set; }
+        public string RestaurantLocation { get; set; }
     }
 
     public class LunchPickVM
     {
         public int Id { get; set; }
         public DateTime MeetingDateTime { get; set; }
-        public List<ResturantPickVM> Picks { get; set; } = new List<ResturantPickVM>();
+        public List<RestaurantPickVM> Picks { get; set; } = new List<RestaurantPickVM>();
         public int SelectedId { get; set; }
     }
 }

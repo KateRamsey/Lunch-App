@@ -10,107 +10,107 @@ using Lunch_App.Models;
 
 namespace Lunch_App.Controllers
 {
-    public class Temp_ResturantsController : Controller
+    public class Temp_RestaurantsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Temp_Resturants
+        // GET: Temp_Restaurants
         public ActionResult Index()
         {
-            return View(db.Resturants.ToList());
+            return View(db.Restaurants.ToList());
         }
 
-        // GET: Temp_Resturants/Details/5
+        // GET: Temp_Restaurants/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Resturant resturant = db.Resturants.Find(id);
-            if (resturant == null)
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
             {
                 return HttpNotFound();
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
-        // GET: Temp_Resturants/Create
+        // GET: Temp_Restaurants/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Temp_Resturants/Create
+        // POST: Temp_Restaurants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Location,HoursOfOperation,PriceRange,Website,CuisineType,DietaryOptions")] Resturant resturant)
+        public ActionResult Create([Bind(Include = "Id,Name,Location,HoursOfOperation,PriceRange,Website,CuisineType,DietaryOptions")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
-                db.Resturants.Add(resturant);
+                db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(resturant);
+            return View(restaurant);
         }
 
-        // GET: Temp_Resturants/Edit/5
+        // GET: Temp_Restaurants/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Resturant resturant = db.Resturants.Find(id);
-            if (resturant == null)
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
             {
                 return HttpNotFound();
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
-        // POST: Temp_Resturants/Edit/5
+        // POST: Temp_Restaurants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Location,HoursOfOperation,PriceRange,Website,CuisineType,DietaryOptions")] Resturant resturant)
+        public ActionResult Edit([Bind(Include = "Id,Name,Location,HoursOfOperation,PriceRange,Website,CuisineType,DietaryOptions")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(resturant).State = EntityState.Modified;
+                db.Entry(restaurant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
-        // GET: Temp_Resturants/Delete/5
+        // GET: Temp_Restaurants/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Resturant resturant = db.Resturants.Find(id);
-            if (resturant == null)
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
             {
                 return HttpNotFound();
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
-        // POST: Temp_Resturants/Delete/5
+        // POST: Temp_Restaurants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Resturant resturant = db.Resturants.Find(id);
-            db.Resturants.Remove(resturant);
+            Restaurant restaurant = db.Restaurants.Find(id);
+            db.Restaurants.Remove(restaurant);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

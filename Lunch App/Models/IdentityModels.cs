@@ -20,7 +20,7 @@ namespace Lunch_App.Models
         public string Handle { get; set; }
         public virtual List<LunchUser> MyBuddies { get; set; } = new List<LunchUser>();
         public virtual List<LunchUser> BuddiesWithMe { get; set; } = new List<LunchUser>();
-        public virtual List<Resturant> FavoriteResturants { get; set; } = new List<Resturant>();
+        public virtual List<Restaurant> FavoriteRestaurants { get; set; } = new List<Restaurant>();
         public virtual List<LunchMembers> Lunches { get; set; } = new List<LunchMembers>();
         public virtual List<Survey> Surveys { get; set; } = new List<Survey>();
 
@@ -68,8 +68,8 @@ namespace Lunch_App.Models
                 x.MapLeftKey("LunchUserId");
                 x.MapRightKey("BuddyId");
             });
-            modelBuilder.Entity<Resturant>().HasMany(x => x.Fans).WithMany(y => y.FavoriteResturants)
-                .Map(z => z.ToTable("ResturantFans"));
+            modelBuilder.Entity<Restaurant>().HasMany(x => x.Fans).WithMany(y => y.FavoriteRestaurants)
+                .Map(z => z.ToTable("RestaurantFans"));
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
@@ -80,7 +80,7 @@ namespace Lunch_App.Models
 
         public DbSet<Lunch> Lunches { get; set; }
 
-        public DbSet<Resturant> Resturants { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
 
         public DbSet<LunchMembers> LunchMembers { get; set; }
 

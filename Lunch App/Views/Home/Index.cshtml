@@ -12,7 +12,7 @@
         <div class="list-group">
             @foreach (var item in Model.OrderByDescending(x => x.MeetingTime))
             {
-                if (item.LunchPast && item.ResturantId == 0)
+                if (item.LunchPast && item.RestaurantId == 0)
                 {
                     continue;
                 }
@@ -27,7 +27,7 @@
                         {
                             <a class="btn btn-info btn-sm" href="/home/editsurvey/@item.SurveyId">Respond</a>
                         }
-                        @if (item.IsCreatedByMe && item.SurveysFinished && item.ResturantId == 0)
+                        @if (item.IsCreatedByMe && item.SurveysFinished && item.RestaurantId == 0)
                         {
                             <a class="btn btn-warning btn-sm" href="/home/picklunch/@item.LunchId">Pick Lunch</a>
                         }
@@ -41,10 +41,10 @@
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
-                                @if (item.ResturantId != 0)
+                                @if (item.RestaurantId != 0)
                                 {
                                     <span>
-                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                        at <a href="/home/restaurantdetails/@item.RestaurantId"> @item.RestaurantName</a>
                                     </span>
                                 }
                             </div>
@@ -58,10 +58,10 @@
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
-                                @if (item.ResturantId != 0)
+                                @if (item.RestaurantId != 0)
                                 {
                                     <span>
-                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                        at <a href="/home/restaurantdetails/@item.RestaurantId"> @item.RestaurantName</a>
                                     </span>
                                 }
                             </div>
@@ -75,10 +75,10 @@
                                 <strong>@item.MeetingTime.ToShortTimeString()</strong> on <span>
                                     @item.MeetingTime.ToString("ddd, MMM dd")
                                 </span>
-                                @if (item.ResturantId != 0)
+                                @if (item.RestaurantId != 0)
                                 {
                                     <span>
-                                        at <a href="/home/resturantdetails/@item.ResturantId"> @item.ResturantName</a>
+                                        at <a href="/home/restaurantdetails/@item.RestaurantId"> @item.RestaurantName</a>
                                     </span>
                                 }
                             </div>

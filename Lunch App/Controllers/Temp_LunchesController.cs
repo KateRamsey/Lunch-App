@@ -41,9 +41,9 @@ namespace Lunch_App.Controllers
                 MeetingDateTime = lunch.MeetingDateTime
             };
 
-            if (lunch.Resturant != null)
+            if (lunch.Restaurant != null)
             {
-                lunchView.Resturant = new ResturantVM(lunch.Resturant);
+                lunchView.Restaurant = new RestaurantVM(lunch.Restaurant);
             }
 
             foreach (var m in lunch.Members)

@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201605111629429_AddZipCache.Designer.cs">
       <DependentUpon>201605111629429_AddZipCache.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605191619061_fixSpelling.cs" />
+    <Compile Include="Migrations\201605191619061_fixSpelling.Designer.cs">
+      <DependentUpon>201605191619061_fixSpelling.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -343,8 +347,8 @@
     <Content Include="Views\Temp_Surveys\EditSurvey.cshtml" />
     <Content Include="Views\Home\EditSurvey.cshtml" />
     <Content Include="Views\Home\PickLunch.cshtml" />
-    <Content Include="Views\Home\CreateResturant.cshtml" />
-    <Content Include="Views\Home\ResturantDetails.cshtml" />
+    <Content Include="Views\Home\CreateRestaurant.cshtml" />
+    <Content Include="Views\Home\RestaurantDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605111629429_AddZipCache.resx">
       <DependentUpon>201605111629429_AddZipCache.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605191619061_fixSpelling.resx">
+      <DependentUpon>201605191619061_fixSpelling.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

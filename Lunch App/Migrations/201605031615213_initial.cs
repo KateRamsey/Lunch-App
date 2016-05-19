@@ -65,7 +65,7 @@ namespace Lunch_App.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Resturants",
+                "dbo.Restaurants",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -86,13 +86,13 @@ namespace Lunch_App.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         MeetingDateTime = c.DateTime(nullable: false),
                         Creator_Id = c.String(maxLength: 128),
-                        Resturant_Id = c.Int(),
+                        Restaurant_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.Creator_Id)
-                .ForeignKey("dbo.Resturants", t => t.Resturant_Id)
+                .ForeignKey("dbo.Restaurants", t => t.Restaurant_Id)
                 .Index(t => t.Creator_Id)
-                .Index(t => t.Resturant_Id);
+                .Index(t => t.Restaurant_Id);
             
             CreateTable(
                 "dbo.LunchMembers",
@@ -110,19 +110,19 @@ namespace Lunch_App.Migrations
                 .Index(t => t.Member_Id);
             
             CreateTable(
-                "dbo.ResturantOptions",
+                "dbo.RestaurantOptions",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Rank = c.Int(nullable: false),
                         Lunch_Id = c.Int(),
-                        Resturant_Id = c.Int(),
+                        Restaurant_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Lunches", t => t.Lunch_Id)
-                .ForeignKey("dbo.Resturants", t => t.Resturant_Id)
+                .ForeignKey("dbo.Restaurants", t => t.Restaurant_Id)
                 .Index(t => t.Lunch_Id)
-                .Index(t => t.Resturant_Id);
+                .Index(t => t.Restaurant_Id);
             
             CreateTable(
                 "dbo.Surveys",
@@ -138,15 +138,15 @@ namespace Lunch_App.Migrations
                         CuisineNotWanted = c.Int(nullable: false),
                         DiataryIssues = c.Int(nullable: false),
                         Lunch_Id = c.Int(),
-                        SuggestedResturant_Id = c.Int(),
+                        SuggestedRestaurant_Id = c.Int(),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Lunches", t => t.Lunch_Id)
-                .ForeignKey("dbo.Resturants", t => t.SuggestedResturant_Id)
+                .ForeignKey("dbo.Restaurants", t => t.SuggestedRestaurant_Id)
                 .ForeignKey("dbo.Users", t => t.User_Id)
                 .Index(t => t.Lunch_Id)
-                .Index(t => t.SuggestedResturant_Id)
+                .Index(t => t.SuggestedRestaurant_Id)
                 .Index(t => t.User_Id);
             
             CreateTable(
@@ -162,16 +162,16 @@ namespace Lunch_App.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.ResturantFans",
+                "dbo.RestaurantFans",
                 c => new
                     {
-                        Resturant_Id = c.Int(nullable: false),
+                        Restaurant_Id = c.Int(nullable: false),
                         LunchUser_Id = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.Resturant_Id, t.LunchUser_Id })
-                .ForeignKey("dbo.Resturants", t => t.Resturant_Id, cascadeDelete: true)
+                .PrimaryKey(t => new { t.Restaurant_Id, t.LunchUser_Id })
+                .ForeignKey("dbo.Restaurants", t => t.Restaurant_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.LunchUser_Id, cascadeDelete: true)
-                .Index(t => t.Resturant_Id)
+                .Index(t => t.Restaurant_Id)
                 .Index(t => t.LunchUser_Id);
             
             CreateTable(
@@ -196,31 +196,31 @@ namespace Lunch_App.Migrations
             DropForeignKey("dbo.LunchBuddies", "LunchUserId", "dbo.Users");
             DropForeignKey("dbo.UserLogins", "UserId", "dbo.Users");
             DropForeignKey("dbo.Surveys", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Surveys", "SuggestedResturant_Id", "dbo.Resturants");
+            DropForeignKey("dbo.Surveys", "SuggestedRestaurant_Id", "dbo.Restaurants");
             DropForeignKey("dbo.Surveys", "Lunch_Id", "dbo.Lunches");
-            DropForeignKey("dbo.Lunches", "Resturant_Id", "dbo.Resturants");
-            DropForeignKey("dbo.ResturantOptions", "Resturant_Id", "dbo.Resturants");
-            DropForeignKey("dbo.ResturantOptions", "Lunch_Id", "dbo.Lunches");
+            DropForeignKey("dbo.Lunches", "Restaurant_Id", "dbo.Restaurants");
+            DropForeignKey("dbo.RestaurantOptions", "Restaurant_Id", "dbo.Restaurants");
+            DropForeignKey("dbo.RestaurantOptions", "Lunch_Id", "dbo.Lunches");
             DropForeignKey("dbo.LunchMembers", "Member_Id", "dbo.Users");
             DropForeignKey("dbo.LunchMembers", "Lunch_Id", "dbo.Lunches");
             DropForeignKey("dbo.Lunches", "Creator_Id", "dbo.Users");
-            DropForeignKey("dbo.ResturantFans", "LunchUser_Id", "dbo.Users");
-            DropForeignKey("dbo.ResturantFans", "Resturant_Id", "dbo.Resturants");
+            DropForeignKey("dbo.RestaurantFans", "LunchUser_Id", "dbo.Users");
+            DropForeignKey("dbo.RestaurantFans", "Restaurant_Id", "dbo.Restaurants");
             DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
             DropIndex("dbo.LunchBuddies", new[] { "BuddyId" });
             DropIndex("dbo.LunchBuddies", new[] { "LunchUserId" });
-            DropIndex("dbo.ResturantFans", new[] { "LunchUser_Id" });
-            DropIndex("dbo.ResturantFans", new[] { "Resturant_Id" });
+            DropIndex("dbo.RestaurantFans", new[] { "LunchUser_Id" });
+            DropIndex("dbo.RestaurantFans", new[] { "Restaurant_Id" });
             DropIndex("dbo.UserLogins", new[] { "UserId" });
             DropIndex("dbo.Surveys", new[] { "User_Id" });
-            DropIndex("dbo.Surveys", new[] { "SuggestedResturant_Id" });
+            DropIndex("dbo.Surveys", new[] { "SuggestedRestaurant_Id" });
             DropIndex("dbo.Surveys", new[] { "Lunch_Id" });
-            DropIndex("dbo.ResturantOptions", new[] { "Resturant_Id" });
-            DropIndex("dbo.ResturantOptions", new[] { "Lunch_Id" });
+            DropIndex("dbo.RestaurantOptions", new[] { "Restaurant_Id" });
+            DropIndex("dbo.RestaurantOptions", new[] { "Lunch_Id" });
             DropIndex("dbo.LunchMembers", new[] { "Member_Id" });
             DropIndex("dbo.LunchMembers", new[] { "Lunch_Id" });
-            DropIndex("dbo.Lunches", new[] { "Resturant_Id" });
+            DropIndex("dbo.Lunches", new[] { "Restaurant_Id" });
             DropIndex("dbo.Lunches", new[] { "Creator_Id" });
             DropIndex("dbo.UserClaims", new[] { "UserId" });
             DropIndex("dbo.Users", "UserNameIndex");
@@ -228,13 +228,13 @@ namespace Lunch_App.Migrations
             DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.Roles", "RoleNameIndex");
             DropTable("dbo.LunchBuddies");
-            DropTable("dbo.ResturantFans");
+            DropTable("dbo.RestaurantFans");
             DropTable("dbo.UserLogins");
             DropTable("dbo.Surveys");
-            DropTable("dbo.ResturantOptions");
+            DropTable("dbo.RestaurantOptions");
             DropTable("dbo.LunchMembers");
             DropTable("dbo.Lunches");
-            DropTable("dbo.Resturants");
+            DropTable("dbo.Restaurants");
             DropTable("dbo.UserClaims");
             DropTable("dbo.Users");
             DropTable("dbo.UserRoles");

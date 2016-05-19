@@ -14,6 +14,6 @@ namespace Lunch_App.Models
         public List<int> LunchReadyToPick { get; set; } = new List<int>();
 
         public IEnumerable<UserVM> Buddies { get; set; } = new List<UserVM>();
-        public IEnumerable<ResturantVM> FavoriteResturants { get; set; } = new List<ResturantVM>();
+        public IEnumerable<RestaurantVM> FavoriteRestaurants { get; set; } = new List<RestaurantVM>();
     }
 }

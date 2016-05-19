@@ -182,7 +182,7 @@ namespace Lunch_App.Tests
 
             var surveyTotal = FilterLogic.CombineSurveys(list, db);
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id =3,
                 LocationZip = "72120",
@@ -217,7 +217,7 @@ namespace Lunch_App.Tests
 
             var surveyTotal = FilterLogic.CombineSurveys(list, db);
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -265,7 +265,7 @@ namespace Lunch_App.Tests
             var surveyList = new List<SurveyFilterModel> { kate, bruce };
 
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -275,7 +275,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 239
             });
 
-            var burger = new ResturantFilterModel(new Resturant()
+            var burger = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 2,
                 LocationZip = "72120",
@@ -285,7 +285,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 255
             });
 
-            var pizza = new ResturantFilterModel(new Resturant()
+            var pizza = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 10,
                 LocationZip = "72120",
@@ -295,9 +295,9 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var resturantList = new List<ResturantFilterModel>() {seafood, burger, pizza};
+            var restaurantList = new List<RestaurantFilterModel>() {seafood, burger, pizza};
 
-            var result = FilterLogic.Filter(resturantList, surveyList, db);
+            var result = FilterLogic.Filter(restaurantList, surveyList, db);
 
             Assert.IsTrue(result.Count == 3);
             Assert.IsTrue(result.Contains(10));
@@ -339,7 +339,7 @@ namespace Lunch_App.Tests
             var surveyList = new List<SurveyFilterModel> { kate, bruce };
 
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -349,7 +349,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 239
             });
 
-            var burger = new ResturantFilterModel(new Resturant()
+            var burger = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 2,
                 LocationZip = "72120",
@@ -359,7 +359,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 255
             });
 
-            var pizza = new ResturantFilterModel(new Resturant()
+            var pizza = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 10,
                 LocationZip = "72120",
@@ -369,9 +369,9 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza };
+            var restaurantList = new List<RestaurantFilterModel>() { seafood, burger, pizza };
 
-            var result = FilterLogic.Filter(resturantList, surveyList, db);
+            var result = FilterLogic.Filter(restaurantList, surveyList, db);
 
             Assert.IsTrue(result.Count == 2);
             Assert.IsTrue(result.Contains(10));
@@ -413,7 +413,7 @@ namespace Lunch_App.Tests
             var surveyList = new List<SurveyFilterModel> { kate, bruce };
 
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -423,7 +423,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 239
             });
 
-            var burger = new ResturantFilterModel(new Resturant()
+            var burger = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 2,
                 LocationZip = "72120",
@@ -433,7 +433,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 255
             });
 
-            var pizza = new ResturantFilterModel(new Resturant()
+            var pizza = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 10,
                 LocationZip = "72120",
@@ -443,7 +443,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var defaultPick = new ResturantFilterModel(new Resturant()
+            var defaultPick = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 1,
                 LocationZip = "72120",
@@ -453,9 +453,9 @@ namespace Lunch_App.Tests
                 DietaryOptions = 0
             });
 
-            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+            var restaurantList = new List<RestaurantFilterModel>() { seafood, burger, pizza, defaultPick };
 
-            var result = FilterLogic.Filter(resturantList, surveyList, db);
+            var result = FilterLogic.Filter(restaurantList, surveyList, db);
 
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.Contains(1));
@@ -495,7 +495,7 @@ namespace Lunch_App.Tests
             var surveyList = new List<SurveyFilterModel> { kate, bruce };
 
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -505,7 +505,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 239
             });
 
-            var burger = new ResturantFilterModel(new Resturant()
+            var burger = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 2,
                 LocationZip = "72120",
@@ -515,7 +515,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 255
             });
 
-            var pizza = new ResturantFilterModel(new Resturant()
+            var pizza = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 10,
                 LocationZip = "72120",
@@ -525,7 +525,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var defaultPick = new ResturantFilterModel(new Resturant()
+            var defaultPick = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 1,
                 LocationZip = "72120",
@@ -535,9 +535,9 @@ namespace Lunch_App.Tests
                 DietaryOptions = 0
             });
 
-            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+            var restaurantList = new List<RestaurantFilterModel>() { seafood, burger, pizza, defaultPick };
 
-            var result = FilterLogic.Filter(resturantList, surveyList, db);
+            var result = FilterLogic.Filter(restaurantList, surveyList, db);
 
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.Contains(1));
@@ -577,7 +577,7 @@ namespace Lunch_App.Tests
             var surveyList = new List<SurveyFilterModel> { kate, bruce };
 
 
-            var seafood = new ResturantFilterModel(new Resturant()
+            var seafood = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 3,
                 LocationZip = "72120",
@@ -587,7 +587,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 239
             });
 
-            var burger = new ResturantFilterModel(new Resturant()
+            var burger = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 2,
                 LocationZip = "72120",
@@ -597,7 +597,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var pizza = new ResturantFilterModel(new Resturant()
+            var pizza = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 10,
                 LocationZip = "72120",
@@ -607,7 +607,7 @@ namespace Lunch_App.Tests
                 DietaryOptions = 251
             });
 
-            var defaultPick = new ResturantFilterModel(new Resturant()
+            var defaultPick = new RestaurantFilterModel(new Restaurant()
             {
                 Id = 1,
                 LocationZip = "72120",
@@ -617,9 +617,9 @@ namespace Lunch_App.Tests
                 DietaryOptions = 0
             });
 
-            var resturantList = new List<ResturantFilterModel>() { seafood, burger, pizza, defaultPick };
+            var restaurantList = new List<RestaurantFilterModel>() { seafood, burger, pizza, defaultPick };
 
-            var result = FilterLogic.Filter(resturantList, surveyList, db);
+            var result = FilterLogic.Filter(restaurantList, surveyList, db);
 
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.Contains(1));
@@ -685,15 +685,15 @@ namespace Lunch_App.Tests
         }
 
         [TestMethod]
-        public void OpenResturant()
+        public void OpenRestaurant()
         {
-            Assert.IsTrue(FilterLogic.ResturantOpen("Sunday-Saturday 1am-11pm", DateTime.Now));
+            Assert.IsTrue(FilterLogic.RestaurantOpen("Sunday-Saturday 1am-11pm", DateTime.Now));
         }
 
         [TestMethod]
-        public void ClosedResturant()
+        public void ClosedRestaurant()
         {
-            Assert.IsFalse(FilterLogic.ResturantOpen("Sunday 1am-2pm", DateTime.Now));
+            Assert.IsFalse(FilterLogic.RestaurantOpen("Sunday 1am-2pm", DateTime.Now));
         }
 
     }
